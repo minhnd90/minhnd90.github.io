@@ -80,3 +80,82 @@ img.next-image {
     }
   }
 }
+
+// Navbar
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo a {
+    font-weight: 800;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.25rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+
+    .nav-link {
+      text-decoration: none;
+      color: #666;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      font-size: 0.95rem;
+
+      &:hover {
+        color: #000;
+      }
+
+      &.active {
+        color: #0070f3;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+html.dark .navbar {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  .logo a {
+    color: #fff;
+  }
+
+  .nav-links .nav-link {
+    color: #888;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &.active {
+      color: #0d96f2; 
+    }
+  }
+}
+
+// Improved main content padding for sticky nav
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 80vh;
+}
