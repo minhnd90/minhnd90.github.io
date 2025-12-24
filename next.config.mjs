@@ -13,11 +13,15 @@ const withNextra = nextra({
 export default withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
-  output: 'export',
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
     unoptimized: true,
+  },
+  turbopack: {
+    resolveAlias: {
+      'next-mdx-import-source-file': './mdx-components.tsx',
+    },
   },
 })
