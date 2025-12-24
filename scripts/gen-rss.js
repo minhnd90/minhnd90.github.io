@@ -10,31 +10,36 @@ async function generate() {
     feed_url: 'https://minhnd90.vercel.app/feed.xml'
   })
 
-  const posts = await fs.readdir(path.join(__dirname, '..', 'pages', 'blog'))
+  const blogDir = path.join(__dirname, '..', 'app', 'blog')
+  const posts = await fs.readdir(blogDir, { withFileTypes: true })
   const allPosts = []
   await Promise.all(
-    posts.map(async (name) => {
-      if (name.startsWith('index.')) return
+    posts.map(async (dirent) => {
+      if (!dirent.isDirectory()) return
+      const slug = dirent.name
+      const pagePath = path.join(blogDir, slug, 'page.mdx')
 
-      const content = await fs.readFile(
-        path.join(__dirname, '..', 'pages', 'blog', name)
-      )
-      const frontmatter = matter(content)
+      try {
+        const content = await fs.readFile(pagePath)
+        const frontmatter = matter(content)
 
-      allPosts.push({
-        title: frontmatter.data.title,
-        url: '/blog/' + name.replace(/\.mdx?/, ''),
-        date: frontmatter.data.date,
-        description: frontmatter.data.description,
-        categories: frontmatter.data.tag?.split(', '),
-        author: frontmatter.data.author
-      })
+        allPosts.push({
+          title: frontmatter.data.title,
+          url: '/blog/' + slug,
+          date: frontmatter.data.date,
+          description: frontmatter.data.description,
+          categories: frontmatter.data.tag?.split(', '),
+          author: frontmatter.data.author
+        })
+      } catch (err) {
+        // Skip if page.mdx doesn't exist or other error
+      }
     })
   )
 
   allPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
   allPosts.forEach((post) => {
-      feed.item(post)
+    feed.item(post)
   })
   await fs.writeFile('./public/feed.xml', feed.xml({ indent: true }))
 }
