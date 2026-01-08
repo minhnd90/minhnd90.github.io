@@ -18,7 +18,7 @@ export default function Navbar() {
             <div className="navbar-container">
                 <div className="logo">
                     <Link href="/">
-                        MinhND
+                        CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP
                     </Link>
                 </div>
                 <div className="nav-links">
