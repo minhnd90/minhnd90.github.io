@@ -24,4 +24,9 @@ export default withNextra({
       'next-mdx-import-source-file': './mdx-components.tsx',
     },
   },
+  env: {
+    APP_NAME: 'BM Group',
+    COMPANY_NAME: 'CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP',
+    COMPANY_DESC: 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng'
+  },
 })

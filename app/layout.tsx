@@ -7,11 +7,11 @@ import { ViewTransitions } from 'next-view-transitions'
 import '../styles/main.scss'
 
 export const metadata = {
-    title: 'Nextra Portfolio',
-    description: 'Portfolio built with Nextra',
+    title: process.env.COMPANY_NAME,
+    description: process.env.COMPANY_DESC,
     verification: {
         other: {
-            'facebook-domain-verification': '5ajy96lzwf0s8gcgpxihdestxuoxik',
+            'facebook-domain-verification': process.env.FB_DOMAIN_VERI,
         },
     },
 }
