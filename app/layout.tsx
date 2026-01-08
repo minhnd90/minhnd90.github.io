@@ -2,6 +2,7 @@ import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from 'next-themes'
 import { ViewTransitions } from 'next-view-transitions'
 import '../styles/main.scss'
@@ -22,9 +23,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body suppressHydrationWarning>
                 <ViewTransitions>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                        <Navbar />
-                        <main>{children}</main>
-                        <Footer />
+                        <AppRouterCacheProvider>
+                            <Navbar />
+                            <main>{children}</main>
+                            <Footer />
+                        </AppRouterCacheProvider>
                         <Analytics />
                         <SpeedInsights />
                     </ThemeProvider>
