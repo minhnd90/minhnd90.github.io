@@ -1,8 +1,7 @@
 "use client"
 
-import React from 'react'
-import { Box, Typography, Container, keyframes } from '@mui/material'
 import ConstructionIcon from '@mui/icons-material/Construction'
+import { Box, Container, keyframes, Typography } from '@mui/material'
 
 const float = keyframes`
   0% {
@@ -56,7 +55,7 @@ const UnderConstruction = () => {
                         Under Construction
                     </Typography>
 
-                    <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '600px', mx: 'auto', lineHeight: 1.6 }}>
+                    <Typography variant="h5" sx={{ maxWidth: '600px', mx: 'auto', lineHeight: 1.6 }}>
                         We're working hard to bring you a new experience.
                         Check back soon for updates!
                     </Typography>

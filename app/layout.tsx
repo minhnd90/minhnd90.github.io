@@ -5,6 +5,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from 'next-themes'
 import { ViewTransitions } from 'next-view-transitions'
+import { Roboto } from 'next/font/google'
+const roboto = Roboto({ subsets: ['latin'] })
 import '../styles/main.scss'
 
 export const metadata = {
@@ -19,7 +21,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="vi" className={roboto.className} suppressHydrationWarning>
             <body suppressHydrationWarning>
                 <ViewTransitions>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

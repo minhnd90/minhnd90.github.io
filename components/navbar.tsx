@@ -18,9 +18,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="navbar-container">
                 <div className="logo">
-                    <Link href="/">
-                        CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP
-                    </Link>
+                    <Link href="/">{process.env.COMPANY_NAME}</Link>
                 </div>
                 <div className="nav-links">
                     {navLinks.map((link) => (

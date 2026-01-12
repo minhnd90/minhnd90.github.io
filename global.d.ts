@@ -6,3 +6,7 @@ declare namespace NodeJS {
     FB_DOMAIN_VERI: string;
   }
 }
+declare module '*.scss' {
+  const content: Record<string, string>;
+  export default content;
+}
