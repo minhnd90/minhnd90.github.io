@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename)
 
 const withNextra = nextra({
   defaultShowCopyCode: true,
-  readingTime: true
+  readingTime: false
 })
 
 export default withNextra({
