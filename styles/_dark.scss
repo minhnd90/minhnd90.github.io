@@ -1,0 +1,40 @@
+// Dark mode adjustments
+html.dark {
+  .navbar {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .logo a {
+      color: #fff;
+    }
+
+    .nav-links .nav-link {
+      color: #888;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.active {
+        color: #0d96f2;
+      }
+    }
+  }
+
+  .footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .col-right a {
+      color: #888;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.active {
+        color: #0d96f2;
+      }
+    }
+  }
+}
