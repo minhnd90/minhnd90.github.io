@@ -73,7 +73,9 @@ export async function POST(req: Request) {
       headers: { 'Content-Type': contentType }
     })
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: String(err) }), { status: 500 })
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    status: 500
+    })
   }
 }
 
