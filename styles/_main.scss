@@ -41,21 +41,6 @@ img.next-image {
   color: #69778c;
 }
 
-.footer {
-  display: block;
-  margin-top: 8rem;
-
-  a {
-    float: right;
-  }
-  @media screen and (max-width: 480px) {
-    article {
-      padding-top: 2rem;
-      padding-bottom: 4rem;
-    }
-  }
-}
-
 // Navbar
 .navbar {
   position: sticky;
@@ -150,51 +135,11 @@ img.next-image {
   }
 }
 
-// Dark mode adjustments
-html.dark {
-  .navbar {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-color: rgba(255, 255, 255, 0.1);
 
-    .logo a {
-      color: #fff;
-    }
-
-    .nav-links .nav-link {
-      color: #888;
-
-      &:hover {
-        color: #fff;
-      }
-
-      &.active {
-        color: #0d96f2;
-      }
-    }
-  }
-
-  .footer {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-color: rgba(255, 255, 255, 0.1);
-
-    .col-right a {
-      color: #888;
-
-      &:hover {
-        color: #fff;
-      }
-
-      &.active {
-        color: #0d96f2;
-      }
-    }
-  }
-}
 
 // Improved main content padding for sticky nav
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
   min-height: 80vh;
 }
