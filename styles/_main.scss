@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }
 b,
 strong,
@@ -95,6 +96,7 @@ img.next-image {
 .footer {
   position: sticky;
   bottom: 0;
+  top: 100%;
   z-index: 1000;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -134,8 +136,6 @@ img.next-image {
     }
   }
 }
-
-
 
 // Improved main content padding for sticky nav
 main {
