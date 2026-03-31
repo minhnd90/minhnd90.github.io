@@ -1,4 +1,4 @@
-import { createHash } from 'crypto'
+import { createHash } from 'node:crypto'
 
 // Hash PII value with SHA256 as required by Meta
 function hashPII(value: string): string {
@@ -89,4 +89,3 @@ export async function POST(req: Request) {
   }
 }
 
-export const runtime = 'edge'
