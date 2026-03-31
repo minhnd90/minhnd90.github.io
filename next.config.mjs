@@ -27,6 +27,8 @@ export default withNextra({
   env: {
     APP_NAME: 'BM Group',
     COMPANY_NAME: 'CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP',
-    COMPANY_DESC: 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng'
+    COMPANY_DESC: 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng',
+    CONTACT_EMAIL: process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn',
+    CONTACT_PHONE: process.env.CONTACT_PHONE || '0988 108 250'
   },
 })

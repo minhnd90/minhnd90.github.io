@@ -6,6 +6,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from 'next-themes'
 import { ViewTransitions } from 'next-view-transitions'
 import { Roboto } from 'next/font/google'
+import MuiThemeProvider from '../components/theme/mui-theme-provider'
 const roboto = Roboto({ subsets: ['vietnamese'] })
 import '../styles/index.scss'
 
@@ -26,13 +27,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={roboto.className} suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body>
         <ViewTransitions>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <AppRouterCacheProvider>
-              <Navbar />
-              <main>{children}</main>
-              <Footer />
+              <MuiThemeProvider>
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </MuiThemeProvider>
             </AppRouterCacheProvider>
             <Analytics />
             <SpeedInsights />
