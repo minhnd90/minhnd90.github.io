@@ -1,7 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import BlogList, { BlogPost } from '../../components/blog/blog-list'
+import dynamic from 'next/dynamic'
+
+const BlogList = dynamic(() => import('../../components/blog/blog-list'))
+import { BlogPost } from '../../components/blog/blog-list'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

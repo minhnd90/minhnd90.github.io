@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function JobsPage() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')
   let files: string[] = []
-  
+
   try {
     if (fs.existsSync(jobsDir)) {
       files = fs.readdirSync(jobsDir)

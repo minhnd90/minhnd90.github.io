@@ -22,10 +22,10 @@ export default function Navbar() {
         <div className="logo">
           <Link href="/" title={process.env.COMPANY_NAME}>
             <Image
-              src="/next.svg"
+              src="/logo.png"
               alt={process.env.COMPANY_NAME}
-              width={100}
-              height={40}
+              width={48}
+              height={48}
             />
           </Link>
         </div>
