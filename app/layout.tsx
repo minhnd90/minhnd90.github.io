@@ -10,31 +10,35 @@ const roboto = Roboto({ subsets: ['vietnamese'] })
 import '../styles/index.scss'
 
 export const metadata = {
-    title: process.env.COMPANY_NAME,
-    description: process.env.COMPANY_DESC,
-    verification: {
-        other: {
-            'facebook-domain-verification': process.env.FB_DOMAIN_VERI,
-        },
-    },
+  title: process.env.COMPANY_NAME,
+  description: process.env.COMPANY_DESC,
+  verification: {
+    other: {
+      'facebook-domain-verification': process.env.FB_DOMAIN_VERI
+    }
+  }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <html lang="vi" className={roboto.className} suppressHydrationWarning>
-            <body suppressHydrationWarning>
-                <ViewTransitions>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                        <AppRouterCacheProvider>
-                            <Navbar />
-                            <main>{children}</main>
-                            <Footer />
-                        </AppRouterCacheProvider>
-                        <Analytics />
-                        <SpeedInsights />
-                    </ThemeProvider>
-                </ViewTransitions>
-            </body>
-        </html>
-    )
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="vi" className={roboto.className} suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ViewTransitions>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <AppRouterCacheProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </AppRouterCacheProvider>
+            <Analytics />
+            <SpeedInsights />
+          </ThemeProvider>
+        </ViewTransitions>
+      </body>
+    </html>
+  )
 }

@@ -1,4 +1,3 @@
-import type { NextRequest } from 'next/server'
 import { createHash } from 'crypto'
 
 // Hash PII value with SHA256 as required by Meta
@@ -10,7 +9,18 @@ function hashPII(value: string): string {
 // Hash user_data object: em, ph, ge, db, ln, fn, etc.
 function hashUserData(userData: any): any {
   if (!userData) return userData
-  const piiFields = ['em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp', 'country']
+  const piiFields = [
+    'em',
+    'ph',
+    'ge',
+    'db',
+    'ln',
+    'fn',
+    'ct',
+    'st',
+    'zp',
+    'country'
+  ]
   const hashed = { ...userData }
   for (const field of piiFields) {
     if (hashed[field] && typeof hashed[field] === 'string') {
@@ -74,7 +84,7 @@ export async function POST(req: Request) {
     })
   } catch (err: any) {
     return new Response(JSON.stringify({ error: 'Internal server error' }), {
-    status: 500
+      status: 500
     })
   }
 }
