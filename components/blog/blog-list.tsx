@@ -21,26 +21,18 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
     <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: 'background.default', minHeight: '100vh' }}>
       <Container maxWidth="lg">
         <PageBreadcrumb items={[{ label: 'Blog' }]} />
-        <PageHeader 
-          title="Góc Chia Sẻ" 
-          subtitle="Kinh nghiệm tìm việc, mẹo phỏng vấn và các kỹ năng sống dành cho người lao động phổ thông." 
+        <PageHeader
+          title="Góc Chia Sẻ"
+          subtitle="Kinh nghiệm tìm việc, mẹo phỏng vấn và các kỹ năng sống dành cho người lao động phổ thông."
         />
 
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {posts.map((post) => (
             <Grid size={{ xs: 12, md: 6 }} key={post.slug}>
               <Card
+                className="card-hover"
                 sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: 3,
                   boxShadow: theme.palette.mode === 'dark' ? 2 : '0 4px 12px rgba(0,0,0,0.05)',
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: theme.palette.mode === 'dark' ? 4 : '0 8px 24px rgba(0,0,0,0.1)'
-                  }
                 }}
               >
                 <CardContent sx={{ flexGrow: 1, p: 4 }}>

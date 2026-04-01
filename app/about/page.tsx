@@ -22,11 +22,9 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import Link from 'next/link'
 import PageHeader from '../../components/shared/page-header'
+import { APP_NAME, META, PAGE_HEADERS } from '../../lib/constants'
 
-export const metadata: Metadata = {
-  title: 'Giới thiệu | BM Group',
-  description: 'Tìm hiểu về sứ mệnh và quy trình tuyển dụng tại BM Group - Chuyên tuyển dụng lao động phổ thông uy tín.',
-}
+export const metadata: Metadata = META.about
 
 export default function AboutPage() {
   return (
@@ -34,8 +32,8 @@ export default function AboutPage() {
       <Container maxWidth="lg">
         {/* Header Section */}
         <PageHeader
-          title="Giới thiệu BM Group"
-          subtitle="Chuyên tuyển dụng lao động phổ thông, nhân viên kho bãi và sản xuất hàng đầu cho các tập đoàn công nghiệp lớn."
+          title={PAGE_HEADERS.about.title}
+          subtitle={PAGE_HEADERS.about.subtitle}
         />
 
         {/* Mission Section */}
@@ -46,7 +44,7 @@ export default function AboutPage() {
                 Sứ mệnh của chúng tôi
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 3, fontSize: '1.1rem', lineHeight: 1.8 }}>
-                Chúng tôi là **BM Group** — chuyên gia trong lĩnh vực tuyển dụng lao động phổ thông cho các ngành sản xuất, kho vận và công nghiệp tại Việt Nam.
+                Chúng tôi là **{APP_NAME}** — chuyên gia trong lĩnh vực tuyển dụng lao động phổ thông cho các ngành sản xuất, kho vận và công nghiệp tại Việt Nam.
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
                 Mục tiêu của chúng tôi không chỉ là tuyển dụng, mà là xây dựng một cầu nối bền vững giúp người lao động có công việc ổn định, thu nhập tốt và các phúc lợi minh bạch, góp phần vào sự phát triển ổn định của doanh nghiệp.
@@ -57,7 +55,7 @@ export default function AboutPage() {
             <Paper sx={{ p: 5, borderRadius: 4, bgcolor: 'primary.main', color: 'white', position: 'relative', overflow: 'hidden' }}>
               <BusinessIcon sx={{ position: 'absolute', right: -20, bottom: -20, fontSize: 180, opacity: 0.1 }} />
               <Typography variant="h5" fontWeight="bold" gutterBottom>
-                Tại sao chọn BM Group?
+                Tại sao chọn {APP_NAME}?
               </Typography>
               <List sx={{ mt: 3 }}>
                 {[

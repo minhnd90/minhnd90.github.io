@@ -6,11 +6,9 @@ import dynamic from 'next/dynamic'
 const BlogList = dynamic(() => import('../../components/blog/blog-list'))
 import { BlogPost } from '../../components/blog/blog-list'
 import { Metadata } from 'next'
+import { META } from '../../lib/constants'
 
-export const metadata: Metadata = {
-  title: 'Blog - Bình Minh Group',
-  description: 'Kinh nghiệm tìm việc và mẹo ứng tuyển'
-}
+export const metadata: Metadata = META.blog
 
 export default async function BlogPage() {
   const blogDir = path.join(process.cwd(), 'content/blog')

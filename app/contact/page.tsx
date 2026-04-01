@@ -24,24 +24,22 @@ import InfoIcon from '@mui/icons-material/Info'
 import Link from 'next/link'
 
 import PageHeader from '../../components/shared/page-header'
+import { CONTACT_EMAIL, CONTACT_PHONE, META, PAGE_HEADERS, APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE } from '../../lib/constants'
 
-export const metadata: Metadata = {
-  title: 'Liên hệ & Ứng tuyển | BM Group',
-  description: 'Gửi hồ sơ ứng tuyển hoặc liên hệ trực tiếp với BM Group để nhận việc làm nhanh chóng.',
-}
+export const metadata: Metadata = META.contact
 
 export default function ContactPage() {
-  const contactEmail = process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn'
-  const contactPhone = process.env.CONTACT_PHONE || '0988 108 250'
-  const applySubject = encodeURIComponent('Ứng tuyển việc làm phổ thông')
+  const contactEmail = CONTACT_EMAIL
+  const contactPhone = CONTACT_PHONE
+  const applySubject = encodeURIComponent(APPLY_EMAIL_SUBJECT)
 
   return (
     <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         {/* Header Section */}
-        <PageHeader 
-          title="Liên hệ & Ứng tuyển" 
-          subtitle="Chúng tôi luôn sẵn sàng hỗ trợ bạn tìm được công việc phù hợp nhất. Phản hồi nhanh trong vòng 24h." 
+        <PageHeader
+          title={PAGE_HEADERS.contact.title}
+          subtitle={PAGE_HEADERS.contact.subtitle}
         />
 
         <Grid container spacing={5}>
@@ -181,16 +179,7 @@ export default function ContactPage() {
                 <Typography variant="caption" sx={{ position: 'absolute', top: 8, right: 12, color: 'text.disabled' }}>
                   Sao chép và sửa lại thông tin của bạn
                 </Typography>
-                {`Tiêu đề: Ứng tuyển Công nhân đóng gói
-
-Xin chào Bình Minh Group,
-
-Tôi tên là [Họ tên], sinh năm [19xx], hiện sống tại [Địa chỉ].
-Tôi mong muốn ứng tuyển vị trí Công nhân đóng gói.
-Số điện thoại liên hệ: [SĐT]
-
-Trân trọng,
-[Họ tên]`}
+                {APPLY_EMAIL_TEMPLATE}
               </Box>
 
               <Typography variant="body2" color="text.secondary" sx={{ mt: 3, fontStyle: 'italic' }}>

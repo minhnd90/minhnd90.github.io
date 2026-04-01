@@ -17,7 +17,8 @@ import {
   Select,
   MenuItem,
   InputAdornment,
-  Stack
+  Stack,
+  useTheme
 } from '@mui/material'
 import Link from 'next/link'
 import SearchIcon from '@mui/icons-material/Search'
@@ -39,6 +40,7 @@ export interface Job {
 }
 
 export default function JobList({ jobs }: { jobs: Job[] }) {
+  const theme = useTheme()
   const [category, setCategory] = useState('Tất cả')
   const [type, setType] = useState('Tất cả')
   const [location, setLocation] = useState('Tất cả')
@@ -139,16 +141,9 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
           {filteredJobs.map((job) => (
             <Grid size={{ xs: 12, md: 6 }} key={job.slug}>
               <Card
+                className="card-hover"
                 sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: 3,
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
-                  }
+                  boxShadow: theme.palette.mode === 'dark' ? 2 : '0 4px 12px rgba(0,0,0,0.05)',
                 }}
               >
                 <CardContent sx={{ flexGrow: 1, p: 3.5 }}>
