@@ -6,11 +6,12 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const withNextra = nextra({
-  defaultShowCopyCode: true,
+  defaultShowCopyCode: false,
   readingTime: false
 })
 
 export default withNextra({
+  output: 'export',
   reactStrictMode: true,
   cleanDistDir: true,
   sassOptions: {
