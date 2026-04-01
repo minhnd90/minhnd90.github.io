@@ -3,16 +3,14 @@ import path from 'path'
 import matter from 'gray-matter'
 import JobList, { Job } from '../../components/jobs/job-list'
 import { Metadata } from 'next'
+import { META } from '../../lib/constants'
 
-export const metadata: Metadata = {
-  title: 'Việc Làm - Bình Minh Group',
-  description: 'Tìm kiếm việc làm lao động phổ thông, công nhân, kho vận phù hợp nhất với bạn.'
-}
+export const metadata: Metadata = META.jobs
 
 export default async function JobsPage() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')
   let files: string[] = []
-  
+
   try {
     if (fs.existsSync(jobsDir)) {
       files = fs.readdirSync(jobsDir)

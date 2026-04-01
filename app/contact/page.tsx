@@ -1,61 +1,194 @@
 import type { Metadata } from 'next'
+import {
+  Container,
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  Stack,
+  Button,
+  Paper,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import EmailIcon from '@mui/icons-material/Email'
+import PhoneIcon from '@mui/icons-material/Phone'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import AssignmentIcon from '@mui/icons-material/Assignment'
+import SendIcon from '@mui/icons-material/Send'
+import InfoIcon from '@mui/icons-material/Info'
+import Link from 'next/link'
 
-export const metadata: Metadata = {
-  title: 'Liên hệ | BM Group',
-  description: 'Liên hệ BM Group để nhận việc làm phù hợp trong vòng 24h.',
-}
+import PageHeader from '../../components/shared/page-header'
+import { CONTACT_EMAIL, CONTACT_PHONE, META, PAGE_HEADERS, APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE } from '../../lib/constants'
+
+export const metadata: Metadata = META.contact
 
 export default function ContactPage() {
-  const contactEmail = process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn'
-  const contactPhone = process.env.CONTACT_PHONE || '0988 108 250'
-  const applySubject = encodeURIComponent('Ứng tuyển việc làm phổ thông')
+  const contactEmail = CONTACT_EMAIL
+  const contactPhone = CONTACT_PHONE
+  const applySubject = encodeURIComponent(APPLY_EMAIL_SUBJECT)
 
   return (
-    <div className="nextra-content" style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1rem' }}>
-      <h1>Liên hệ và ứng tuyển nhanh</h1>
+    <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: 'background.default' }}>
+      <Container maxWidth="lg">
+        {/* Header Section */}
+        <PageHeader
+          title={PAGE_HEADERS.contact.title}
+          subtitle={PAGE_HEADERS.contact.subtitle}
+        />
 
-      <p>Bạn có thể liên hệ trực tiếp để nhận được việc làm phù hợp trong vòng 24h.</p>
+        <Grid container spacing={5}>
+          {/* Contact Info Column */}
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Stack spacing={4}>
+              <Box>
+                <Typography variant="h5" fontWeight="bold" gutterBottom>
+                  Thông tin tuyển dụng
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                  Liên hệ trực tiếp qua Hotline hoặc Email để được sắp xếp lịch phỏng vấn sớm nhất.
+                </Typography>
 
-      <h2>Thông tin tuyển dụng</h2>
+                <Paper sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
+                  <Stack spacing={3}>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Box sx={{ bgcolor: 'rgba(255, 140, 0, 0.1)', p: 1.5, borderRadius: 2, display: 'flex' }}>
+                        <EmailIcon color="primary" />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" color="text.secondary">Email ứng tuyển</Typography>
+                        <Typography variant="h6" fontWeight="bold">{contactEmail}</Typography>
+                      </Box>
+                    </Box>
 
-      <ul>
-        <li><strong>Email ứng tuyển:</strong> {contactEmail}</li>
-        <li><strong>Hotline:</strong> {contactPhone}</li>
-        <li><strong>Địa điểm chính:</strong> Hà Nội, Bắc Ninh, Hải Phòng</li>
-      </ul>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Box sx={{ bgcolor: 'rgba(255, 140, 0, 0.1)', p: 1.5, borderRadius: 2, display: 'flex' }}>
+                        <PhoneIcon color="primary" />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" color="text.secondary">Hotline 24/7</Typography>
+                        <Typography variant="h6" fontWeight="bold">{contactPhone}</Typography>
+                      </Box>
+                    </Box>
 
-      <h2>Hướng dẫn nộp hồ sơ</h2>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Box sx={{ bgcolor: 'rgba(255, 140, 0, 0.1)', p: 1.5, borderRadius: 2, display: 'flex' }}>
+                        <LocationOnIcon color="primary" />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" color="text.secondary">Khu vực làm việc</Typography>
+                        <Typography variant="h6" fontWeight="bold">Hà Nội, Bắc Ninh, Hải Phòng</Typography>
+                      </Box>
+                    </Box>
+                  </Stack>
+                </Paper>
+              </Box>
 
-      <ol>
-        <li>Ghi rõ vị trí muốn ứng tuyển trong tiêu đề email.</li>
-        <li>Gửi thông tin cá nhân ngắn gọn: họ tên, tuổi, địa chỉ, số điện thoại.</li>
-        <li>Nếu có, đính kèm ảnh chụp CMND/CCCD hoặc giấy tờ tùy thân.</li>
-      </ol>
+              <Card sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: 4, p: 2 }}>
+                <CardContent>
+                  <Typography variant="h5" fontWeight="bold" gutterBottom>
+                    Nộp hồ sơ ngay?
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
+                    Gửi thông tin của bạn ngay bây giờ để nhận lịch phỏng vấn sớm nhất.
+                  </Typography>
+                  <Button
+                    component={Link}
+                    href={`mailto:${contactEmail}?subject=${applySubject}`}
+                    variant="contained"
+                    sx={{ 
+                      bgcolor: 'white', 
+                      color: 'primary.main',
+                      fontWeight: 'bold',
+                      borderRadius: 2,
+                      '&:hover': {
+                        bgcolor: 'rgba(255,255,255,0.9)'
+                      }
+                    }}
+                    fullWidth
+                    size="large"
+                    startIcon={<SendIcon />}
+                  >
+                    Gửi email ứng tuyển ngay
+                  </Button>
+                </CardContent>
+              </Card>
+            </Stack>
+          </Grid>
 
-      <h2>Mẫu nội dung email</h2>
+          {/* Instructions Column */}
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Paper sx={{ p: { xs: 4, md: 6 }, borderRadius: 4, height: '100%' }}>
+              <Typography variant="h5" fontWeight="bold" gutterBottom>
+                Hướng dẫn nộp hồ sơ
+              </Typography>
+              
+              <List sx={{ mt: 2, mb: 4 }}>
+                {[
+                  { 
+                    icon: <AssignmentIcon color="primary" />, 
+                    title: 'Vị trí mong muốn', 
+                    desc: 'Tiêu đề email ghi rõ: Ứng tuyển [Vị trí công việc]' 
+                  },
+                  { 
+                    icon: <InfoIcon color="primary" />, 
+                    title: 'Thông tin cơ bản', 
+                    desc: 'Gửi ngắn gọn: Họ tên, Năm sinh, Địa chỉ, Số điện thoại liên hệ.' 
+                  },
+                  { 
+                    icon: <AssignmentIcon color="primary" />, 
+                    title: 'Giấy tờ tùy thân', 
+                    desc: 'Nếu có, đính kèm ảnh chụp CCCD/CMND để chúng tôi ưu tiên xét duyệt.' 
+                  }
+                ].map((item, index) => (
+                  <ListItem key={index} sx={{ px: 0, py: 2 }}>
+                    <ListItemIcon sx={{ minWidth: 50 }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary={<Typography fontWeight="bold">{item.title}</Typography>}
+                      secondary={item.desc}
+                    />
+                  </ListItem>
+                ))}
+              </List>
 
-      <pre style={{ background: 'var(--nextra-bg, #f6f6f6)', padding: '1rem', borderRadius: 8, overflowX: 'auto' }}>
-        <code>{`Tiêu đề: Ứng tuyển Công nhân đóng gói
+              <Divider sx={{ mb: 4 }} />
 
-Xin chào,
+              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                Mẫu nội dung email ứng tuyển
+              </Typography>
+              <Box 
+                sx={{ 
+                  bgcolor: 'background.default', 
+                  p: 3, 
+                  borderRadius: 3, 
+                  border: '1px dashed', 
+                  borderColor: 'divider',
+                  fontFamily: 'monospace',
+                  fontSize: '0.9rem',
+                  lineHeight: 1.6,
+                  position: 'relative'
+                }}
+              >
+                <Typography variant="caption" sx={{ position: 'absolute', top: 8, right: 12, color: 'text.disabled' }}>
+                  Sao chép và sửa lại thông tin của bạn
+                </Typography>
+                {APPLY_EMAIL_TEMPLATE}
+              </Box>
 
-Tôi tên là [Họ tên], sinh năm [19xx], hiện sống tại [Địa chỉ].
-Tôi mong muốn ứng tuyển vị trí Công nhân đóng gói.
-Số điện thoại: [SĐT]
-
-Trân trọng,
-[Họ tên]`}</code>
-      </pre>
-
-      <h2>Nộp hồ sơ nhanh</h2>
-
-      <p>
-        <a href={`mailto:${contactEmail}?subject=${applySubject}`}>
-          Gửi email ứng tuyển ngay
-        </a>
-      </p>
-
-      <p>Nếu cần trợ giúp, gọi ngay hotline để được hỗ trợ sắp lịch phỏng vấn hoặc hướng dẫn thủ tục.</p>
-    </div>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 3, fontStyle: 'italic' }}>
+                * Lưu ý: Chúng tôi không thu bất kỳ khoản phí nào của người lao động. Cẩn thận với các hành vi lừa đảo nộp phí phỏng vấn.
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   )
 }

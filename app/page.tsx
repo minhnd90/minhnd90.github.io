@@ -7,16 +7,14 @@ import RecentJobs from '../components/home/recent-jobs'
 import CTA from '../components/home/cta'
 import { Metadata } from 'next'
 import { Job } from '../components/jobs/job-list'
+import { META } from '../lib/constants'
 
-export const metadata: Metadata = {
-  title: 'Trang Chủ - Bình Minh Group',
-  description: 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng'
-}
+export const metadata: Metadata = META.home
 
 export default async function HomePage() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')
   let jobs: Job[] = []
-  
+
   try {
     if (fs.existsSync(jobsDir)) {
       const files = fs.readdirSync(jobsDir)

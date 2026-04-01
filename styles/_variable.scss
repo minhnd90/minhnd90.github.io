@@ -1,22 +1,22 @@
 :root {
   // Brand colors
-  --primary-color: #FF8C00;
+  --primary-color: #ff8c00;
   --secondary-color: #0074de;
-  
+
   // Layout
   --max-width: 1200px;
-  
+
   // Theme specific (Light)
   --bg-primary: #ffffff;
   --bg-secondary: #f6f6f6;
   --bg-navbar: rgba(255, 255, 255, 0.7);
-  
+
   --text-primary: #000000;
   --text-secondary: #666666;
   --text-muted: #69778c;
-  
+
   --border-color: rgba(0, 0, 0, 0.05);
-  
+
   --nav-link-color: var(--text-secondary);
   --nav-link-hover: var(--text-primary);
   --nav-link-active: var(--primary-color);

@@ -20,6 +20,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import SendIcon from '@mui/icons-material/Send'
 import Link from 'next/link'
+import { CONTACT_EMAIL } from '../../../lib/constants'
 
 export function generateStaticParams() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')
@@ -43,7 +44,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
   const fileContent = fs.readFileSync(mdxPath, 'utf-8')
   const { data } = matter(fileContent)
   
-  const applyEmail = data.applyEmail || process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn'
+  const applyEmail = data.applyEmail || CONTACT_EMAIL
 
   try {
     const { default: JobContent } = await import(`../../../content/jobs/${slug}.mdx`)

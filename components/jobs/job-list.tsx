@@ -17,13 +17,15 @@ import {
   Select,
   MenuItem,
   InputAdornment,
-  Stack
+  Stack,
+  useTheme
 } from '@mui/material'
 import Link from 'next/link'
 import SearchIcon from '@mui/icons-material/Search'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
+import PageHeader from '../shared/page-header'
 
 export interface Job {
   slug: string
@@ -38,6 +40,7 @@ export interface Job {
 }
 
 export default function JobList({ jobs }: { jobs: Job[] }) {
+  const theme = useTheme()
   const [category, setCategory] = useState('Tất cả')
   const [type, setType] = useState('Tất cả')
   const [location, setLocation] = useState('Tất cả')
@@ -64,14 +67,10 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
     <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         {/* Header Section */}
-        <Box sx={{ mb: 6, textAlign: 'center' }}>
-          <Typography component="h1" variant="h3" fontWeight={800} gutterBottom color="primary">
-            Cơ Hội Việc Làm
-          </Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 700, mx: 'auto' }}>
-            Kết nối bạn với các doanh nghiệp uy tín. Việc làm thật, lương thật, nhận việc nhanh trong 48h.
-          </Typography>
-        </Box>
+        <PageHeader
+          title="Cơ Hội Việc Làm"
+          subtitle="Kết nối bạn với các doanh nghiệp uy tín. Việc làm thật, lương thật, nhận việc nhanh trong 48h."
+        />
 
         {/* Filters Section */}
         <Card sx={{ p: 3, mb: 6, borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.05)', overflow: 'visible' }}>
@@ -82,12 +81,14 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
                 placeholder="Vị trí, công việc, kỹ năng..."
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  )
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    )
+                  }
                 }}
               />
             </Grid>
@@ -140,16 +141,9 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
           {filteredJobs.map((job) => (
             <Grid size={{ xs: 12, md: 6 }} key={job.slug}>
               <Card
+                className="card-hover"
                 sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: 3,
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
-                  }
+                  boxShadow: theme.palette.mode === 'dark' ? 2 : '0 4px 12px rgba(0,0,0,0.05)',
                 }}
               >
                 <CardContent sx={{ flexGrow: 1, p: 3.5 }}>

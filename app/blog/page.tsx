@@ -1,13 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import BlogList, { BlogPost } from '../../components/blog/blog-list'
-import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 
-export const metadata: Metadata = {
-  title: 'Blog - Bình Minh Group',
-  description: 'Kinh nghiệm tìm việc và mẹo ứng tuyển'
-}
+const BlogList = dynamic(() => import('../../components/blog/blog-list'))
+import { BlogPost } from '../../components/blog/blog-list'
+import { Metadata } from 'next'
+import { META } from '../../lib/constants'
+
+export const metadata: Metadata = META.blog
 
 export default async function BlogPage() {
   const blogDir = path.join(process.cwd(), 'content/blog')
