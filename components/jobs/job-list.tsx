@@ -184,7 +184,7 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 3.5, pt: 0 }}>
-                  <Link href={`/jobs/${job.slug}`} passHref style={{ textDecoration: 'none', width: '100%' }}>
+                  <Link href={`/jobs/${encodeURIComponent(job.slug)}`} passHref style={{ textDecoration: 'none', width: '100%' }}>
                     <Button
                       variant="contained"
                       fullWidth
