@@ -45,41 +45,41 @@ export default function Hero() {
             spacing={2}
             justifyContent="center"
           >
-            <Button
-              component={Link}
-              href="/jobs"
-              variant="contained"
-              size="large"
-              startIcon={<WorkOutlineIcon />}
-              sx={{
-                py: 1.5,
-                px: 4,
-                fontWeight: 'bold',
-                borderRadius: 2,
-                textTransform: 'none',
-                fontSize: '1.1rem'
-              }}
-            >
-              Tìm việc ngay
-            </Button>
-            <Button
-              component={Link}
-              href="/contact"
-              variant="outlined"
-              color="secondary"
-              size="large"
-              startIcon={<ContactSupportIcon />}
-              sx={{
-                py: 1.5,
-                px: 4,
-                fontWeight: 'bold',
-                borderRadius: 2,
-                textTransform: 'none',
-                fontSize: '1.1rem'
-              }}
-            >
-              Liên hệ hỗ trợ
-            </Button>
+            <Link href="/jobs" passHref style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                size="large"
+                startIcon={<WorkOutlineIcon />}
+                sx={{
+                  py: 1.5,
+                  px: 4,
+                  fontWeight: 'bold',
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  fontSize: '1.1rem'
+                }}
+              >
+                Tìm việc ngay
+              </Button>
+            </Link>
+            <Link href="/contact" passHref style={{ textDecoration: 'none' }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                startIcon={<ContactSupportIcon />}
+                sx={{
+                  py: 1.5,
+                  px: 4,
+                  fontWeight: 'bold',
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  fontSize: '1.1rem'
+                }}
+              >
+                Liên hệ hỗ trợ
+              </Button>
+            </Link>
           </Stack>
         </Box>
       </Container>

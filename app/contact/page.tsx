@@ -97,25 +97,25 @@ export default function ContactPage() {
                   <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
                     Gửi thông tin của bạn ngay bây giờ để nhận lịch phỏng vấn sớm nhất.
                   </Typography>
-                  <Button
-                    component={Link}
-                    href={`mailto:${contactEmail}?subject=${applySubject}`}
-                    variant="contained"
-                    sx={{ 
-                      bgcolor: 'white', 
-                      color: 'primary.main',
-                      fontWeight: 'bold',
-                      borderRadius: 2,
-                      '&:hover': {
-                        bgcolor: 'rgba(255,255,255,0.9)'
-                      }
-                    }}
-                    fullWidth
-                    size="large"
-                    startIcon={<SendIcon />}
-                  >
-                    Gửi email ứng tuyển ngay
-                  </Button>
+                  <Link href={`mailto:${contactEmail}?subject=${applySubject}`} passHref style={{ textDecoration: 'none' }}>
+                    <Button
+                      variant="contained"
+                      sx={{ 
+                        bgcolor: 'white', 
+                        color: 'primary.main',
+                        fontWeight: 'bold',
+                        borderRadius: 2,
+                        '&:hover': {
+                          bgcolor: 'rgba(255,255,255,0.9)'
+                        }
+                      }}
+                      fullWidth
+                      size="large"
+                      startIcon={<SendIcon />}
+                    >
+                      Gửi email ứng tuyển ngay
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </Stack>

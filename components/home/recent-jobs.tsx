@@ -24,9 +24,11 @@ export default function RecentJobs({ jobs }: { jobs: Job[] }) {
             </Typography>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Button component={Link} href="/jobs" endIcon={<ArrowForwardIcon />} color="primary" sx={{ fontWeight: 'bold' }}>
-              Xem tất cả
-            </Button>
+            <Link href="/jobs" passHref style={{ textDecoration: 'none' }}>
+              <Button endIcon={<ArrowForwardIcon />} color="primary" sx={{ fontWeight: 'bold' }}>
+                Xem tất cả
+              </Button>
+            </Link>
           </Box>
         </Box>
 
@@ -69,9 +71,11 @@ export default function RecentJobs({ jobs }: { jobs: Job[] }) {
                   </Box>
                 </CardContent>
                 <CardActions sx={{ p: 3, pt: 0 }}>
-                  <Button component={Link} href={`/jobs/${job.slug}`} variant="contained" fullWidth disableElevation sx={{ borderRadius: 2 }}>
-                    Chi tiết công việc
-                  </Button>
+                  <Link href={`/jobs/${job.slug}`} passHref style={{ textDecoration: 'none', width: '100%' }}>
+                    <Button variant="contained" fullWidth disableElevation sx={{ borderRadius: 2 }}>
+                      Chi tiết công việc
+                    </Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>
@@ -79,9 +83,11 @@ export default function RecentJobs({ jobs }: { jobs: Job[] }) {
         </Grid>
         
         <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: 4, textAlign: 'center' }}>
-          <Button component={Link} href="/jobs" variant="outlined" endIcon={<ArrowForwardIcon />} color="primary" fullWidth sx={{ py: 1.5, borderRadius: 2, fontWeight: 'bold' }}>
-            Xem tất cả việc làm
-          </Button>
+          <Link href="/jobs" passHref style={{ textDecoration: 'none' }}>
+            <Button variant="outlined" endIcon={<ArrowForwardIcon />} color="primary" fullWidth sx={{ py: 1.5, borderRadius: 2, fontWeight: 'bold' }}>
+              Xem tất cả việc làm
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>

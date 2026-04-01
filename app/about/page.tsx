@@ -170,15 +170,15 @@ export default function AboutPage() {
 
         {/* CTA */}
         <Box sx={{ textAlign: 'center' }}>
-          <Button
-            component={Link}
-            href="/jobs"
-            variant="contained"
-            size="large"
-            sx={{ px: 6, py: 2, borderRadius: 3, fontWeight: 'bold', fontSize: '1.1rem' }}
-          >
-            Bắt đầu tìm việc ngay
-          </Button>
+          <Link href="/jobs" passHref>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{ px: 6, py: 2, borderRadius: 3, fontWeight: 'bold', fontSize: '1.1rem' }}
+            >
+              Bắt đầu tìm việc ngay
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>

@@ -14,22 +14,22 @@ export default function CTA() {
           <Typography variant="h6" paragraph sx={{ mb: 4, opacity: 0.9, fontWeight: 400 }}>
             Kết nối ngay với đội ngũ để được tư vấn và nhận lộ trình nhận việc trong vòng 48h.
           </Typography>
-          <Button
-            component={Link}
-            href="/contact"
-            variant="contained"
-            color="primary"
-            size="large"
-            sx={{
-              py: 1.5,
-              px: 5,
-              fontWeight: 'bold',
-              borderRadius: 2,
-              fontSize: '1.1rem'
-            }}
-          >
-            Liên hệ ứng tuyển ngay
-          </Button>
+          <Link href="/contact" passHref style={{ textDecoration: 'none' }}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                py: 1.5,
+                px: 5,
+                fontWeight: 'bold',
+                borderRadius: 2,
+                fontSize: '1.1rem'
+              }}
+            >
+              Liên hệ ứng tuyển ngay
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>
