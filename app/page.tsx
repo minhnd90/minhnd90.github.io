@@ -9,6 +9,19 @@ import { Metadata } from 'next'
 import { Job } from '../components/jobs/job-list'
 import { META } from '../lib/constants'
 
+function sanitizeSlug(filename: string): string {
+  // Remove known extension if present
+  let base = filename.replace(/\.mdx$/i, '')
+  // Allow only URL-safe characters: letters, numbers, dash and underscore
+  base = base.replace(/[^a-zA-Z0-9-_]+/g, '-')
+  // Collapse multiple dashes
+  base = base.replace(/-+/g, '-')
+  // Trim leading/trailing dashes
+  base = base.replace(/^-+|-+$/g, '')
+  // Fallback in case nothing remains after sanitization
+  return base || 'job'
+}
+
 export const metadata: Metadata = META.home
 
 export default async function HomePage() {
@@ -25,7 +38,7 @@ export default async function HomePage() {
         const { data } = matter(fileContent)
 
         return {
-          slug: filename.replace('.mdx', ''),
+          slug: sanitizeSlug(filename),
           title: data.title || filename,
           category: data.category || 'Khác',
           type: data.type || 'Toàn thời gian',
