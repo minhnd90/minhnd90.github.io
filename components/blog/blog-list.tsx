@@ -52,15 +52,15 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 4, pt: 0 }}>
-                  <Button
-                    component={Link}
-                    href={`/blog/${post.slug}`}
-                    endIcon={<ArrowForwardIcon />}
-                    color="secondary"
-                    sx={{ fontWeight: 'bold' }}
-                  >
-                    Đọc tiếp
-                  </Button>
+                  <Link href={`/blog/${post.slug}`} passHref style={{ textDecoration: 'none' }}>
+                    <Button
+                      endIcon={<ArrowForwardIcon />}
+                      color="secondary"
+                      sx={{ fontWeight: 'bold' }}
+                    >
+                      Đọc tiếp
+                    </Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import {
   Box,
   Typography,
@@ -52,16 +52,14 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
     location: ['Tất cả', ...Array.from(new Set(jobs.map((job) => job.location)))]
   }
 
-  const filteredJobs = useMemo(() => {
-    return jobs.filter((job) => {
-      const matchCategory = category === 'Tất cả' || job.category === category
-      const matchType = type === 'Tất cả' || job.type === type
-      const matchLocation = location === 'Tất cả' || job.location === location
-      const text = `${job.title} ${job.description} ${job.tags.join(' ')}`.toLowerCase()
-      const matchKeyword = keyword.trim() === '' || text.includes(keyword.toLowerCase())
-      return matchCategory && matchType && matchLocation && matchKeyword
-    })
-  }, [category, type, location, keyword, jobs])
+  const filteredJobs = jobs.filter((job) => {
+    const matchCategory = category === 'Tất cả' || job.category === category
+    const matchType = type === 'Tất cả' || job.type === type
+    const matchLocation = location === 'Tất cả' || job.location === location
+    const text = `${job.title} ${job.description} ${job.tags.join(' ')}`.toLowerCase()
+    const matchKeyword = keyword.trim() === '' || text.includes(keyword.toLowerCase())
+    return matchCategory && matchType && matchLocation && matchKeyword
+  })
 
   return (
     <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: 'background.default' }}>
@@ -186,16 +184,16 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 3.5, pt: 0 }}>
-                  <Button
-                    component={Link}
-                    href={`/jobs/${job.slug}`}
-                    variant="contained"
-                    fullWidth
-                    size="large"
-                    sx={{ borderRadius: 2, fontWeight: 'bold', textTransform: 'none' }}
-                  >
-                    Xem chi tiết và ứng tuyển
-                  </Button>
+                  <Link href={`/jobs/${job.slug}`} passHref style={{ textDecoration: 'none', width: '100%' }}>
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      size="large"
+                      sx={{ borderRadius: 2, fontWeight: 'bold', textTransform: 'none' }}
+                    >
+                      Xem chi tiết và ứng tuyển
+                    </Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>

@@ -176,18 +176,18 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                     <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
                       {data.applyInstructions}
                     </Typography>
-                    <Button
-                      component={Link}
-                      href={`mailto:${applyEmail}?subject=Ứng tuyển cho vị trí ${encodeURIComponent(data.title)}`}
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      size="large"
-                      startIcon={<SendIcon />}
-                      sx={{ borderRadius: 2, fontWeight: 'bold' }}
-                    >
-                      Gửi email ứng tuyển
-                    </Button>
+                    <Link href={`mailto:${applyEmail}?subject=Ứng tuyển cho vị trí ${encodeURIComponent(data.title)}`} passHref style={{ textDecoration: 'none' }}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        size="large"
+                        startIcon={<SendIcon />}
+                        sx={{ borderRadius: 2, fontWeight: 'bold' }}
+                      >
+                        Gửi email ứng tuyển
+                      </Button>
+                    </Link>
                     <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', opacity: 0.8 }}>
                       Liên hệ: {applyEmail}
                     </Typography>

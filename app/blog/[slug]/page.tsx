@@ -51,15 +51,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               { label: data.title }
             ]} />
 
-            <Button
-              component={Link}
-              href="/blog"
-              startIcon={<ArrowBackIcon />}
-              sx={{ mb: 4, fontWeight: 'bold' }}
-              color="inherit"
-            >
-              Quay lại danh sách
-            </Button>
+            <Link href="/blog" passHref style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Button
+                startIcon={<ArrowBackIcon />}
+                sx={{ mb: 4, fontWeight: 'bold' }}
+                color="inherit"
+              >
+                Quay lại danh sách
+              </Button>
+            </Link>
           </Box>
 
           {/* Article Header */}
@@ -117,14 +117,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
               Chia sẻ bài viết này cho bạn bè hoặc người thân đang tìm việc nhé. Nếu bạn cần hỗ trợ trực tiếp, đừng ngần ngại liên hệ với chúng tôi.
             </Typography>
-            <Button
-              component={Link}
-              href="/contact"
-              variant="contained"
-              sx={{ fontWeight: 'bold', borderRadius: 2 }}
-            >
-              Liên hệ chúng tôi
-            </Button>
+            <Link href="/contact" passHref style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                sx={{ fontWeight: 'bold', borderRadius: 2 }}
+              >
+                Liên hệ chúng tôi
+              </Button>
+            </Link>
           </Box>
         </Container>
       </Box>
