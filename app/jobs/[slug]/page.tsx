@@ -43,7 +43,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
 
   const fileContent = fs.readFileSync(mdxPath, 'utf-8')
   const { data } = matter(fileContent)
-  
+
   const applyEmail = data.applyEmail || CONTACT_EMAIL
 
   try {
@@ -155,7 +155,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                       <AccessTimeIcon color="primary" />
                       <Box>
                         <Typography variant="body2" color="text.secondary">Ngày đăng</Typography>
-                        <Typography variant="body1" fontWeight="bold">{data.postedAt}</Typography>
+                        <Typography variant="body1" fontWeight="bold">{data.date}</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2 }}>

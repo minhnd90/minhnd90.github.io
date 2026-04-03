@@ -6,13 +6,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import PageHeader from '../shared/page-header'
 import PageBreadcrumb from '../shared/breadcrumb'
 
-export interface BlogPost {
-  slug: string
-  title: string
-  date: string
-  description: string
-  tags: string[]
-}
+import { BlogPost } from '../../lib/types'
 
 export default function BlogList({ posts }: { posts: BlogPost[] }) {
   const theme = useTheme()

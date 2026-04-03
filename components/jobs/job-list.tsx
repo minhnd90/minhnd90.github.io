@@ -10,19 +10,8 @@ import {
 import PageHeader from '../shared/page-header'
 import { JobFilters } from './job-filters'
 import { JobCard } from './job-card'
-import { EmptyState } from './empty-state'
-
-export interface Job {
-  slug: string
-  title: string
-  category: string
-  type: string
-  location: string
-  salary: string
-  postedAt: string
-  description: string
-  tags: string[]
-}
+import { EmptyState } from '../shared/empty-state'
+import { Job } from '../../lib/types'
 
 export default function JobList({ jobs }: { jobs: Job[] }) {
   const [category, setCategory] = useState('Tất cả')
@@ -71,7 +60,9 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
         {/* Jobs List */}
         <Grid container spacing={3}>
           {filteredJobs.map((job) => (
-            <JobCard key={job.slug} job={job} />
+            <Grid key={job.slug} size={{ xs: 12, md: 6 }}>
+              <JobCard job={job} />
+            </Grid>
           ))}
           {filteredJobs.length === 0 && <EmptyState />}
         </Grid>

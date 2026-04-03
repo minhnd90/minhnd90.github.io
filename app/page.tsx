@@ -1,58 +1,15 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
 import Hero from '../components/home/hero'
 import Features from '../components/home/features'
 import RecentJobs from '../components/home/recent-jobs'
 import CTA from '../components/home/cta'
 import { Metadata } from 'next'
-import { Job } from '../components/jobs/job-list'
 import { META } from '../lib/constants'
-
-function sanitizeSlug(filename: string): string {
-  // Remove known extension if present
-  let base = filename.replace(/\.mdx$/i, '')
-  // Allow only URL-safe characters: letters, numbers, dash and underscore
-  base = base.replace(/[^a-zA-Z0-9-_]+/g, '-')
-  // Collapse multiple dashes
-  base = base.replace(/-+/g, '-')
-  // Trim leading/trailing dashes
-  base = base.replace(/^-+|-+$/g, '')
-  // Fallback in case nothing remains after sanitization
-  return base || 'job'
-}
+import { getAllJobs } from '../lib/markdown'
 
 export const metadata: Metadata = META.home
 
 export default async function HomePage() {
-  const jobsDir = path.join(process.cwd(), 'content/jobs')
-  let jobs: Job[] = []
-
-  try {
-    if (fs.existsSync(jobsDir)) {
-      const files = fs.readdirSync(jobsDir)
-      const mdxFiles = files.filter((file) => file.endsWith('.mdx'))
-
-      jobs = mdxFiles.map((filename) => {
-        const fileContent = fs.readFileSync(path.join(jobsDir, filename), 'utf-8')
-        const { data } = matter(fileContent)
-
-        return {
-          slug: sanitizeSlug(filename),
-          title: data.title || filename,
-          category: data.category || 'Khác',
-          type: data.type || 'Toàn thời gian',
-          location: data.location || 'Toàn quốc',
-          salary: data.salary || 'Thỏa thuận',
-          postedAt: data.postedAt || '',
-          description: data.description || '',
-          tags: data.tags || []
-        }
-      })
-    }
-  } catch (error) {
-    console.error('Failed to read jobs for home page:', error)
-  }
+  const jobs = getAllJobs()
 
   return (
     <>

@@ -13,17 +13,7 @@ import {
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
-export interface Job {
-  slug: string
-  title: string
-  category: string
-  type: string
-  location: string
-  salary: string
-  postedAt: string
-  description: string
-  tags: string[]
-}
+import { Job } from '../../lib/types'
 
 interface JobFiltersProps {
   jobs: Job[]

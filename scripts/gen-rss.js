@@ -37,7 +37,7 @@ async function generate() {
         allPosts.push({
           title: data.title || slug,
           url: `${SITE_URL}/${source.type === 'blog' ? 'blog' : 'jobs'}/${slug}`,
-          date: data.date || data.postedAt || new Date().toISOString(),
+          date: data.date || data.date || new Date().toISOString(),
           description: data.description || '',
           categories: [source.type, ...(data.tags || [])],
           author: data.author || APP_NAME
