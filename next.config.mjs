@@ -30,6 +30,10 @@ export default withNextra({
     COMPANY_NAME: 'CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP',
     COMPANY_DESC: 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng',
     CONTACT_EMAIL: process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn',
-    CONTACT_PHONE: process.env.CONTACT_PHONE || '0988 108 250'
+    CONTACT_PHONE: process.env.CONTACT_PHONE || '0988 108 250',
+    CONTACT_ADDRESS: process.env.CONTACT_ADDRESS || 'Địa chỉ đang cập nhật',
+    FB_PAGE_URL: process.env.FB_PAGE_URL || 'https://facebook.com',
+    ZALO_URL: process.env.ZALO_URL || 'https://zalo.me',
+    SITE_URL: process.env.SITE_URL || 'https://bm-group.info.vn'
   },
 })

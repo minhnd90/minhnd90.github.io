@@ -24,7 +24,8 @@ import InfoIcon from '@mui/icons-material/Info'
 import Link from 'next/link'
 
 import PageHeader from '../../components/shared/page-header'
-import { CONTACT_EMAIL, CONTACT_PHONE, META, PAGE_HEADERS, APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE } from '../../lib/constants'
+import ContactForm from './contact-form'
+import { CONTACT_EMAIL, CONTACT_PHONE, META, PAGE_HEADERS, APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE, CONTACT_UI } from '../../lib/constants'
 
 export const metadata: Metadata = META.contact
 
@@ -48,10 +49,10 @@ export default function ContactPage() {
             <Stack spacing={4}>
               <Box>
                 <Typography variant="h5" fontWeight="bold" gutterBottom>
-                  Thông tin tuyển dụng
+                  {CONTACT_UI.recruitmentInfo}
                 </Typography>
                 <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                  Liên hệ trực tiếp qua Hotline hoặc Email để được sắp xếp lịch phỏng vấn sớm nhất.
+                  {CONTACT_UI.contactDescription}
                 </Typography>
 
                 <Paper sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
@@ -61,7 +62,7 @@ export default function ContactPage() {
                         <EmailIcon color="primary" />
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.secondary">Email ứng tuyển</Typography>
+                        <Typography variant="body2" color="text.secondary">{CONTACT_UI.emailLabel}</Typography>
                         <Typography variant="h6" fontWeight="bold">{contactEmail}</Typography>
                       </Box>
                     </Box>
@@ -71,7 +72,7 @@ export default function ContactPage() {
                         <PhoneIcon color="primary" />
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.secondary">Hotline 24/7</Typography>
+                        <Typography variant="body2" color="text.secondary">{CONTACT_UI.hotlineLabel}</Typography>
                         <Typography variant="h6" fontWeight="bold">{contactPhone}</Typography>
                       </Box>
                     </Box>
@@ -81,27 +82,29 @@ export default function ContactPage() {
                         <LocationOnIcon color="primary" />
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.secondary">Khu vực làm việc</Typography>
-                        <Typography variant="h6" fontWeight="bold">Hà Nội, Bắc Ninh, Hải Phòng</Typography>
+                        <Typography variant="body2" color="text.secondary">{CONTACT_UI.locationLabel}</Typography>
+                        <Typography variant="h6" fontWeight="bold">{CONTACT_UI.locationValue}</Typography>
                       </Box>
                     </Box>
                   </Stack>
                 </Paper>
               </Box>
 
+              <ContactForm />
+
               <Card sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: 4, p: 2 }}>
                 <CardContent>
                   <Typography variant="h5" fontWeight="bold" gutterBottom>
-                    Nộp hồ sơ ngay?
+                    {CONTACT_UI.applyNowTitle}
                   </Typography>
                   <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
-                    Gửi thông tin của bạn ngay bây giờ để nhận lịch phỏng vấn sớm nhất.
+                    {CONTACT_UI.applyNowDescription}
                   </Typography>
                   <Link href={`mailto:${contactEmail}?subject=${applySubject}`} passHref style={{ textDecoration: 'none' }}>
                     <Button
                       variant="contained"
-                      sx={{ 
-                        bgcolor: 'white', 
+                      sx={{
+                        bgcolor: 'white',
                         color: 'primary.main',
                         fontWeight: 'bold',
                         borderRadius: 2,
@@ -125,32 +128,32 @@ export default function ContactPage() {
           <Grid size={{ xs: 12, md: 7 }}>
             <Paper sx={{ p: { xs: 4, md: 6 }, borderRadius: 4, height: '100%' }}>
               <Typography variant="h5" fontWeight="bold" gutterBottom>
-                Hướng dẫn nộp hồ sơ
+                {CONTACT_UI.applicationGuide}
               </Typography>
-              
+
               <List sx={{ mt: 2, mb: 4 }}>
                 {[
-                  { 
-                    icon: <AssignmentIcon color="primary" />, 
-                    title: 'Vị trí mong muốn', 
-                    desc: 'Tiêu đề email ghi rõ: Ứng tuyển [Vị trí công việc]' 
+                  {
+                    icon: <AssignmentIcon color="primary" />,
+                    title: CONTACT_UI.positionTitle,
+                    desc: CONTACT_UI.positionDesc
                   },
-                  { 
-                    icon: <InfoIcon color="primary" />, 
-                    title: 'Thông tin cơ bản', 
-                    desc: 'Gửi ngắn gọn: Họ tên, Năm sinh, Địa chỉ, Số điện thoại liên hệ.' 
+                  {
+                    icon: <InfoIcon color="primary" />,
+                    title: CONTACT_UI.basicInfoTitle,
+                    desc: CONTACT_UI.basicInfoDesc
                   },
-                  { 
-                    icon: <AssignmentIcon color="primary" />, 
-                    title: 'Giấy tờ tùy thân', 
-                    desc: 'Nếu có, đính kèm ảnh chụp CCCD/CMND để chúng tôi ưu tiên xét duyệt.' 
+                  {
+                    icon: <AssignmentIcon color="primary" />,
+                    title: CONTACT_UI.documentsTitle,
+                    desc: CONTACT_UI.documentsDesc
                   }
                 ].map((item, index) => (
                   <ListItem key={index} sx={{ px: 0, py: 2 }}>
                     <ListItemIcon sx={{ minWidth: 50 }}>
                       {item.icon}
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary={<Typography fontWeight="bold">{item.title}</Typography>}
                       secondary={item.desc}
                     />
@@ -161,14 +164,14 @@ export default function ContactPage() {
               <Divider sx={{ mb: 4 }} />
 
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Mẫu nội dung email ứng tuyển
+                {CONTACT_UI.emailTemplateTitle}
               </Typography>
-              <Box 
-                sx={{ 
-                  bgcolor: 'background.default', 
-                  p: 3, 
-                  borderRadius: 3, 
-                  border: '1px dashed', 
+              <Box
+                sx={{
+                  bgcolor: 'background.default',
+                  p: 3,
+                  borderRadius: 3,
+                  border: '1px dashed',
                   borderColor: 'divider',
                   fontFamily: 'monospace',
                   fontSize: '0.9rem',
@@ -177,13 +180,13 @@ export default function ContactPage() {
                 }}
               >
                 <Typography variant="caption" sx={{ position: 'absolute', top: 8, right: 12, color: 'text.disabled' }}>
-                  Sao chép và sửa lại thông tin của bạn
+                  {CONTACT_UI.copyHint}
                 </Typography>
                 {APPLY_EMAIL_TEMPLATE}
               </Box>
 
               <Typography variant="body2" color="text.secondary" sx={{ mt: 3, fontStyle: 'italic' }}>
-                * Lưu ý: Chúng tôi không thu bất kỳ khoản phí nào của người lao động. Cẩn thận với các hành vi lừa đảo nộp phí phỏng vấn.
+                {CONTACT_UI.disclaimer}
               </Typography>
             </Paper>
           </Grid>

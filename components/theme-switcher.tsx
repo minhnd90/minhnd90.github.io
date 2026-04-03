@@ -23,7 +23,8 @@ export default function ThemeSwitcher() {
     <IconButton
       onClick={() => setTheme(resolvedTheme === 'light' ? 'dark' : 'light')}
       color="inherit"
-      aria-label="toggle theme"
+      aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}
+      aria-pressed={resolvedTheme === 'dark'}
     >
       {resolvedTheme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
     </IconButton>
