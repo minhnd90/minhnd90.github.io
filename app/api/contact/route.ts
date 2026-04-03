@@ -1,4 +1,5 @@
 import { FORM_VALIDATION, API_ERRORS } from '../../../lib/constants'
+import { persistContactRequest, sendContactEmail, ContactRequestData } from '../../../lib/contact'
 import DOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 
@@ -65,12 +66,37 @@ export async function POST(req: Request) {
     const DOMPurifyServer = DOMPurify(window as any)
     const sanitizedMessage = DOMPurifyServer.sanitize(message)
 
-    // TODO: Replace with real storage / email service integration.
+    const contactData: ContactRequestData = {
+      name: name.trim(),
+      email: email.trim(),
+      message: sanitizedMessage,
+      submittedAt: new Date().toISOString(),
+      clientIp: ip,
+    }
+
+    try {
+      await persistContactRequest(contactData)
+    } catch (err) {
+      console.error('Error persisting contact request:', err)
+      return new Response(JSON.stringify({ error: API_ERRORS.internalServerError }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
+    // Send email if configured (don't fail request if email fails)
+    try {
+      await sendContactEmail(contactData)
+    } catch (err) {
+      console.error('Error sending contact email:', err)
+      // Continue, as persistence succeeded
+    }
+
     console.info('Contact request received', {
-      timestamp: new Date().toISOString(),
-      hasName: !!name,
-      hasEmail: !!email,
-      messageLength: sanitizedMessage?.length || 0
+      timestamp: contactData.submittedAt,
+      hasName: !!contactData.name,
+      hasEmail: !!contactData.email,
+      messageLength: contactData.message?.length || 0,
     })
 
     return new Response(JSON.stringify({ success: true, message: API_ERRORS.contactSuccess }), {
