@@ -1,9 +1,8 @@
-'use client'
-
 import { Box, Typography, Button, Container, Stack } from '@mui/material'
 import Link from 'next/link'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'
+import { APP_NAME, COMPANY_DESC } from '../../lib/constants'
 
 export default function Hero() {
   return (
@@ -25,9 +24,9 @@ export default function Hero() {
             gutterBottom
             sx={{ fontWeight: 800, fontSize: { xs: '2.5rem', md: '3.75rem' } }}
           >
-            Tuyển Dụng Lao Động Phổ Thông
+            {APP_NAME}
             <Box component="span" sx={{ color: 'primary.main', display: 'block' }}>
-              Nhanh & Tin Cậy
+              Tuyển Dụng Nhanh & Tin Cậy
             </Box>
           </Typography>
 
@@ -35,9 +34,9 @@ export default function Hero() {
             variant="h6"
             color="text.secondary"
             paragraph
-            sx={{ mb: 4, fontWeight: 400, maxWidth: 640, mx: 'auto', lineHeight: 1.6 }}
+            sx={{ mb: 4, fontWeight: 400, maxWidth: 640, mx: 'auto', lineHeight: 1.6, fontSize: '1.25rem' }}
           >
-            Chúng tôi kết nối bạn với công việc thực tế, ổn định và phù hợp với năng lực. Dễ tìm, dễ ứng tuyển, nhận việc đi làm ngay trong tuần.
+            {COMPANY_DESC}. Chúng tôi kết nối bạn với công việc thực tế, ổn định và phù hợp với năng lực.
           </Typography>
 
           <Stack

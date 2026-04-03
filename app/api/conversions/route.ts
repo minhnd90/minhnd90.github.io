@@ -1,4 +1,7 @@
 import { createHash } from 'node:crypto'
+import { API_ERRORS, UserData, FacebookEvent, ConversionsPayload } from '../../../lib/constants'
+import { checkRateLimit } from '../../../lib/rate-limit'
+import { errorResponse } from '../../../lib/api-responses'
 
 // Hash PII value with SHA256 as required by Meta
 function hashPII(value: string): string {
@@ -7,9 +10,9 @@ function hashPII(value: string): string {
 }
 
 // Hash user_data object: em, ph, ge, db, ln, fn, etc.
-function hashUserData(userData: any): any {
-  if (!userData) return userData
-  const piiFields = [
+function hashUserData(userData: UserData): UserData {
+  if (!userData || typeof userData !== 'object') return userData
+  const piiFields: (keyof UserData)[] = [
     'em',
     'ph',
     'ge',
@@ -22,18 +25,55 @@ function hashUserData(userData: any): any {
     'country'
   ]
   const hashed = { ...userData }
+
   for (const field of piiFields) {
-    if (hashed[field] && typeof hashed[field] === 'string') {
-      hashed[field] = hashPII(hashed[field])
+    const value = hashed[field]
+    if (value && typeof value === 'string') {
+      (hashed as any)[field] = hashPII(value)
     }
   }
+
   return hashed
+}
+
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0
+}
+
+function validateEvent(event: FacebookEvent): string[] {
+  const errors: string[] = []
+
+  if (!event || typeof event !== 'object') {
+    errors.push('Event must be an object')
+    return errors
+  }
+
+  if (!isNonEmptyString(event.event_name)) {
+    errors.push('event_name is required')
+  }
+
+  if (event.event_time !== undefined && typeof event.event_time !== 'number') {
+    errors.push('event_time must be a number when provided')
+  }
+
+  if (event.user_data !== undefined && typeof event.user_data !== 'object') {
+    errors.push('user_data must be an object when provided')
+  }
+
+  return errors
 }
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
+    // Rate limiting check
+    const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+                     req.headers.get('x-real-ip') ||
+                     'unknown'
+    if (!checkRateLimit(clientIP)) {
+      return errorResponse('Too many requests', 429)
+    }
 
+    const body = await req.json()
     const pixelId = process.env.FB_PIXEL_ID
     const accessToken = process.env.FB_ACCESS_TOKEN
     const apiVersion = process.env.FB_API_VERSION || '16.0'
@@ -46,46 +86,63 @@ export async function POST(req: Request) {
       )
     }
 
-    const endpoint = `https://graph.facebook.com/v${apiVersion}/${pixelId}/events?access_token=${accessToken}`
-
-    const payload: any = {}
-    // Accept either { data: [...] } or a single event object
-    if (body && Array.isArray(body.data)) {
-      payload.data = body.data.map((event: any) => ({
-        ...event,
-        user_data: hashUserData(event.user_data)
-      }))
-    } else if (body) {
-      payload.data = [
-        {
-          ...body,
-          user_data: hashUserData(body.user_data)
-        }
-      ]
-    } else {
-      return new Response(JSON.stringify({ error: 'No event data provided' }), {
-        status: 400
-      })
+    if (!body || (typeof body !== 'object')) {
+      return errorResponse(API_ERRORS.invalidJson, 400)
     }
+
+    const payload: ConversionsPayload = { data: [] }
+
+    const events: FacebookEvent[] = []
+
+    if (Array.isArray(body.data)) {
+      events.push(...body.data)
+    } else if (Object.keys(body).length > 0) {
+      // Accept single object as event if no wrapper data
+      events.push(body)
+    }
+
+    if (events.length === 0) {
+      return errorResponse(API_ERRORS.noEventData, 400)
+    }
+
+    const validationErrors = events.flatMap((event, idx) => {
+      const errs = validateEvent(event)
+      return errs.map((err) => `events[${idx}]: ${err}`)
+    })
+
+    if (validationErrors.length > 0) {
+      return new Response(
+        JSON.stringify({ error: API_ERRORS.validationFailed, details: validationErrors }),
+        { status: 400 }
+      )
+    }
+
+    payload.data = events.map((event) => ({
+      ...event,
+      user_data: event.user_data ? hashUserData(event.user_data) : undefined
+    }))
 
     if (testEventCode) payload.test_event_code = testEventCode
 
+    const endpoint = `https://graph.facebook.com/v${apiVersion}/${pixelId}/events`
     const res = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
       body: JSON.stringify(payload)
     })
 
     const text = await res.text()
     const contentType = res.headers.get('content-type') || 'text/plain'
+
     return new Response(text, {
       status: res.status,
       headers: { 'Content-Type': contentType }
     })
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
-      status: 500
-    })
+  } catch (err: unknown) {
+    console.error('Conversion API error:', err)
+    return errorResponse(API_ERRORS.internalServerError, 500)
   }
 }
-

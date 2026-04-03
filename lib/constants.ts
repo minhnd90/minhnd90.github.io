@@ -15,6 +15,13 @@ export const COMPANY_DESC = process.env.COMPANY_DESC || 'Việc Chất, Lương 
 
 export const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn'
 export const CONTACT_PHONE = process.env.CONTACT_PHONE || '0988 108 250'
+export const CONTACT_ADDRESS = process.env.CONTACT_ADDRESS || 'Địa chỉ đang cập nhật'
+
+// ─── Links & SEO ──────────────────────────────────────────────────────────────
+
+export const SITE_URL = process.env.SITE_URL || 'https://bm-group.info.vn'
+export const FB_PAGE_URL = process.env.FB_PAGE_URL || 'https://facebook.com'
+export const ZALO_URL = process.env.ZALO_URL || 'https://zalo.me'
 
 // ─── SEO / Metadata helpers ───────────────────────────────────────────────────
 
@@ -84,3 +91,92 @@ Số điện thoại liên hệ: [SĐT]
 
 Trân trọng,
 [Họ tên]`
+
+// ─── Form Validation Messages ─────────────────────────────────────────────────
+
+export const FORM_VALIDATION = {
+  nameRequired: 'Vui lòng nhập họ tên',
+  emailRequired: 'Vui lòng nhập địa chỉ email',
+  emailInvalid: 'Địa chỉ email không hợp lệ',
+  messageRequired: 'Vui lòng nhập nội dung liên hệ',
+  submitError: 'Không thể gửi yêu cầu lúc này. Vui lòng thử lại sau.',
+  networkError: 'Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.',
+  successMessage: 'Yêu cầu của bạn đã được gửi thành công, chúng tôi sẽ liên hệ sớm nhất.',
+  submitting: 'Đang gửi...',
+  submitButton: 'Gửi yêu cầu',
+} as const
+
+// ─── Contact Page UI Text ─────────────────────────────────────────────────────
+
+export const CONTACT_UI = {
+  recruitmentInfo: 'Thông tin tuyển dụng',
+  contactDescription: 'Liên hệ trực tiếp qua Hotline hoặc Email để được sắp xếp lịch phỏng vấn sớm nhất.',
+  emailLabel: 'Email ứng tuyển',
+  hotlineLabel: 'Hotline 24/7',
+  locationLabel: 'Khu vực làm việc',
+  locationValue: 'Hà Nội, Bắc Ninh, Hải Phòng',
+  applyNowTitle: 'Nộp hồ sơ ngay?',
+  applyNowDescription: 'Gửi thông tin của bạn ngay bây giờ để nhận lịch phỏng vấn sớm nhất.',
+  applyEmailButton: 'Gửi email ứng tuyển ngay',
+  applicationGuide: 'Hướng dẫn nộp hồ sơ',
+  positionTitle: 'Vị trí mong muốn',
+  positionDesc: 'Tiêu đề email ghi rõ: Ứng tuyển [Vị trí công việc]',
+  basicInfoTitle: 'Thông tin cơ bản',
+  basicInfoDesc: 'Gửi ngắn gọn: Họ tên, Năm sinh, Địa chỉ, Số điện thoại liên hệ.',
+  documentsTitle: 'Giấy tờ tùy thân',
+  documentsDesc: 'Nếu có, đính kèm ảnh chụp CCCD/CMND để chúng tôi ưu tiên xét duyệt.',
+  emailTemplateTitle: 'Mẫu nội dung email ứng tuyển',
+  copyHint: 'Sao chép và sửa lại thông tin của bạn',
+  disclaimer: '* Lưu ý: Chúng tôi không thu bất kỳ khoản phí nào của người lao động. Cẩn thận với các hành vi lừa đảo nộp phí phỏng vấn.',
+} as const
+
+// ─── API Error Messages ───────────────────────────────────────────────────────
+
+export const API_ERRORS = {
+  validationFailed: 'Validation failed',
+  noEventData: 'No event data provided',
+  invalidJson: 'Invalid JSON body',
+  internalServerError: 'Internal server error',
+  contactSuccess: 'Yêu cầu đã được gửi',
+} as const
+
+// ─── API Type Definitions ───────────────────────────────────────────────────
+
+export interface UserData {
+  em?: string
+  ph?: string
+  ge?: string
+  db?: string
+  ln?: string
+  fn?: string
+  ct?: string
+  st?: string
+  zp?: string
+  country?: string
+}
+
+export interface FacebookEvent {
+  event_name: string
+  event_time?: number
+  event_source_url?: string
+  user_data?: UserData
+  custom_data?: Record<string, any>
+  event_id?: string
+}
+
+export interface ConversionsPayload {
+  data: FacebookEvent[]
+  test_event_code?: string
+}
+
+export interface ValidationError {
+  field: string
+  message: string
+}
+
+export interface ApiResponse<T = any> {
+  success: boolean
+  data?: T
+  error?: string
+  details?: string[]
+}

@@ -21,6 +21,7 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import SendIcon from '@mui/icons-material/Send'
 import Link from 'next/link'
 import { CONTACT_EMAIL } from '../../../lib/constants'
+import { formatVietnameseDate } from '../../../lib/date'
 
 export function generateStaticParams() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')
@@ -43,7 +44,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
 
   const fileContent = fs.readFileSync(mdxPath, 'utf-8')
   const { data } = matter(fileContent)
-  
+
   const applyEmail = data.applyEmail || CONTACT_EMAIL
 
   try {
@@ -155,7 +156,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                       <AccessTimeIcon color="primary" />
                       <Box>
                         <Typography variant="body2" color="text.secondary">Ngày đăng</Typography>
-                        <Typography variant="body1" fontWeight="bold">{data.postedAt}</Typography>
+                        <Typography variant="body1" fontWeight="bold">{formatVietnameseDate(data.date)}</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2 }}>
