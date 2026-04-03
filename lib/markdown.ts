@@ -16,50 +16,44 @@ export function sanitizeSlug(filename: string): string {
   return base || 'content'
 }
 
-export function getAllJobs(): Job[] {
-  const jobsDir = path.join(process.cwd(), 'content/jobs')
-  if (!fs.existsSync(jobsDir)) return []
+function getAllContent<T>(
+  dir: string,
+  mapper: (filename: string, data: any) => T
+): T[] {
+  if (!fs.existsSync(dir)) return []
 
-  const files = fs.readdirSync(jobsDir)
+  const files = fs.readdirSync(dir)
   const mdxFiles = files.filter((file) => file.endsWith('.mdx'))
 
   return mdxFiles.map((filename) => {
-    const fileContent = fs.readFileSync(path.join(jobsDir, filename), 'utf-8')
+    const fileContent = fs.readFileSync(path.join(dir, filename), 'utf-8')
     const { data } = matter(fileContent)
-
-    return {
-      slug: sanitizeSlug(filename),
-      title: data.title || filename,
-      category: data.category || 'Khác',
-      type: data.type || 'Toàn thời gian',
-      location: data.location || 'Toàn quốc',
-      salary: data.salary || 'Thỏa thuận',
-      date: data.date || new Date().toLocaleDateString('vi-VN'),
-      description: data.description || '',
-      tags: data.tags || []
-    }
+    return mapper(filename, data)
   })
 }
 
+export function getAllJobs(): Job[] {
+  return getAllContent(path.join(process.cwd(), 'content/jobs'), (filename, data) => ({
+    slug: sanitizeSlug(filename),
+    title: data.title || filename,
+    category: data.category || 'Khác',
+    type: data.type || 'Toàn thời gian',
+    location: data.location || 'Toàn quốc',
+    salary: data.salary || 'Thỏa thuận',
+    date: data.date || new Date().toLocaleDateString('vi-VN'),
+    description: data.description || '',
+    tags: data.tags || []
+  }))
+}
+
 export function getAllPosts(): BlogPost[] {
-  const blogDir = path.join(process.cwd(), 'content/blog')
-  if (!fs.existsSync(blogDir)) return []
-
-  const files = fs.readdirSync(blogDir)
-  const mdxFiles = files.filter((file) => file.endsWith('.mdx'))
-
-  const posts: BlogPost[] = mdxFiles.map((filename) => {
-    const fileContent = fs.readFileSync(path.join(blogDir, filename), 'utf-8')
-    const { data } = matter(fileContent)
-
-    return {
-      slug: sanitizeSlug(filename),
-      title: data.title || filename,
-      date: data.date || new Date().toISOString(),
-      description: data.description || '',
-      tags: data.tags || []
-    }
-  })
+  const posts: BlogPost[] = getAllContent(path.join(process.cwd(), 'content/blog'), (filename, data) => ({
+    slug: sanitizeSlug(filename),
+    title: data.title || filename,
+    date: data.date || new Date().toISOString(),
+    description: data.description || '',
+    tags: data.tags || []
+  }))
 
   // Sort by date descending
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

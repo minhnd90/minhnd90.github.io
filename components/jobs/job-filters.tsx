@@ -10,10 +10,12 @@ import {
   Select,
   MenuItem,
   InputAdornment,
+  useTheme,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 import { Job } from '../../lib/types'
+import { getCardShadow } from '../../lib/styles'
 
 interface JobFiltersProps {
   jobs: Job[]
@@ -38,6 +40,7 @@ export function JobFilters({
   onLocationChange,
   onKeywordChange,
 }: JobFiltersProps) {
+  const theme = useTheme()
   const filters = useMemo(() => ({
     category: ['Tất cả', ...Array.from(new Set(jobs.map((job) => job.category)))],
     type: ['Tất cả', ...Array.from(new Set(jobs.map((job) => job.type)))],
@@ -45,7 +48,7 @@ export function JobFilters({
   }), [jobs])
 
   return (
-    <Card sx={{ p: 3, mb: 6, borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.05)', overflow: 'visible' }}>
+    <Card sx={{ p: 3, mb: 6, borderRadius: 3, boxShadow: getCardShadow(theme), overflow: 'visible' }}>
       <Grid container spacing={2} alignItems="center">
         <Grid size={{ xs: 12, md: 4 }}>
           <TextField

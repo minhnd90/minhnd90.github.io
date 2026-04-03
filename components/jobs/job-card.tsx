@@ -13,6 +13,8 @@ import Link from 'next/link'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import { Job } from '../../lib/types'
+import { formatVietnameseDate } from '../../lib/date'
+import { getCardShadow, COMMON_STYLES } from '../../lib/styles'
 
 interface JobCardProps {
   job: Job
@@ -29,7 +31,7 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        boxShadow: theme.palette.mode === 'dark' ? 2 : '0 4px 12px rgba(0,0,0,0.05)',
+        boxShadow: getCardShadow(theme),
         borderRadius: 3,
         transition: 'all 0.2s ease',
         '&:hover': {
@@ -45,11 +47,11 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
             <Chip label={job.type} size="small" variant="outlined" />
           </Box>
           <Typography variant="caption" color="text.secondary">
-            {job.date}
+            {formatVietnameseDate(job.date)}
           </Typography>
         </Stack>
 
-        <Typography variant="h5" component="h2" fontWeight="bold" gutterBottom>
+        <Typography variant="h5" component="h2" {...COMMON_STYLES.boldText} gutterBottom>
           {job.title}
         </Typography>
 
@@ -60,7 +62,7 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'success.main' }}>
             <AttachMoneyIcon fontSize="small" />
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2" {...COMMON_STYLES.boldText}>
               {job.salary}
             </Typography>
           </Box>
@@ -85,7 +87,7 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
             variant="contained"
             fullWidth
             size="large"
-            sx={{ borderRadius: 2, fontWeight: 'bold', textTransform: 'none' }}
+            sx={{ borderRadius: 2, ...COMMON_STYLES.boldText, textTransform: 'none' }}
           >
             {showDescription ? 'Xem chi tiết và ứng tuyển' : 'Chi tiết công việc'}
           </Button>

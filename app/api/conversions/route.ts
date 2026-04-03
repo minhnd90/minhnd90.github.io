@@ -1,25 +1,7 @@
 import { createHash } from 'node:crypto'
 import { API_ERRORS, UserData, FacebookEvent, ConversionsPayload } from '../../../lib/constants'
-
-// Simple in-memory rate limiter
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
-
-function checkRateLimit(ip: string, maxRequests: number = 10, windowMs: number = 60 * 1000): boolean {
-  const now = Date.now()
-  const record = rateLimitMap.get(ip)
-
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs })
-    return true
-  }
-
-  if (record.count >= maxRequests) {
-    return false
-  }
-
-  record.count++
-  return true
-}
+import { checkRateLimit } from '../../../lib/rate-limit'
+import { errorResponse } from '../../../lib/api-responses'
 
 // Hash PII value with SHA256 as required by Meta
 function hashPII(value: string): string {
@@ -88,7 +70,7 @@ export async function POST(req: Request) {
                      req.headers.get('x-real-ip') ||
                      'unknown'
     if (!checkRateLimit(clientIP)) {
-      return new Response(JSON.stringify({ error: 'Too many requests' }), { status: 429 })
+      return errorResponse('Too many requests', 429)
     }
 
     const body = await req.json()
@@ -105,7 +87,7 @@ export async function POST(req: Request) {
     }
 
     if (!body || (typeof body !== 'object')) {
-      return new Response(JSON.stringify({ error: API_ERRORS.invalidJson }), { status: 400 })
+      return errorResponse(API_ERRORS.invalidJson, 400)
     }
 
     const payload: ConversionsPayload = { data: [] }
@@ -120,7 +102,7 @@ export async function POST(req: Request) {
     }
 
     if (events.length === 0) {
-      return new Response(JSON.stringify({ error: API_ERRORS.noEventData }), { status: 400 })
+      return errorResponse(API_ERRORS.noEventData, 400)
     }
 
     const validationErrors = events.flatMap((event, idx) => {
@@ -161,9 +143,6 @@ export async function POST(req: Request) {
     })
   } catch (err: unknown) {
     console.error('Conversion API error:', err)
-    return new Response(JSON.stringify({ error: API_ERRORS.internalServerError }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    })
+    return errorResponse(API_ERRORS.internalServerError, 500)
   }
 }

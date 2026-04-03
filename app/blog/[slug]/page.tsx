@@ -15,6 +15,7 @@ import Link from 'next/link'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import PageBreadcrumb from '../../../components/shared/breadcrumb'
+import { formatVietnameseDate } from '../../../lib/date'
 
 export function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'content/blog')
@@ -75,7 +76,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
                 <CalendarTodayIcon fontSize="small" />
                 <Typography variant="body2" fontWeight={500}>
-                  {new Date(data.date).toLocaleDateString('vi-VN')}
+                  {formatVietnameseDate(data.date)}
                 </Typography>
               </Box>
               <Stack direction="row" spacing={1}>

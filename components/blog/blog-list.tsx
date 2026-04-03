@@ -7,6 +7,8 @@ import PageHeader from '../shared/page-header'
 import PageBreadcrumb from '../shared/breadcrumb'
 
 import { BlogPost } from '../../lib/types'
+import { formatVietnameseDate } from '../../lib/date'
+import { getCardShadow, COMMON_STYLES } from '../../lib/styles'
 
 export default function BlogList({ posts }: { posts: BlogPost[] }) {
   const theme = useTheme()
@@ -26,14 +28,14 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
               <Card
                 className="card-hover"
                 sx={{
-                  boxShadow: theme.palette.mode === 'dark' ? 2 : '0 4px 12px rgba(0,0,0,0.05)',
+                  boxShadow: getCardShadow(theme),
                 }}
               >
                 <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                  <Typography variant="caption" color="text.secondary" fontWeight="bold" display="block" gutterBottom>
-                    {new Date(post.date).toLocaleDateString('vi-VN')}
+                  <Typography variant="caption" color="text.secondary" {...COMMON_STYLES.boldText} display="block" gutterBottom>
+                    {formatVietnameseDate(post.date)}
                   </Typography>
-                  <Typography variant="h5" component="h2" fontWeight="bold" gutterBottom sx={{ mt: 1 }}>
+                  <Typography variant="h5" component="h2" {...COMMON_STYLES.boldText} gutterBottom sx={{ mt: 1 }}>
                     {post.title}
                   </Typography>
                   <Box sx={{ display: 'flex', gap: 1, my: 2, flexWrap: 'wrap' }}>
@@ -50,7 +52,7 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
                     <Button
                       endIcon={<ArrowForwardIcon />}
                       color="secondary"
-                      sx={{ fontWeight: 'bold' }}
+                      sx={COMMON_STYLES.boldText}
                     >
                       Đọc tiếp
                     </Button>

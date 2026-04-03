@@ -1,37 +1,16 @@
 import { FORM_VALIDATION, API_ERRORS } from '../../../lib/constants'
 import { persistContactRequest, sendContactEmail, ContactRequestData } from '../../../lib/contact'
+import { checkRateLimit } from '../../../lib/rate-limit'
+import { errorResponse, successResponse } from '../../../lib/api-responses'
 import DOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
-
-// Simple in-memory rate limiter
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
-
-function checkRateLimit(ip: string, maxRequests: number = 5, windowMs: number = 15 * 60 * 1000): boolean {
-  const now = Date.now()
-  const record = rateLimitMap.get(ip)
-
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs })
-    return true
-  }
-
-  if (record.count >= maxRequests) {
-    return false
-  }
-
-  record.count++
-  return true
-}
 
 export async function POST(req: Request) {
   // Get client IP (in production, this would come from headers like x-forwarded-for)
   const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown'
 
   if (!checkRateLimit(ip)) {
-    return new Response(JSON.stringify({ error: 'Too many requests from this IP, please try again later.' }), {
-      status: 429,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return errorResponse('Too many requests from this IP, please try again later.', 429)
   }
 
   try {
@@ -55,10 +34,7 @@ export async function POST(req: Request) {
     }
 
     if (issues.length > 0) {
-      return new Response(JSON.stringify({ error: API_ERRORS.validationFailed, details: issues }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      })
+      return errorResponse(API_ERRORS.validationFailed, 400)
     }
 
     // Sanitize the message to prevent XSS
@@ -78,10 +54,7 @@ export async function POST(req: Request) {
       await persistContactRequest(contactData)
     } catch (err) {
       console.error('Error persisting contact request:', err)
-      return new Response(JSON.stringify({ error: API_ERRORS.internalServerError }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      })
+      return errorResponse(API_ERRORS.internalServerError, 500)
     }
 
     // Send email if configured (don't fail request if email fails)
@@ -99,15 +72,9 @@ export async function POST(req: Request) {
       messageLength: contactData.message?.length || 0,
     })
 
-    return new Response(JSON.stringify({ success: true, message: API_ERRORS.contactSuccess }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return successResponse({ success: true, message: API_ERRORS.contactSuccess })
   } catch (err) {
     console.error('Error in /api/contact', err)
-    return new Response(JSON.stringify({ error: API_ERRORS.internalServerError }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return errorResponse(API_ERRORS.internalServerError, 500)
   }
 }
