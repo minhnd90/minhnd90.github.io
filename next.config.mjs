@@ -15,7 +15,7 @@ export default withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(/* turbopackIgnore: true */ __dirname, 'styles')],
   },
   images: {
     unoptimized: true,

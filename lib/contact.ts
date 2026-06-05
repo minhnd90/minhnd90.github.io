@@ -10,11 +10,10 @@ export interface ContactRequestData {
   clientIp?: string
 }
 
-const CONTACT_STORAGE_DIR = process.env.CONTACT_STORAGE_DIR || path.join(process.cwd(), 'data')
 const CONTACT_STORAGE_FILE = process.env.CONTACT_STORAGE_FILE || 'contact-requests.log'
 
 export async function persistContactRequest(data: ContactRequestData): Promise<void> {
-  const dir = CONTACT_STORAGE_DIR
+  const dir = process.env.CONTACT_STORAGE_DIR || path.join(/* turbopackIgnore: true */ process.cwd(), 'data')
   const filePath = path.join(dir, CONTACT_STORAGE_FILE)
 
   await fs.mkdir(dir, { recursive: true })

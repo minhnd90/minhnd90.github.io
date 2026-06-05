@@ -1,10 +1,10 @@
 'use client'
 
-import { Box, Typography, Container, Grid, Button } from '@mui/material'
-import Link from 'next/link'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { JobCard } from '../jobs/job-card'
+import { Box, Container, Grid, Typography } from '@mui/material'
+import AppButton from '../shared/button'
 import { Job } from '../../lib/types'
+import { JobCard } from '../jobs/job-card'
 
 export default function RecentJobs({ jobs }: { jobs: Job[] }) {
   // Get up to 3 latest jobs
@@ -23,11 +23,9 @@ export default function RecentJobs({ jobs }: { jobs: Job[] }) {
             </Typography>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Link href="/jobs" passHref style={{ textDecoration: 'none' }}>
-              <Button endIcon={<ArrowForwardIcon />} color="primary" sx={{ fontWeight: 'bold' }}>
-                Xem tất cả
-              </Button>
-            </Link>
+            <AppButton href="/jobs" endIcon={<ArrowForwardIcon />} color="primary" sx={{ fontWeight: 'bold' }}>
+              Xem tất cả
+            </AppButton>
           </Box>
         </Box>
 
@@ -38,13 +36,11 @@ export default function RecentJobs({ jobs }: { jobs: Job[] }) {
             </Grid>
           ))}
         </Grid>
-        
+
         <Box sx={{ display: { xs: 'block', sm: 'none' }, mt: 4, textAlign: 'center' }}>
-          <Link href="/jobs" passHref style={{ textDecoration: 'none' }}>
-            <Button variant="outlined" endIcon={<ArrowForwardIcon />} color="primary" fullWidth sx={{ py: 1.5, borderRadius: 2, fontWeight: 'bold' }}>
-              Xem tất cả việc làm
-            </Button>
-          </Link>
+          <AppButton href="/jobs" variant="outlined" endIcon={<ArrowForwardIcon />} color="primary" fullWidth sx={{ py: 1.5, borderRadius: 2, fontWeight: 'bold' }}>
+            Xem tất cả việc làm
+          </AppButton>
         </Box>
       </Container>
     </Box>

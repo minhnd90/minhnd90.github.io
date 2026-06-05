@@ -1,12 +1,13 @@
 import { useMDXComponents as getThemeComponents } from 'nextra-theme-blog'
 import React from 'react'
+import type { MDXComponents } from 'nextra/mdx-components'
 
-export function useMDXComponents(components: any) {
+export function useMDXComponents(components: MDXComponents = {}) {
   const themeComponents = getThemeComponents(components)
   return {
     ...themeComponents,
     wrapper(props: any) {
-      const original = themeComponents.wrapper(props)
+      const original = themeComponents.wrapper?.(props)
       if (React.isValidElement(original)) {
         const originalProps = original.props as { children?: React.ReactNode[] }
         if (originalProps && Array.isArray(originalProps.children)) {

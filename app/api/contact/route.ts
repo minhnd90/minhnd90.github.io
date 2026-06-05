@@ -38,8 +38,8 @@ export async function POST(req: Request) {
     }
 
     // Sanitize the message to prevent XSS
-    const window = new JSDOM('').window
-    const DOMPurifyServer = DOMPurify(window as any)
+    const jsdomWindow = new JSDOM('').window as unknown as Parameters<typeof DOMPurify>[0]
+    const DOMPurifyServer = DOMPurify(jsdomWindow)
     const sanitizedMessage = DOMPurifyServer.sanitize(message)
 
     const contactData: ContactRequestData = {

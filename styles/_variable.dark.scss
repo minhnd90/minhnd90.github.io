@@ -1,12 +1,18 @@
 html.dark {
-  // Theme specific (Dark)
-  --bg-primary: #000000;
-  --bg-secondary: #111111;
+  /* Theme specific (Dark) */
+  /* Transitions stay consistent with light theme */
+  --primary-color: #ff8c00;
+  /* Keep original primary for consistency */
+  --secondary-color: #0074de;
+  /* Adjust secondary for dark contrast */
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
   --bg-navbar: rgba(0, 0, 0, 0.7);
-
   --text-primary: #ffffff;
-  --text-secondary: #888888;
+  --text-secondary: #bbbbbb;
   --text-muted: #888888;
-
   --border-color: rgba(255, 255, 255, 0.1);
+  --nav-link-color: var(--text-secondary);
+  --nav-link-hover: var(--text-primary);
+  --nav-link-active: var(--primary-color);
 }

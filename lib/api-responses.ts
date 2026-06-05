@@ -6,7 +6,7 @@ export function errorResponse(message: string, status: number = 400) {
   })
 }
 
-export function successResponse(data: any, status: number = 200) {
+export function successResponse<T>(data: T, status: number = 200) {
   return new Response(JSON.stringify(data), {
     status,
     headers: { 'Content-Type': 'application/json' },

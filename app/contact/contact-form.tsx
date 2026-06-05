@@ -6,9 +6,9 @@ import {
   CardContent,
   Box,
   TextField,
-  Button,
   Alert,
 } from '@mui/material'
+import AppButton from '../../components/shared/button'
 import SendIcon from '@mui/icons-material/Send'
 import { FORM_VALIDATION } from '../../lib/constants'
 
@@ -128,9 +128,9 @@ export default function ContactForm(_: ContactFormProps) {
           {errors.submit && <Alert severity="error" sx={{ mb: 2 }}>{errors.submit}</Alert>}
           {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
 
-          <Button type="submit" variant="contained" size="large" startIcon={<SendIcon />} fullWidth disabled={isSubmitting}>
+          <AppButton type="submit" variant="contained" size="large" startIcon={<SendIcon />} fullWidth disabled={isSubmitting}>
             {isSubmitting ? FORM_VALIDATION.submitting : FORM_VALIDATION.submitButton}
-          </Button>
+          </AppButton>
         </Box>
       </CardContent>
     </Card>
