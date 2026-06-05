@@ -1,5 +1,5 @@
-import { Box, Typography, Button, Container, Stack } from '@mui/material'
-import Link from 'next/link'
+import { Box, Typography, Container, Stack } from '@mui/material'
+import AppButton from '../shared/button'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'
 import { APP_NAME, COMPANY_DESC } from '../../lib/constants'
@@ -44,41 +44,37 @@ export default function Hero() {
             spacing={2}
             justifyContent="center"
           >
-            <Link href="/jobs" passHref style={{ textDecoration: 'none' }}>
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<WorkOutlineIcon />}
-                sx={{
-                  py: 1.5,
-                  px: 4,
-                  fontWeight: 'bold',
-                  borderRadius: 2,
-                  textTransform: 'none',
-                  fontSize: '1.1rem'
-                }}
-              >
-                Tìm việc ngay
-              </Button>
-            </Link>
-            <Link href="/contact" passHref style={{ textDecoration: 'none' }}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                size="large"
-                startIcon={<ContactSupportIcon />}
-                sx={{
-                  py: 1.5,
-                  px: 4,
-                  fontWeight: 'bold',
-                  borderRadius: 2,
-                  textTransform: 'none',
-                  fontSize: '1.1rem'
-                }}
-              >
-                Liên hệ hỗ trợ
-              </Button>
-            </Link>
+              <AppButton
+              href="/jobs"
+              variant="contained"
+              size="large"
+              startIcon={<WorkOutlineIcon />}
+              sx={{
+                py: 1.5,
+                px: 4,
+                fontWeight: 'bold',
+                borderRadius: 2,
+                fontSize: '1.1rem'
+              }}
+            >
+              Tìm việc ngay
+            </AppButton>
+            <AppButton
+              href="/contact"
+              variant="outlined"
+              color="secondary"
+              size="large"
+              startIcon={<ContactSupportIcon />}
+              sx={{
+                py: 1.5,
+                px: 4,
+                fontWeight: 'bold',
+                borderRadius: 2,
+                fontSize: '1.1rem'
+              }}
+            >
+              Liên hệ hỗ trợ
+            </AppButton>
           </Stack>
         </Box>
       </Container>

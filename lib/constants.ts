@@ -77,6 +77,13 @@ export const PAGE_HEADERS = {
   },
 } as const
 
+export const ABOUT_PROCESS_STEPS = [
+  { step: '01', title: 'Tìm việc', desc: 'Chọn vị trí phù hợp tại Job Board của chúng tôi.' },
+  { step: '02', title: 'Ứng tuyển', desc: 'Gửi Email hoặc liên hệ Hotline để được tư vấn.' },
+  { step: '03', title: 'Phỏng vấn', desc: 'Nhận lịch hẹn trong 24h và hướng dẫn thủ tục.' },
+  { step: '04', title: 'Nhận việc', desc: 'Ký hợp đồng và bắt đầu hành trình mới.' },
+] as const
+
 // ─── Email template ───────────────────────────────────────────────────────────
 
 export const APPLY_EMAIL_SUBJECT = 'Ứng tuyển việc làm phổ thông'
@@ -160,7 +167,7 @@ export interface FacebookEvent {
   event_time?: number
   event_source_url?: string
   user_data?: UserData
-  custom_data?: Record<string, any>
+  custom_data?: Record<string, unknown>
   event_id?: string
 }
 
@@ -174,7 +181,7 @@ export interface ValidationError {
   message: string
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean
   data?: T
   error?: string

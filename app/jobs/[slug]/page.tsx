@@ -1,25 +1,39 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-import { notFound } from 'next/navigation'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import SendIcon from '@mui/icons-material/Send'
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import {
-  Container,
   Box,
-  Typography,
-  Grid,
   Card,
   CardContent,
-  Stack,
-  Button,
   Chip,
-  Paper
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography
 } from '@mui/material'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
-import SendIcon from '@mui/icons-material/Send'
-import Link from 'next/link'
+import fs from 'fs'
+import AppButton from '../../../components/shared/button'
+import { notFound } from 'next/navigation'
+import { importPage } from 'nextra/pages'
+import path from 'path'
+
+type JobDetailMetadata = {
+  title: string
+  description: string
+  tags?: string[]
+  responsibilities?: string[]
+  requirements?: string[]
+  benefits?: string[]
+  location: string
+  salary: string
+  date: string
+  type: string
+  applyInstructions: string
+  applyEmail?: string
+}
 import { CONTACT_EMAIL } from '../../../lib/constants'
 import { formatVietnameseDate } from '../../../lib/date'
 
@@ -34,21 +48,24 @@ export function generateStaticParams() {
     }))
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  try {
+    const { metadata } = await importPage(['jobs', slug])
+    return metadata
+  } catch {
+    return {}
+  }
+}
+
 export default async function JobDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const mdxPath = path.join(process.cwd(), 'content/jobs', `${slug}.mdx`)
-
-  if (!fs.existsSync(mdxPath)) {
-    notFound()
-  }
-
-  const fileContent = fs.readFileSync(mdxPath, 'utf-8')
-  const { data } = matter(fileContent)
-
-  const applyEmail = data.applyEmail || CONTACT_EMAIL
 
   try {
-    const { default: JobContent } = await import(`../../../content/jobs/${slug}.mdx`)
+    const { default: JobContent, metadata } = await importPage(['jobs', slug])
+    const data = metadata as unknown as JobDetailMetadata
+    const applyEmail = data.applyEmail || CONTACT_EMAIL
+
     return (
       <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
         <Container maxWidth="lg">
@@ -177,18 +194,17 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                     <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
                       {data.applyInstructions}
                     </Typography>
-                    <Link href={`mailto:${applyEmail}?subject=Ứng tuyển cho vị trí ${encodeURIComponent(data.title)}`} passHref style={{ textDecoration: 'none' }}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        size="large"
-                        startIcon={<SendIcon />}
-                        sx={{ borderRadius: 2, fontWeight: 'bold' }}
-                      >
-                        Gửi email ứng tuyển
-                      </Button>
-                    </Link>
+                    <AppButton
+                      href={`mailto:${applyEmail}?subject=Ứng tuyển cho vị trí ${encodeURIComponent(data.title)}`}
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      size="large"
+                      startIcon={<SendIcon />}
+                      sx={{ borderRadius: 2, fontWeight: 'bold' }}
+                    >
+                      Gửi email ứng tuyển
+                    </AppButton>
                     <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', opacity: 0.8 }}>
                       Liên hệ: {applyEmail}
                     </Typography>

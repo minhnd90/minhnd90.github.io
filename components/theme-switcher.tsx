@@ -3,7 +3,7 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import { IconButton } from '@mui/material'
-import { useTheme } from 'next-themes'
+import { useTheme } from './theme/ThemeProvider'
 import { useEffect, useState } from 'react'
 
 export default function ThemeSwitcher() {

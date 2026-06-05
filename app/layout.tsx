@@ -3,7 +3,7 @@ import Footer from '../components/footer'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from '../components/theme/ThemeProvider'
 import { ViewTransitions } from 'next-view-transitions'
 import { Roboto } from 'next/font/google'
 import MuiThemeProvider from '../components/theme/mui-theme-provider'
@@ -27,9 +27,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={roboto.className} suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <ViewTransitions>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider>
             <AppRouterCacheProvider>
               <MuiThemeProvider>
                 <Navbar />

@@ -1,3 +1,5 @@
+import type { Theme } from '@mui/material'
+
 // Common styling constants for consistent UI
 export const COMMON_STYLES = {
   boldText: { fontWeight: 'bold' },
@@ -8,7 +10,7 @@ export const COMMON_STYLES = {
 }
 
 // Theme-aware card shadow function
-export const getCardShadow = (theme: any) =>
+export const getCardShadow = (theme: Theme) =>
   theme.palette.mode === 'dark' ? COMMON_STYLES.cardShadowDark : COMMON_STYLES.cardShadow
 
 // Common grid sizes

@@ -2,14 +2,13 @@ import {
   Card,
   CardContent,
   CardActions,
-  Button,
   Chip,
   Stack,
   Box,
   Typography,
   useTheme,
 } from '@mui/material'
-import Link from 'next/link'
+import AppButton from '../shared/button'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import { Job } from '../../lib/types'
@@ -82,16 +81,15 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
         )}
       </CardContent>
       <CardActions sx={{ p: 3.5, pt: 0 }}>
-        <Link href={`/jobs/${encodeURIComponent(job.slug)}`} passHref style={{ textDecoration: 'none', width: '100%' }}>
-          <Button
-            variant="contained"
-            fullWidth
-            size="large"
-            sx={{ borderRadius: 2, ...COMMON_STYLES.boldText, textTransform: 'none' }}
-          >
-            {showDescription ? 'Xem chi tiết và ứng tuyển' : 'Chi tiết công việc'}
-          </Button>
-        </Link>
+        <AppButton
+          href={`/jobs/${encodeURIComponent(job.slug)}`}
+          variant="contained"
+          fullWidth
+          size="large"
+          sx={{ borderRadius: 2, ...COMMON_STYLES.boldText }}
+        >
+          {showDescription ? 'Xem chi tiết và ứng tuyển' : 'Chi tiết công việc'}
+        </AppButton>
       </CardActions>
     </Card>
   )

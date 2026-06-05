@@ -1,17 +1,23 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
 import { notFound } from 'next/navigation'
+import { importPage } from 'nextra/pages'
+
+type BlogPostMetadata = {
+  title: string
+  date: string
+  description: string
+  tags?: string[]
+}
 import {
   Container,
   Box,
   Typography,
   Chip,
   Stack,
-  Button,
   Divider
 } from '@mui/material'
-import Link from 'next/link'
+import AppButton from '../../../components/shared/button'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import PageBreadcrumb from '../../../components/shared/breadcrumb'
@@ -28,19 +34,22 @@ export function generateStaticParams() {
     }))
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  try {
+    const { metadata } = await importPage(['blog', slug])
+    return metadata
+  } catch {
+    return {}
+  }
+}
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const mdxPath = path.join(process.cwd(), 'content/blog', `${slug}.mdx`)
-
-  if (!fs.existsSync(mdxPath)) {
-    notFound()
-  }
-
-  const fileContent = fs.readFileSync(mdxPath, 'utf-8')
-  const { data } = matter(fileContent)
 
   try {
-    const { default: PostContent } = await import(`../../../content/blog/${slug}.mdx`)
+    const { default: PostContent, metadata } = await importPage(['blog', slug])
+    const data = metadata as unknown as BlogPostMetadata
 
     return (
       <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -52,15 +61,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               { label: data.title }
             ]} />
 
-            <Link href="/blog" passHref style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Button
-                startIcon={<ArrowBackIcon />}
-                sx={{ mb: 4, fontWeight: 'bold' }}
-                color="inherit"
-              >
-                Quay lại danh sách
-              </Button>
-            </Link>
+            <AppButton
+              href="/blog"
+              startIcon={<ArrowBackIcon />}
+              sx={{ mb: 4, fontWeight: 'bold' }}
+              color="inherit"
+            >
+              Quay lại danh sách
+            </AppButton>
           </Box>
 
           {/* Article Header */}
@@ -118,14 +126,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
               Chia sẻ bài viết này cho bạn bè hoặc người thân đang tìm việc nhé. Nếu bạn cần hỗ trợ trực tiếp, đừng ngần ngại liên hệ với chúng tôi.
             </Typography>
-            <Link href="/contact" passHref style={{ textDecoration: 'none' }}>
-              <Button
-                variant="contained"
-                sx={{ fontWeight: 'bold', borderRadius: 2 }}
-              >
-                Liên hệ chúng tôi
-              </Button>
-            </Link>
+            <AppButton
+              href="/contact"
+              variant="contained"
+              sx={{ fontWeight: 'bold', borderRadius: 2 }}
+            >
+              Liên hệ chúng tôi
+            </AppButton>
           </Box>
         </Container>
       </Box>

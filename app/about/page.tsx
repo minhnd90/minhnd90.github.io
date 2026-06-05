@@ -1,28 +1,27 @@
-import type { Metadata } from 'next'
+import BusinessIcon from '@mui/icons-material/Business'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import GroupsIcon from '@mui/icons-material/Groups'
+import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import VerifiedIcon from '@mui/icons-material/Verified'
 import {
-  Container,
   Box,
-  Typography,
-  Grid,
   Card,
   CardContent,
-  Stack,
-  Button,
-  Paper,
+  Container,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Paper,
+  Stack,
+  Typography,
 } from '@mui/material'
-import BusinessIcon from '@mui/icons-material/Business'
-import GroupsIcon from '@mui/icons-material/Groups'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import Link from 'next/link'
+import type { Metadata } from 'next'
+import AppButton from '../../components/shared/button'
 import PageHeader from '../../components/shared/page-header'
-import { APP_NAME, META, PAGE_HEADERS } from '../../lib/constants'
+import { APP_NAME, META, PAGE_HEADERS, ABOUT_PROCESS_STEPS } from '../../lib/constants'
 
 export const metadata: Metadata = META.about
 
@@ -131,15 +130,18 @@ export default function AboutPage() {
           </Typography>
 
           <Grid container spacing={2}>
-            {[
-              { step: '01', title: 'Tìm việc', desc: 'Chọn vị trí phù hợp tại Job Board của chúng tôi.' },
-              { step: '02', title: 'Ứng tuyển', desc: 'Gửi Email hoặc liên hệ Hotline để được tư vấn.' },
-              { step: '03', title: 'Phỏng vấn', desc: 'Nhận lịch hẹn trong 24h và hướng dẫn thủ tục.' },
-              { step: '04', title: 'Nhận việc', desc: 'Ký hợp đồng và bắt đầu hành trình mới.' }
-            ].map((node, index) => (
+            {ABOUT_PROCESS_STEPS.map((node, index) => (
               <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
                 <Box sx={{ textAlign: { xs: 'left', md: 'center' }, p: 2 }}>
-                  <Typography variant="h2" fontWeight="bold" color="rgba(255, 140, 0, 0.15)" sx={{ lineHeight: 1, mb: 1 }}>
+                  <Typography
+                    variant="h2"
+                    fontWeight="bold"
+                    color="primary.main"
+                    sx={{
+                      lineHeight: 1,
+                      mb: 1,
+                    }}
+                  >
                     {node.step}
                   </Typography>
                   <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
@@ -170,15 +172,14 @@ export default function AboutPage() {
 
         {/* CTA */}
         <Box sx={{ textAlign: 'center' }}>
-          <Link href="/jobs" passHref>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{ px: 6, py: 2, borderRadius: 3, fontWeight: 'bold', fontSize: '1.1rem' }}
-            >
-              Bắt đầu tìm việc ngay
-            </Button>
-          </Link>
+          <AppButton
+            href="/jobs"
+            variant="contained"
+            size="large"
+            sx={{ px: 6, py: 2, borderRadius: 3, fontWeight: 'bold', fontSize: '1.1rem' }}
+          >
+            Bắt đầu tìm việc ngay
+          </AppButton>
         </Box>
       </Container>
     </Box>

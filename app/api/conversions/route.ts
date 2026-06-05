@@ -24,12 +24,12 @@ function hashUserData(userData: UserData): UserData {
     'zp',
     'country'
   ]
-  const hashed = { ...userData }
+  const hashed: UserData = { ...userData }
 
   for (const field of piiFields) {
     const value = hashed[field]
     if (value && typeof value === 'string') {
-      (hashed as any)[field] = hashPII(value)
+      hashed[field] = hashPII(value)
     }
   }
 

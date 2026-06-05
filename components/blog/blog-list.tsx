@@ -1,7 +1,7 @@
 'use client'
 
-import { Box, Typography, Container, Grid, Card, CardContent, CardActions, Button, Chip, useTheme } from '@mui/material'
-import Link from 'next/link'
+import { Box, Typography, Container, Grid, Card, CardContent, CardActions, Chip, useTheme } from '@mui/material'
+import AppButton from '../shared/button'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import PageHeader from '../shared/page-header'
 import PageBreadcrumb from '../shared/breadcrumb'
@@ -48,15 +48,14 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 4, pt: 0 }}>
-                  <Link href={`/blog/${post.slug}`} passHref style={{ textDecoration: 'none' }}>
-                    <Button
-                      endIcon={<ArrowForwardIcon />}
-                      color="secondary"
-                      sx={COMMON_STYLES.boldText}
-                    >
-                      Đọc tiếp
-                    </Button>
-                  </Link>
+                  <AppButton
+                  href={`/blog/${post.slug}`}
+                  endIcon={<ArrowForwardIcon />}
+                  color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}
+                  sx={COMMON_STYLES.boldText}
+                >
+                  Đọc tiếp
+                </AppButton>
                 </CardActions>
               </Card>
             </Grid>

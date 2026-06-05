@@ -7,7 +7,6 @@ import {
   Card,
   CardContent,
   Stack,
-  Button,
   Paper,
   Divider,
   List,
@@ -16,13 +15,12 @@ import {
   ListItemText,
 } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
+import AppButton from '../../components/shared/button'
 import PhoneIcon from '@mui/icons-material/Phone'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AssignmentIcon from '@mui/icons-material/Assignment'
 import SendIcon from '@mui/icons-material/Send'
 import InfoIcon from '@mui/icons-material/Info'
-import Link from 'next/link'
-
 import PageHeader from '../../components/shared/page-header'
 import ContactForm from './contact-form'
 import { CONTACT_EMAIL, CONTACT_PHONE, META, PAGE_HEADERS, APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE, CONTACT_UI } from '../../lib/constants'
@@ -100,25 +98,24 @@ export default function ContactPage() {
                   <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
                     {CONTACT_UI.applyNowDescription}
                   </Typography>
-                  <Link href={`mailto:${contactEmail}?subject=${applySubject}`} passHref style={{ textDecoration: 'none' }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        bgcolor: 'white',
-                        color: 'primary.main',
-                        fontWeight: 'bold',
-                        borderRadius: 2,
-                        '&:hover': {
-                          bgcolor: 'rgba(255,255,255,0.9)'
-                        }
-                      }}
-                      fullWidth
-                      size="large"
-                      startIcon={<SendIcon />}
-                    >
-                      Gửi email ứng tuyển ngay
-                    </Button>
-                  </Link>
+                  <AppButton
+                    href={`mailto:${contactEmail}?subject=${applySubject}`}
+                    variant="contained"
+                    sx={{
+                      bgcolor: 'white',
+                      color: 'primary.main',
+                      fontWeight: 'bold',
+                      borderRadius: 2,
+                      '&:hover': {
+                        bgcolor: 'rgba(255,255,255,0.9)'
+                      }
+                    }}
+                    fullWidth
+                    size="large"
+                    startIcon={<SendIcon />}
+                  >
+                    Gửi email ứng tuyển ngay
+                  </AppButton>
                 </CardContent>
               </Card>
             </Stack>
