@@ -2,7 +2,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import SendIcon from '@mui/icons-material/Send'
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
+import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
 import {
   Box,
   Card,
@@ -73,10 +73,10 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
             {/* Main Content Column */}
             <Grid size={{ xs: 12, md: 8 }}>
               <Box sx={{ mb: 4 }}>
-                <Typography variant="overline" color="primary" fontWeight="bold">
+                <Typography variant="overline" color="primary" sx={{ fontWeight: 'bold' }}>
                   Chi tiết tuyển dụng
                 </Typography>
-                <Typography variant="h3" component="h1" fontWeight={800} gutterBottom>
+                <Typography variant="h3" component="h1" sx={{ fontWeight: 800 }} gutterBottom>
                   {data.title}
                 </Typography>
                 <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
@@ -88,7 +88,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
 
               <Card sx={{ borderRadius: 3, mb: 4, variant: 'outlined' }}>
                 <CardContent sx={{ p: 4 }}>
-                  <Typography variant="h5" fontWeight="bold" gutterBottom>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                     Mô tả công việc
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4, lineHeight: 1.8 }}>
@@ -97,7 +97,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
 
                   <Grid container spacing={3}>
                     <Grid size={{ xs: 12, sm: 6 }}>
-                      <Typography variant="h6" fontWeight="bold" gutterBottom>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
                         Nhiệm vụ chính
                       </Typography>
                       <Box component="ul" sx={{ pl: 2, m: 0 }}>
@@ -109,7 +109,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                       </Box>
                     </Grid>
                     <Grid size={{ xs: 12, sm: 6 }}>
-                      <Typography variant="h6" fontWeight="bold" gutterBottom>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
                         Yêu cầu ứng tuyển
                       </Typography>
                       <Box component="ul" sx={{ pl: 2, m: 0 }}>
@@ -123,7 +123,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                   </Grid>
 
                   <Box sx={{ mt: 4 }}>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
                       Quyền lợi
                     </Typography>
                     <Box component="ul" sx={{ pl: 2, m: 0 }}>
@@ -136,7 +136,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                   </Box>
 
                   <Box sx={{ mt: 6 }}>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
                       Chi tiết khác
                     </Typography>
                     <Box className="nextra-job-content" sx={{ lineHeight: 1.8, color: 'text.secondary' }}>
@@ -151,7 +151,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
             <Grid size={{ xs: 12, md: 4 }}>
               <Stack spacing={3} sx={{ position: 'sticky', top: 100 }}>
                 <Paper sx={{ p: 3, borderRadius: 3, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
-                  <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
                     Thông tin chung
                   </Typography>
                   <Stack spacing={2.5} sx={{ mt: 2 }}>
@@ -159,28 +159,28 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                       <LocationOnIcon color="primary" />
                       <Box>
                         <Typography variant="body2" color="text.secondary">Địa điểm</Typography>
-                        <Typography variant="body1" fontWeight="bold">{data.location}</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{data.location}</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2 }}>
                       <AttachMoneyIcon color="primary" />
                       <Box>
                         <Typography variant="body2" color="text.secondary">Lương hấp dẫn</Typography>
-                        <Typography variant="body1" fontWeight="bold" color="success.main">{data.salary}</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }} color="success.main">{data.salary}</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2 }}>
                       <AccessTimeIcon color="primary" />
                       <Box>
                         <Typography variant="body2" color="text.secondary">Ngày đăng</Typography>
-                        <Typography variant="body1" fontWeight="bold">{formatVietnameseDate(data.date)}</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{formatVietnameseDate(data.date)}</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2 }}>
-                      <WorkOutlineIcon color="primary" />
+                      <WorkOutlinedIcon color="primary" />
                       <Box>
                         <Typography variant="body2" color="text.secondary">Loại hình</Typography>
-                        <Typography variant="body1" fontWeight="bold">{data.type}</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{data.type}</Typography>
                       </Box>
                     </Box>
                   </Stack>
@@ -188,7 +188,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
 
                 <Card sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: 3, p: 1 }}>
                   <CardContent>
-                    <Typography variant="h5" fontWeight="bold" gutterBottom>
+                    <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                       Ứng tuyển ngay?
                     </Typography>
                     <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>

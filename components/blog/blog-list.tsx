@@ -32,10 +32,10 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
                 }}
               >
                 <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                  <Typography variant="caption" color="text.secondary" {...COMMON_STYLES.boldText} display="block" gutterBottom>
+                  <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 'bold', display: 'block' }} gutterBottom>
                     {formatVietnameseDate(post.date)}
                   </Typography>
-                  <Typography variant="h5" component="h2" {...COMMON_STYLES.boldText} gutterBottom sx={{ mt: 1 }}>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', mt: 1 }}>
                     {post.title}
                   </Typography>
                   <Box sx={{ display: 'flex', gap: 1, my: 2, flexWrap: 'wrap' }}>

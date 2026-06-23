@@ -12,12 +12,12 @@ export default function PageHeader({ title, subtitle, centered = true }: PageHea
       <Typography
         component="h1"
         variant="h3"
-        fontWeight={900}
         gutterBottom
         color="primary.main"
         sx={{ 
           fontSize: { xs: '2.5rem', md: '3rem' },
-          lineHeight: 1.2
+          lineHeight: 1.2,
+          fontWeight: 900
         }}
       >
         {title}
