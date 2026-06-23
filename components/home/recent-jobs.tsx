@@ -15,7 +15,7 @@ export default function RecentJobs({ jobs }: { jobs: Job[] }) {
       <Container maxWidth="lg">
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mb: 6 }}>
           <Box>
-            <Typography component="h2" variant="h3" fontWeight={700} gutterBottom>
+            <Typography component="h2" variant="h3" sx={{ fontWeight: 700 }} gutterBottom>
               Việc Làm Mới Nhất
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">

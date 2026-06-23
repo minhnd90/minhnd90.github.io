@@ -1,5 +1,5 @@
 import BusinessIcon from '@mui/icons-material/Business'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined'
 import GroupsIcon from '@mui/icons-material/Groups'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import VerifiedIcon from '@mui/icons-material/Verified'
@@ -39,7 +39,7 @@ export default function AboutPage() {
         <Grid container spacing={8} sx={{ mb: 12 }}>
           <Grid size={{ xs: 12, md: 6 }}>
             <Box>
-              <Typography variant="h4" fontWeight="bold" gutterBottom>
+              <Typography variant="h4" sx={{ fontWeight: 'bold' }} gutterBottom>
                 Sứ mệnh của chúng tôi
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 3, fontSize: '1.1rem', lineHeight: 1.8 }}>
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <Grid size={{ xs: 12, md: 6 }}>
             <Paper sx={{ p: 5, borderRadius: 4, bgcolor: 'primary.main', color: 'white', position: 'relative', overflow: 'hidden' }}>
               <BusinessIcon sx={{ position: 'absolute', right: -20, bottom: -20, fontSize: 180, opacity: 0.1 }} />
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
+              <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                 Tại sao chọn {APP_NAME}?
               </Typography>
               <List sx={{ mt: 3 }}>
@@ -65,7 +65,7 @@ export default function AboutPage() {
                 ].map((item, index) => (
                   <ListItem key={index} sx={{ px: 0 }}>
                     <ListItemIcon sx={{ minWidth: 40, color: 'white' }}>
-                      <CheckCircleOutlineIcon />
+                      <CheckCircleOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary={item} />
                   </ListItem>
@@ -79,10 +79,10 @@ export default function AboutPage() {
 
         {/* What You Get Section */}
         <Box sx={{ mb: 12 }}>
-          <Typography variant="h4" fontWeight="bold" textAlign="center" gutterBottom>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center' }} gutterBottom>
             Điều bạn nhận được
           </Typography>
-          <Typography variant="body1" textAlign="center" color="text.secondary" sx={{ mb: 6 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 6, textAlign: 'center' }}>
             Chúng tôi cam kết mang lại những giá trị tốt nhất cho mỗi ứng viên.
           </Typography>
 
@@ -110,7 +110,7 @@ export default function AboutPage() {
                     <Box sx={{ color: 'primary.main', mb: 3 }}>
                       {item.icon}
                     </Box>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
                       {item.title}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
@@ -125,7 +125,7 @@ export default function AboutPage() {
 
         {/* Process Section */}
         <Paper sx={{ p: { xs: 5, md: 10 }, borderRadius: 6, bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', mb: 12 }}>
-          <Typography variant="h4" fontWeight="bold" textAlign="center" sx={{ mb: 6 }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 6 }}>
             Quy trình tuyển dụng đơn giản
           </Typography>
 
@@ -135,16 +135,16 @@ export default function AboutPage() {
                 <Box sx={{ textAlign: { xs: 'left', md: 'center' }, p: 2 }}>
                   <Typography
                     variant="h2"
-                    fontWeight="bold"
                     color="primary.main"
                     sx={{
+                      fontWeight: 'bold',
                       lineHeight: 1,
                       mb: 1,
                     }}
                   >
                     {node.step}
                   </Typography>
-                  <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
                     {node.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -158,13 +158,13 @@ export default function AboutPage() {
 
         {/* Categories Section */}
         <Box sx={{ mb: 12, textAlign: 'center' }}>
-          <Typography variant="h5" fontWeight="bold" gutterBottom>
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
             Lĩnh vực tuyển dụng trọng tâm
           </Typography>
-          <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap" sx={{ mt: 3, gap: 2 }}>
+          <Stack direction="row" spacing={1} sx={{ mt: 3, gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
             {['Sản xuất đóng gói', 'Kho vận & Logictics', 'Bốc xếp phân loại', 'Lắp ráp linh kiện', 'Lao động ca kíp'].map((cat) => (
               <Paper key={cat} sx={{ px: 3, py: 1.5, borderRadius: 10, bgcolor: 'rgba(255, 140, 0, 0.05)', border: '1px solid', borderColor: 'rgba(255, 140, 0, 0.15)' }}>
-                <Typography fontWeight="bold" color="primary">{cat}</Typography>
+                <Typography sx={{ fontWeight: 'bold' }} color="primary">{cat}</Typography>
               </Paper>
             ))}
           </Stack>

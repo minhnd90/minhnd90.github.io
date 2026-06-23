@@ -30,7 +30,7 @@ export default function Features() {
     <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         <Box sx={{ mb: 6, textAlign: 'center' }}>
-          <Typography component="h2" variant="h3" fontWeight={700} gutterBottom>
+          <Typography component="h2" variant="h3" sx={{ fontWeight: 700 }} gutterBottom>
             Ưu Điểm Của Dịch Vụ
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
@@ -57,7 +57,7 @@ export default function Features() {
               >
                 <CardContent sx={{ p: 4, flexGrow: 1, textAlign: 'center' }}>
                   <Box sx={{ mb: 2 }}>{feature.icon}</Box>
-                  <Typography variant="h5" component="h3" fontWeight="bold" gutterBottom>
+                   <Typography variant="h5" component="h3" sx={{ fontWeight: 'bold' }} gutterBottom>
                     {feature.title}
                   </Typography>
                   <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>

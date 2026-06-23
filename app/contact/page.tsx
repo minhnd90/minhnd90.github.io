@@ -46,7 +46,7 @@ export default function ContactPage() {
           <Grid size={{ xs: 12, md: 5 }}>
             <Stack spacing={4}>
               <Box>
-                <Typography variant="h5" fontWeight="bold" gutterBottom>
+                <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                   {CONTACT_UI.recruitmentInfo}
                 </Typography>
                 <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
@@ -61,7 +61,7 @@ export default function ContactPage() {
                       </Box>
                       <Box>
                         <Typography variant="body2" color="text.secondary">{CONTACT_UI.emailLabel}</Typography>
-                        <Typography variant="h6" fontWeight="bold">{contactEmail}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{contactEmail}</Typography>
                       </Box>
                     </Box>
 
@@ -71,7 +71,7 @@ export default function ContactPage() {
                       </Box>
                       <Box>
                         <Typography variant="body2" color="text.secondary">{CONTACT_UI.hotlineLabel}</Typography>
-                        <Typography variant="h6" fontWeight="bold">{contactPhone}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{contactPhone}</Typography>
                       </Box>
                     </Box>
 
@@ -81,7 +81,7 @@ export default function ContactPage() {
                       </Box>
                       <Box>
                         <Typography variant="body2" color="text.secondary">{CONTACT_UI.locationLabel}</Typography>
-                        <Typography variant="h6" fontWeight="bold">{CONTACT_UI.locationValue}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{CONTACT_UI.locationValue}</Typography>
                       </Box>
                     </Box>
                   </Stack>
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
               <Card sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: 4, p: 2 }}>
                 <CardContent>
-                  <Typography variant="h5" fontWeight="bold" gutterBottom>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                     {CONTACT_UI.applyNowTitle}
                   </Typography>
                   <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
@@ -124,7 +124,7 @@ export default function ContactPage() {
           {/* Instructions Column */}
           <Grid size={{ xs: 12, md: 7 }}>
             <Paper sx={{ p: { xs: 4, md: 6 }, borderRadius: 4, height: '100%' }}>
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
+              <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                 {CONTACT_UI.applicationGuide}
               </Typography>
 
@@ -151,7 +151,7 @@ export default function ContactPage() {
                       {item.icon}
                     </ListItemIcon>
                     <ListItemText
-                      primary={<Typography fontWeight="bold">{item.title}</Typography>}
+                      primary={<Typography sx={{ fontWeight: 'bold' }}>{item.title}</Typography>}
                       secondary={item.desc}
                     />
                   </ListItem>
@@ -160,7 +160,7 @@ export default function ContactPage() {
 
               <Divider sx={{ mb: 4 }} />
 
-              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+              <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }} gutterBottom>
                 {CONTACT_UI.emailTemplateTitle}
               </Typography>
               <Box

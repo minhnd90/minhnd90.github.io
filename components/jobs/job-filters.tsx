@@ -49,7 +49,7 @@ export function JobFilters({
 
   return (
     <Card sx={{ p: 3, mb: 6, borderRadius: 3, boxShadow: getCardShadow(theme), overflow: 'visible' }}>
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={2} sx={{ alignItems: 'center' }}>
         <Grid size={{ xs: 12, md: 4 }}>
           <TextField
             fullWidth

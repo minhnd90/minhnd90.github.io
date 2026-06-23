@@ -76,14 +76,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <Typography variant="overline" color="primary" sx={{ fontWeight: 800, mb: 1, display: 'block' }}>
               Blog Chia Sẻ
             </Typography>
-            <Typography component="h1" variant="h3" fontWeight={800} gutterBottom sx={{ lineHeight: 1.2 }}>
+            <Typography component="h1" variant="h3" sx={{ fontWeight: 800, lineHeight: 1.2 }} gutterBottom>
               {data.title}
             </Typography>
 
-            <Stack direction="row" spacing={3} alignItems="center" sx={{ mt: 3, mb: 4, flexWrap: 'wrap', gap: 2 }}>
+            <Stack direction="row" spacing={3} sx={{ mt: 3, mb: 4, flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
                 <CalendarTodayIcon fontSize="small" />
-                <Typography variant="body2" fontWeight={500}>
+                <Typography variant="body2" sx={{ fontWeight: 500 }}>
                   {formatVietnameseDate(data.date)}
                 </Typography>
               </Box>
@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           {/* Article Footer */}
           <Box sx={{ mt: 10, p: 4, bgcolor: 'background.paper', borderRadius: 4, border: '1px solid', borderColor: 'divider' }}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
               Bạn thấy bài viết này hữu ích?
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>

@@ -40,7 +40,7 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
       }}
     >
       <CardContent sx={{ flexGrow: 1, p: 3.5 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
+        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
             <Chip label={job.category} size="small" color="primary" variant="outlined" />
             <Chip label={job.type} size="small" variant="outlined" />
@@ -50,7 +50,7 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
           </Typography>
         </Stack>
 
-        <Typography variant="h5" component="h2" {...COMMON_STYLES.boldText} gutterBottom>
+        <Typography variant="h5" component="h2" sx={{ fontWeight: 'bold' }} gutterBottom>
           {job.title}
         </Typography>
 
@@ -61,7 +61,7 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'success.main' }}>
             <AttachMoneyIcon fontSize="small" />
-            <Typography variant="body2" {...COMMON_STYLES.boldText}>
+            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
               {job.salary}
             </Typography>
           </Box>

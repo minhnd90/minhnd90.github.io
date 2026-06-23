@@ -1,6 +1,6 @@
 import { Box, Typography, Container, Stack } from '@mui/material'
 import AppButton from '../shared/button'
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
+import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'
 import { APP_NAME, COMPANY_DESC } from '../../lib/constants'
 
@@ -33,7 +33,7 @@ export default function Hero() {
           <Typography
             variant="h6"
             color="text.secondary"
-            paragraph
+            component="p"
             sx={{ mb: 4, fontWeight: 400, maxWidth: 640, mx: 'auto', lineHeight: 1.6, fontSize: '1.25rem' }}
           >
             {COMPANY_DESC}. Chúng tôi kết nối bạn với công việc thực tế, ổn định và phù hợp với năng lực.
@@ -42,13 +42,13 @@ export default function Hero() {
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
             spacing={2}
-            justifyContent="center"
+            sx={{ justifyContent: 'center' }}
           >
               <AppButton
               href="/jobs"
               variant="contained"
               size="large"
-              startIcon={<WorkOutlineIcon />}
+              startIcon={<WorkOutlinedIcon />}
               sx={{
                 py: 1.5,
                 px: 4,
