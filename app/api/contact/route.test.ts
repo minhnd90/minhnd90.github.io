@@ -1,9 +1,9 @@
-process.env.CONTACT_STORAGE_DIR = 'test-data'
-process.env.CONTACT_STORAGE_FILE = 'test-contact.log'
+import { persistContactRequest } from '@/lib/contact';
+import { promises as fs } from 'fs';
+import path from 'path';
 
-import { persistContactRequest } from '../../../lib/contact'
-import { promises as fs } from 'fs'
-import path from 'path'
+process.env.CONTACT_STORAGE_DIR = 'test-data';
+process.env.CONTACT_STORAGE_FILE = 'test-contact.log';
 
 describe('persistContactRequest', () => {
   const testDir = path.join(process.cwd(), 'test-data')
@@ -13,16 +13,16 @@ describe('persistContactRequest', () => {
     // Clean up
     try {
       await fs.rm(path.join(testDir, testFile), { force: true })
-      await fs.rmdir(testDir, { recursive: true })
-    } catch {}
+      await fs.rm(testDir, { recursive: true, force: true })
+    } catch { }
   })
 
   afterEach(async () => {
     // Clean up
     try {
       await fs.rm(path.join(testDir, testFile), { force: true })
-      await fs.rmdir(testDir, { recursive: true })
-    } catch {}
+      await fs.rm(testDir, { recursive: true, force: true })
+    } catch { }
   })
 
   it('should persist contact request to file', async () => {

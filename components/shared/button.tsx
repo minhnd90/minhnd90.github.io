@@ -1,7 +1,7 @@
 'use client'
 
-import Link, { type LinkProps } from 'next/link'
 import { Button, type ButtonProps as MuiButtonProps, type SxProps, type Theme } from '@mui/material'
+import Link, { type LinkProps } from 'next/link'
 import type { ReactNode } from 'react'
 
 export interface AppButtonProps extends Omit<MuiButtonProps, 'href'> {

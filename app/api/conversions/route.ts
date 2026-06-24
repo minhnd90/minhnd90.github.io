@@ -1,17 +1,17 @@
-import { createHash } from 'node:crypto'
-import { API_ERRORS, UserData, FacebookEvent, ConversionsPayload } from '../../../lib/constants'
-import { checkRateLimit } from '../../../lib/rate-limit'
-import { errorResponse } from '../../../lib/api-responses'
+import { errorResponse } from '@/lib/api-responses';
+import { API_ERRORS, ConversionsPayload, FacebookEvent, UserData } from '@/lib/constants';
+import { checkRateLimit } from '@/lib/rate-limit';
+import { createHash } from 'node:crypto';
 
 // Hash PII value with SHA256 as required by Meta
 function hashPII(value: string): string {
-  if (!value) return ''
-  return createHash('sha256').update(value.trim().toLowerCase()).digest('hex')
+  if (!value) return '';
+  return createHash('sha256').update(value.trim().toLowerCase()).digest('hex');
 }
 
 // Hash user_data object: em, ph, ge, db, ln, fn, etc.
 function hashUserData(userData: UserData): UserData {
-  if (!userData || typeof userData !== 'object') return userData
+  if (!userData || typeof userData !== 'object') return userData;
   const piiFields: (keyof UserData)[] = [
     'em',
     'ph',
@@ -27,9 +27,9 @@ function hashUserData(userData: UserData): UserData {
   const hashed: UserData = { ...userData }
 
   for (const field of piiFields) {
-    const value = hashed[field]
+    const value = hashed[field];
     if (value && typeof value === 'string') {
-      hashed[field] = hashPII(value)
+      hashed[field] = hashPII(value);
     }
   }
 
@@ -67,8 +67,8 @@ export async function POST(req: Request) {
   try {
     // Rate limiting check
     const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-                     req.headers.get('x-real-ip') ||
-                     'unknown'
+      req.headers.get('x-real-ip') ||
+      'unknown'
     if (!checkRateLimit(clientIP)) {
       return errorResponse('Too many requests', 429)
     }

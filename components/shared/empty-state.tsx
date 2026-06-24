@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material'
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
+import { Box, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 
 interface EmptyStateProps {
@@ -7,9 +7,9 @@ interface EmptyStateProps {
   message?: string
 }
 
-export function EmptyState({ 
-  icon = <WorkOutlinedIcon sx={{ fontSize: 60, color: 'text.disabled', mb: 2 }} />, 
-  message = "Không tìm thấy nội dung phù hợp. Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm nhé!" 
+export function EmptyState({
+  icon = <WorkOutlinedIcon sx={{ fontSize: 60, color: 'text.disabled', mb: 2 }} />,
+  message = "Không tìm thấy nội dung phù hợp. Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm nhé!"
 }: EmptyStateProps) {
   return (
     <Box sx={{ textAlign: 'center', py: 10, width: '100%' }}>

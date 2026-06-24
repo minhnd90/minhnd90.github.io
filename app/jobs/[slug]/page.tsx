@@ -15,10 +15,13 @@ import {
   Typography
 } from '@mui/material'
 import fs from 'fs'
-import AppButton from '../../../components/shared/button'
+import AppButton from '@components/shared/button'
 import { notFound } from 'next/navigation'
 import { importPage } from 'nextra/pages'
 import path from 'path'
+
+export const dynamicParams = false;
+export const dynamic = 'force-static';
 
 type JobDetailMetadata = {
   title: string
@@ -34,8 +37,8 @@ type JobDetailMetadata = {
   applyInstructions: string
   applyEmail?: string
 }
-import { CONTACT_EMAIL } from '../../../lib/constants'
-import { formatVietnameseDate } from '../../../lib/date'
+import { CONTACT_EMAIL } from '@lib/constants'
+import { formatVietnameseDate } from '@lib/date'
 
 export function generateStaticParams() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')

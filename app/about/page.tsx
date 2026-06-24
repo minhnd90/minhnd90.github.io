@@ -18,17 +18,26 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
+
 import type { Metadata } from 'next'
-import AppButton from '../../components/shared/button'
-import PageHeader from '../../components/shared/page-header'
-import { APP_NAME, META, PAGE_HEADERS, ABOUT_PROCESS_STEPS } from '../../lib/constants'
+
+import AppButton from '@/components/shared/button'
+import PageHeader from '@/components/shared/page-header'
+import { ABOUT_PROCESS_STEPS, APP_NAME, META, PAGE_HEADERS } from '@/lib/constants'
+
 
 export const metadata: Metadata = META.about
 
-export default function AboutPage() {
+/**
+ * About page presenting company information and process steps.
+ *
+ * @description Renders the main "About" page with header, content sections,
+ * and a list of process steps.
+ */
+export default function AboutPage(): React.ReactElement {
   return (
     <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: 'background.default' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         {/* Header Section */}
         <PageHeader
           title={PAGE_HEADERS.about.title}

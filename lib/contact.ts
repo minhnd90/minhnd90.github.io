@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
-import path from 'path'
 import nodemailer from 'nodemailer'
+import path from 'path'
 
 export interface ContactRequestData {
   name: string
