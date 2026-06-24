@@ -2,8 +2,8 @@
 
 import { createTheme, ThemeProvider as MuiProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
-import { useTheme } from './ThemeProvider'
 import { ReactNode, useMemo } from 'react'
+import { useTheme } from './ThemeProvider'
 
 const getTheme = (mode: 'light' | 'dark') =>
   createTheme({

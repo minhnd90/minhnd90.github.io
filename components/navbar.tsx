@@ -1,10 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import ThemeSwitcher from './theme-switcher'
-import Image from 'next/image'
 import { APP_NAME, COMPANY_NAME } from '../lib/constants'
+import ThemeSwitcher from './theme-switcher'
 
 const navLinks = [
   { name: 'Trang Chủ', href: '/' },

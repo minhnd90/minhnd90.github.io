@@ -1,19 +1,19 @@
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import {
+  Box,
   Card,
-  CardContent,
   CardActions,
+  CardContent,
   Chip,
   Stack,
-  Box,
   Typography,
   useTheme,
 } from '@mui/material'
-import AppButton from '../shared/button'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
-import { Job } from '../../lib/types'
 import { formatVietnameseDate } from '../../lib/date'
-import { getCardShadow, COMMON_STYLES } from '../../lib/styles'
+import { COMMON_STYLES, getCardShadow } from '../../lib/styles'
+import { Job } from '../../lib/types'
+import AppButton from '../shared/button'
 
 interface JobCardProps {
   job: Job

@@ -1,14 +1,14 @@
 'use client'
 
-import { Box, Typography, Container, Grid, Card, CardContent, CardActions, Chip, useTheme } from '@mui/material'
-import AppButton from '../shared/button'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import PageHeader from '../shared/page-header'
+import { Box, Card, CardActions, CardContent, Chip, Container, Grid, Typography, useTheme } from '@mui/material'
 import PageBreadcrumb from '../shared/breadcrumb'
+import AppButton from '../shared/button'
+import PageHeader from '../shared/page-header'
 
-import { BlogPost } from '../../lib/types'
 import { formatVietnameseDate } from '../../lib/date'
-import { getCardShadow, COMMON_STYLES } from '../../lib/styles'
+import { COMMON_STYLES, getCardShadow } from '../../lib/styles'
+import { BlogPost } from '../../lib/types'
 
 export default function BlogList({ posts }: { posts: BlogPost[] }) {
   const theme = useTheme()
@@ -49,13 +49,13 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
                 </CardContent>
                 <CardActions sx={{ p: 4, pt: 0 }}>
                   <AppButton
-                  href={`/blog/${post.slug}`}
-                  endIcon={<ArrowForwardIcon />}
-                  color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}
-                  sx={COMMON_STYLES.boldText}
-                >
-                  Đọc tiếp
-                </AppButton>
+                    href={`/blog/${post.slug}`}
+                    endIcon={<ArrowForwardIcon />}
+                    color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}
+                    sx={COMMON_STYLES.boldText}
+                  >
+                    Đọc tiếp
+                  </AppButton>
                 </CardActions>
               </Card>
             </Grid>

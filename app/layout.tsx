@@ -1,14 +1,16 @@
-import Navbar from '../components/navbar'
-import Footer from '../components/footer'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
-import { ThemeProvider } from '../components/theme/ThemeProvider'
 import { ViewTransitions } from 'next-view-transitions'
 import { Roboto } from 'next/font/google'
-import MuiThemeProvider from '../components/theme/mui-theme-provider'
-const roboto = Roboto({ subsets: ['vietnamese'] })
+
+import Footer from '@/components/footer'
+import Navbar from '@/components/navbar'
+import MuiThemeProvider from '@/components/theme/mui-theme-provider'
+import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import '../styles/index.scss'
+
+const roboto = Roboto({ subsets: ['vietnamese'] })
 
 export const metadata = {
   title: process.env.COMPANY_NAME,
@@ -20,13 +22,17 @@ export const metadata = {
   }
 }
 
+/**
+ * Root layout for the application. Wraps all pages with global providers,
+ * theme, analytics, and common layout components.
+ */
 export default function RootLayout({
   children
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="vi" className={roboto.className} suppressHydrationWarning>
+    <html lang='vi' className={roboto.className} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ViewTransitions>
           <ThemeProvider>

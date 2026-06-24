@@ -1,9 +1,9 @@
 'use client'
 
-import { Box, Typography, Container, Grid, Card, CardContent, useTheme } from '@mui/material'
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
-import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import SearchIcon from '@mui/icons-material/Search'
+import SupportAgentIcon from '@mui/icons-material/SupportAgent'
+import { Box, Card, CardContent, Container, Grid, Typography, useTheme } from '@mui/material'
 
 const features = [
   {
@@ -57,7 +57,7 @@ export default function Features() {
               >
                 <CardContent sx={{ p: 4, flexGrow: 1, textAlign: 'center' }}>
                   <Box sx={{ mb: 2 }}>{feature.icon}</Box>
-                   <Typography variant="h5" component="h3" sx={{ fontWeight: 'bold' }} gutterBottom>
+                  <Typography variant="h5" component="h3" sx={{ fontWeight: 'bold' }} gutterBottom>
                     {feature.title}
                   </Typography>
                   <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>

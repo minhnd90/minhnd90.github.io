@@ -1,7 +1,20 @@
-import fs from 'fs'
-import path from 'path'
-import { notFound } from 'next/navigation'
-import { importPage } from 'nextra/pages'
+import PageBreadcrumb from '@/components/shared/breadcrumb';
+import AppButton from '@/components/shared/button';
+import { formatVietnameseDate } from '@/lib/date';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import {
+  Box,
+  Chip,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from '@mui/material';
+import fs from 'fs';
+import { notFound } from 'next/navigation';
+import { importPage } from 'nextra/pages';
+import path from 'path';
 
 type BlogPostMetadata = {
   title: string
@@ -9,20 +22,12 @@ type BlogPostMetadata = {
   description: string
   tags?: string[]
 }
-import {
-  Container,
-  Box,
-  Typography,
-  Chip,
-  Stack,
-  Divider
-} from '@mui/material'
-import AppButton from '../../../components/shared/button'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import PageBreadcrumb from '../../../components/shared/breadcrumb'
-import { formatVietnameseDate } from '../../../lib/date'
 
+/**
+ * Generate static parameters (paths) for blog posts.
+ *
+ * @returns {{ slug: string }[]} Array of parameter objects.
+ */
 export function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'content/blog')
   if (!fs.existsSync(blogDir)) return []
@@ -34,6 +39,12 @@ export function generateStaticParams() {
     }))
 }
 
+/**
+ * Generate page metadata for a blog post.
+ *
+ * @param {{ params: Promise<{ slug: string }> }} param - Parameters containing slug.
+ * @returns {Promise<any>} Metadata object for the page.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   try {
@@ -44,6 +55,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
+/**
+ * Blog post page component.
+ *
+ * @param {{ params: Promise<{ slug: string }> }} param - Parameters containing slug.
+ * @returns {JSX.Element} Rendered blog post page.
+ */
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 

@@ -1,21 +1,21 @@
 'use client'
 
-import { useMemo } from 'react'
+import SearchIcon from '@mui/icons-material/Search'
 import {
-  Grid,
   Card,
-  TextField,
   FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  Grid,
   InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
   useTheme,
 } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
+import { useMemo } from 'react'
 
-import { Job } from '../../lib/types'
 import { getCardShadow } from '../../lib/styles'
+import { Job } from '../../lib/types'
 
 interface JobFiltersProps {
   jobs: Job[]

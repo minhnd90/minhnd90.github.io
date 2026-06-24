@@ -22,7 +22,8 @@ export default withNextra({
   },
   turbopack: {
     resolveAlias: {
-      'next-mdx-import-source-file': './mdx-components.tsx',
+      "@components": path.join(__dirname, "components"),
+      "@lib": path.join(__dirname, "lib"),
     },
   },
   env: {

@@ -1,8 +1,8 @@
-import { Box, Typography, Container, Stack } from '@mui/material'
-import AppButton from '../shared/button'
-import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'
+import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
+import { Box, Container, Stack, Typography } from '@mui/material'
 import { APP_NAME, COMPANY_DESC } from '../../lib/constants'
+import AppButton from '../shared/button'
 
 export default function Hero() {
   return (
@@ -44,7 +44,7 @@ export default function Hero() {
             spacing={2}
             sx={{ justifyContent: 'center' }}
           >
-              <AppButton
+            <AppButton
               href="/jobs"
               variant="contained"
               size="large"

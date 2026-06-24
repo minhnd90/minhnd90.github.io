@@ -1,16 +1,18 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import AppButton from '@/components/shared/button';
+import { FORM_VALIDATION } from '@/lib/constants';
+import SendIcon from '@mui/icons-material/Send';
 import {
+  Alert,
+  Box,
   Card,
   CardContent,
-  Box,
   TextField,
-  Alert,
-} from '@mui/material'
-import AppButton from '../../components/shared/button'
-import SendIcon from '@mui/icons-material/Send'
-import { FORM_VALIDATION } from '../../lib/constants'
+} from '@mui/material';
+import type { SyntheticEvent } from 'react';
+import { useState } from 'react';
+
 
 interface ContactFormValues {
   name: string
@@ -25,12 +27,17 @@ interface ContactFormErrors {
   submit?: string
 }
 
-interface ContactFormProps {}
-
+interface ContactFormProps { }
+/**
+ * Contact form component for sending messages.
+ *
+ * @param {ContactFormProps} _ - Component props (none).
+ * @returns {JSX.Element} Rendered contact form.
+ */
 export default function ContactForm(_: ContactFormProps) {
-  const [form, setForm] = useState<ContactFormValues>({ name: '', email: '', message: '' })
-  const [errors, setErrors] = useState<ContactFormErrors>({})
-  const [success, setSuccess] = useState('')
+  const [form, setForm] = useState<ContactFormValues>({ name: '', email: '', message: '' });
+  const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [success, setSuccess] = useState('');
 
   const validate = () => {
     const nextErrors: ContactFormErrors = {}
@@ -46,11 +53,11 @@ export default function ContactForm(_: ContactFormProps) {
 
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
-  }
+  };
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSuccess('')
     setErrors((prev) => ({ ...prev, submit: undefined }))
@@ -86,7 +93,7 @@ export default function ContactForm(_: ContactFormProps) {
     } finally {
       setIsSubmitting(false)
     }
-  }
+  };
 
   return (
     <Card sx={{ mb: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}>

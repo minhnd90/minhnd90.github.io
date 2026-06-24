@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import {
   COMPANY_NAME,
-  CONTACT_PHONE,
-  CONTACT_EMAIL,
   CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
   FB_PAGE_URL,
   ZALO_URL
 } from '../lib/constants'

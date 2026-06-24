@@ -1,36 +1,41 @@
-import type { Metadata } from 'next'
+import AppButton from '@/components/shared/button';
+import PageHeader from '@/components/shared/page-header';
+import { APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_UI, META, PAGE_HEADERS } from '@/lib/constants';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import EmailIcon from '@mui/icons-material/Email';
+import InfoIcon from '@mui/icons-material/Info';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import SendIcon from '@mui/icons-material/Send';
 import {
-  Container,
   Box,
-  Typography,
-  Grid,
   Card,
   CardContent,
-  Stack,
-  Paper,
+  Container,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@mui/material'
-import EmailIcon from '@mui/icons-material/Email'
-import AppButton from '../../components/shared/button'
-import PhoneIcon from '@mui/icons-material/Phone'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import AssignmentIcon from '@mui/icons-material/Assignment'
-import SendIcon from '@mui/icons-material/Send'
-import InfoIcon from '@mui/icons-material/Info'
-import PageHeader from '../../components/shared/page-header'
-import ContactForm from './contact-form'
-import { CONTACT_EMAIL, CONTACT_PHONE, META, PAGE_HEADERS, APPLY_EMAIL_SUBJECT, APPLY_EMAIL_TEMPLATE, CONTACT_UI } from '../../lib/constants'
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
+import type { Metadata } from 'next';
+import ContactForm from './contact-form';
 
 export const metadata: Metadata = META.contact
 
+/**
+ * Contact page component displaying contact information and a form.
+ *
+ * @returns {JSX.Element} Rendered contact page.
+ */
 export default function ContactPage() {
-  const contactEmail = CONTACT_EMAIL
-  const contactPhone = CONTACT_PHONE
-  const applySubject = encodeURIComponent(APPLY_EMAIL_SUBJECT)
+  const contactEmail = CONTACT_EMAIL;
+  const contactPhone = CONTACT_PHONE;
+  const applySubject = encodeURIComponent(APPLY_EMAIL_SUBJECT);
 
   return (
     <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: 'background.default' }}>
