@@ -1,10 +1,10 @@
 'use client'
 
+import { JobCard } from '@/components/jobs/job-card'
+import AppButton from '@/components/shared/button'
+import { Job } from '@/lib/types'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { Box, Container, Grid, Typography } from '@mui/material'
-import { Job } from '../../lib/types'
-import { JobCard } from '../jobs/job-card'
-import AppButton from '../shared/button'
 
 export default function RecentJobs({ jobs }: { jobs: Job[] }) {
   // Get up to 3 latest jobs

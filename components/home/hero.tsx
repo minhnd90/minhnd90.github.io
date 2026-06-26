@@ -1,8 +1,8 @@
+import AppButton from '@/components/shared/button'
+import { APP_NAME, COMPANY_DESC } from '@/lib/constants'
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
 import { Box, Container, Stack, Typography } from '@mui/material'
-import { APP_NAME, COMPANY_DESC } from '../../lib/constants'
-import AppButton from '../shared/button'
 
 export default function Hero() {
   return (

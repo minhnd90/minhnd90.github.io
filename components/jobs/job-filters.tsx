@@ -14,8 +14,8 @@ import {
 } from '@mui/material'
 import { useMemo } from 'react'
 
-import { getCardShadow } from '../../lib/styles'
-import { Job } from '../../lib/types'
+import { getCardShadow } from '@/lib/styles'
+import { Job } from '@/lib/types'
 
 interface JobFiltersProps {
   jobs: Job[]

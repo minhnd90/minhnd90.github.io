@@ -1,6 +1,6 @@
+import AppButton from '@/components/shared/button'
+import { APP_NAME } from '@/lib/constants'
 import { Box, Container, Typography } from '@mui/material'
-import { APP_NAME } from '../../lib/constants'
-import AppButton from '../shared/button'
 
 export default function CTA() {
   return (

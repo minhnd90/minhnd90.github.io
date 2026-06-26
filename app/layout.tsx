@@ -26,14 +26,10 @@ export const metadata = {
  * Root layout for the application. Wraps all pages with global providers,
  * theme, analytics, and common layout components.
  */
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='vi' className={roboto.className} suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang='vi' className={roboto.className}>
+      <body>
         <ViewTransitions>
           <ThemeProvider>
             <AppRouterCacheProvider>
@@ -43,10 +39,10 @@ export default function RootLayout({
                 <Footer />
               </MuiThemeProvider>
             </AppRouterCacheProvider>
-            <Analytics />
-            <SpeedInsights />
           </ThemeProvider>
         </ViewTransitions>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

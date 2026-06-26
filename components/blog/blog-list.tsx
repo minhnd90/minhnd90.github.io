@@ -1,14 +1,14 @@
 'use client'
 
+import PageBreadcrumb from '@/components/shared/breadcrumb'
+import AppButton from '@/components/shared/button'
+import PageHeader from '@/components/shared/page-header'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { Box, Card, CardActions, CardContent, Chip, Container, Grid, Typography, useTheme } from '@mui/material'
-import PageBreadcrumb from '../shared/breadcrumb'
-import AppButton from '../shared/button'
-import PageHeader from '../shared/page-header'
 
-import { formatVietnameseDate } from '../../lib/date'
-import { COMMON_STYLES, getCardShadow } from '../../lib/styles'
-import { BlogPost } from '../../lib/types'
+import { formatVietnameseDate } from '@/lib/date'
+import { COMMON_STYLES, getCardShadow } from '@/lib/styles'
+import { BlogPost } from '@/lib/types'
 
 export default function BlogList({ posts }: { posts: BlogPost[] }) {
   const theme = useTheme()

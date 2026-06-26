@@ -1,5 +1,10 @@
 'use client'
 
+import { JobCard } from '@/components/jobs/job-card'
+import { JobFilters } from '@/components/jobs/job-filters'
+import { EmptyState } from '@/components/shared/empty-state'
+import PageHeader from '@/components/shared/page-header'
+import { Job } from '@/lib/types'
 import {
   Box,
   Container,
@@ -7,11 +12,6 @@ import {
   Typography,
 } from '@mui/material'
 import { useMemo, useState } from 'react'
-import { Job } from '../../lib/types'
-import { EmptyState } from '../shared/empty-state'
-import PageHeader from '../shared/page-header'
-import { JobCard } from './job-card'
-import { JobFilters } from './job-filters'
 
 export default function JobList({ jobs }: { jobs: Job[] }) {
   const [category, setCategory] = useState('Tất cả')
