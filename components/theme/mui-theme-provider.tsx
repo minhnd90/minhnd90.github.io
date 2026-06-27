@@ -1,6 +1,6 @@
 'use client'
 
-import { useTheme } from '@/components/theme/ThemeProvider'
+import { useTheme } from '@/components/theme/theme-provider'
 import { T_SystemTheme } from '@/lib/types'
 import { createTheme, ThemeProvider as MuiProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'

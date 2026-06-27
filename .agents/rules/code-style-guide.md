@@ -6,6 +6,7 @@ trigger: always_on
 
 ## Table of Contents
 - [General](#general)
+- [Linting & Formatting](#linting--formatting)
 - [File Organization](#file-organization)
 - [Naming Conventions](#naming-conventions)
 - [Imports](#imports)
@@ -26,6 +27,52 @@ trigger: always_on
 - Prefer **async/await** over promise chains.
 - Include a **JSDoc/@description** comment for exported functions.
 - All code must pass **eslint** (configured via `eslint.config.mjs`).
+
+## Linting & Formatting
+
+### Auto-Lint Rule (Agent Behaviour)
+> **After generating or modifying any `.ts`, `.tsx`, `.js`, or `.mjs` file, you MUST run:**
+> ```bash
+> npm run lint:fix
+> ```
+> Only report remaining lint errors that cannot be auto-fixed. Do **not** leave generated code in an unlinted state.
+
+### ESLint Configuration (`eslint.config.mjs`)
+The project uses **`eslint-config-next`** as the base, with the following active plugin suites:
+
+| Plugin | Key rules enforced |
+|---|---|
+| `react` | `jsx-key`, `no-unescaped-entities`, `no-unknown-property`, `no-deprecated` |
+| `react-hooks` | `rules-of-hooks` (error), `exhaustive-deps` (warn) |
+| `@next/next` | `no-html-link-for-pages`, `no-head-element`, `google-font-display` |
+| `jsx-a11y` | Accessibility attributes (`aria-*`, `alt`) |
+
+Custom rules added on top of the base:
+
+| Rule | Level | Rationale |
+|---|---|---|
+| `no-unused-vars` | `warn` | Keep dead code out; use `_` prefix to suppress intentionally |
+| `no-console` | `warn` (allow `error`, `warn`) | No stray `console.log` in production |
+| `prefer-const` | `error` | Always `const` unless reassignment is needed |
+| `eqeqeq` | `error` | Enforce `===` / `!==` |
+| `react/self-closing-comp` | `warn` | Self-close components without children |
+| `react/jsx-no-useless-fragment` | `warn` | Avoid unnecessary `<>` wrappers |
+| `@typescript-eslint/no-explicit-any` | `warn` | Use `unknown` or generics instead of `any` |
+
+### Prettier (via `package.json` `prettier` key)
+| Option | Value |
+|---|---|
+| `singleQuote` | `true` |
+| `semi` | `false` |
+| `tabWidth` | `2` |
+| `trailingComma` | `none` |
+| `arrowParens` | `always` |
+
+### Available lint scripts
+| Script | Command | Purpose |
+|---|---|---|
+| `npm run lint` | `eslint .` | Report all lint errors |
+| `npm run lint:fix` | `eslint . --fix` | Auto-fix all fixable errors |
 
 ## File Organization
 - Keep **component files** in `app/` or `components/` directories.
@@ -97,4 +144,4 @@ trigger: always_on
 
 ---
 
-*This guide was generated automatically based on the current codebase conventions.*
+*This guide was last updated to reflect active ESLint plugins, custom rules, and auto-lint agent behaviour.*

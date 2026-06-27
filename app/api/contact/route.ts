@@ -65,7 +65,7 @@ export async function POST(req: Request) {
       // Continue, as persistence succeeded
     }
 
-    console.info('Contact request received', {
+    console.warn('Contact request received', {
       timestamp: contactData.submittedAt,
       hasName: !!contactData.name,
       hasEmail: !!contactData.email,

@@ -3,14 +3,15 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import { IconButton } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useTheme } from '@/components/theme/ThemeProvider'
+import { useLayoutEffect, useState } from 'react'
+import { useTheme } from '@/components/theme/theme-provider'
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
 
-  useEffect(() => { setMounted(true) }, [])
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useLayoutEffect(() => { setMounted(true) }, [])
 
   if (!mounted) { return null }
 

@@ -7,7 +7,7 @@ import { Roboto } from 'next/font/google'
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import MuiThemeProvider from '@/components/theme/mui-theme-provider'
-import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import { ThemeProvider } from '@/components/theme/theme-provider'
 import '../styles/index.scss'
 
 const roboto = Roboto({ subsets: ['vietnamese'] })
