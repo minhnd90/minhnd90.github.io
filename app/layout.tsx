@@ -31,15 +31,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='vi' className={roboto.className}>
       <body>
         <ViewTransitions>
-          <ThemeProvider>
-            <AppRouterCacheProvider>
+          <AppRouterCacheProvider>
+            <ThemeProvider>
               <MuiThemeProvider>
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
               </MuiThemeProvider>
-            </AppRouterCacheProvider>
-          </ThemeProvider>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
         </ViewTransitions>
         <Analytics />
         <SpeedInsights />

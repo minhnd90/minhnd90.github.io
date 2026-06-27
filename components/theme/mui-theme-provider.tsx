@@ -1,11 +1,12 @@
 'use client'
 
 import { useTheme } from '@/components/theme/ThemeProvider'
+import { T_SystemTheme } from '@/lib/types'
 import { createTheme, ThemeProvider as MuiProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ReactNode, useMemo } from 'react'
 
-const getTheme = (mode: 'light' | 'dark') =>
+const getTheme = (mode: T_SystemTheme) =>
   createTheme({
     palette: {
       mode,
