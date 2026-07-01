@@ -60,8 +60,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const storedTheme = getStoredTheme()
     const currentSystemTheme = getSystemTheme()
 
-    setThemeState(storedTheme)
-    setSystemTheme(currentSystemTheme)
+    const updateTheme = () => {
+      setThemeState(storedTheme)
+      setSystemTheme(currentSystemTheme)
+    }
+
+    const timeoutId = window.setTimeout(updateTheme, 0)
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = (event: MediaQueryListEvent) => {
@@ -71,6 +75,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     mediaQuery.addEventListener('change', handleChange)
 
     return () => {
+      window.clearTimeout(timeoutId)
       mediaQuery.removeEventListener('change', handleChange)
     }
   }, [])

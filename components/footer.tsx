@@ -35,6 +35,7 @@ export default function Footer() {
             <div className="social-links" role="list">
               {FOOTER_SOCIALS.map((social) => (
                 <Link
+                  key={social.platform}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
