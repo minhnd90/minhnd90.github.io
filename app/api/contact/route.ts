@@ -1,6 +1,7 @@
 import { errorResponse, successResponse } from '@/lib/api-responses';
 import { API_ERRORS, FORM_VALIDATION } from '@/lib/constants';
-import { ContactRequestData, persistContactRequest, sendContactEmail } from '@/lib/contact';
+import { ContactRequestData } from '@/lib/types';
+import { persistContactRequest, sendContactEmail } from '@/lib/contact';
 import { checkRateLimit } from '@/lib/rate-limit';
 import DOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
