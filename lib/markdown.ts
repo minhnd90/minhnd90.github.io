@@ -1,17 +1,6 @@
+import { BlogPost, FrontMatter, Job } from '@/lib/types'
 import { MdxFile } from 'nextra'
 import { getPageMap } from 'nextra/page-map'
-import { BlogPost, Job } from './types'
-
-type FrontMatter = {
-  title?: string
-  category?: string
-  type?: string
-  location?: string
-  salary?: string
-  date?: string
-  description?: string
-  tags?: string[]
-}
 
 export function sanitizeSlug(filename: string): string {
   // Remove known extension if present
@@ -25,7 +14,6 @@ export function sanitizeSlug(filename: string): string {
   // Fallback in case nothing remains after sanitization
   return base || 'content'
 }
-
 
 export async function getAllJobs(): Promise<Job[]> {
   const pageMap = await getPageMap('/jobs')
@@ -63,5 +51,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     })
 
   // Sort by date descending
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return posts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
 }

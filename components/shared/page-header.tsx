@@ -1,12 +1,11 @@
+import { PageHeaderProps } from '@/lib/types'
 import { Box, Typography } from '@mui/material'
 
-interface PageHeaderProps {
-  title: string
-  subtitle?: string
-  centered?: boolean
-}
-
-export default function PageHeader({ title, subtitle, centered = true }: PageHeaderProps) {
+export default function PageHeader({
+  title,
+  subtitle,
+  centered = true
+}: PageHeaderProps) {
   return (
     <Box sx={{ mb: { xs: 6, md: 8 }, textAlign: centered ? 'center' : 'left' }}>
       <Typography
@@ -14,7 +13,7 @@ export default function PageHeader({ title, subtitle, centered = true }: PageHea
         variant="h3"
         gutterBottom
         color="primary.main"
-        sx={{ 
+        sx={{
           fontSize: { xs: '2.5rem', md: '3rem' },
           lineHeight: 1.2,
           fontWeight: 900

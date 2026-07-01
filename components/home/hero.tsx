@@ -1,5 +1,5 @@
 import AppButton from '@/components/shared/button'
-import { APP_NAME, COMPANY_DESC } from '@/lib/constants'
+import { APP_NAME, TXT_HERO } from '@/lib/constants'
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined'
 import { Box, Container, Stack, Typography } from '@mui/material'
@@ -25,8 +25,11 @@ export default function Hero() {
             sx={{ fontWeight: 800, fontSize: { xs: '2.5rem', md: '3.75rem' } }}
           >
             {APP_NAME}
-            <Box component="span" sx={{ color: 'primary.main', display: 'block' }}>
-              Tuyển Dụng Nhanh & Tin Cậy
+            <Box
+              component="span"
+              sx={{ color: 'primary.main', display: 'block' }}
+            >
+              {TXT_HERO.heading}
             </Box>
           </Typography>
 
@@ -34,9 +37,16 @@ export default function Hero() {
             variant="h6"
             color="text.secondary"
             component="p"
-            sx={{ mb: 4, fontWeight: 400, maxWidth: 640, mx: 'auto', lineHeight: 1.6, fontSize: '1.25rem' }}
+            sx={{
+              mb: 4,
+              fontWeight: 400,
+              maxWidth: 640,
+              mx: 'auto',
+              lineHeight: 1.6,
+              fontSize: '1.25rem'
+            }}
           >
-            {COMPANY_DESC}. Chúng tôi kết nối bạn với công việc thực tế, ổn định và phù hợp với năng lực.
+            {TXT_HERO.description}
           </Typography>
 
           <Stack
@@ -57,7 +67,7 @@ export default function Hero() {
                 fontSize: '1.1rem'
               }}
             >
-              Tìm việc ngay
+              {TXT_HERO.ctaButton}
             </AppButton>
             <AppButton
               href="/contact"
@@ -73,7 +83,7 @@ export default function Hero() {
                 fontSize: '1.1rem'
               }}
             >
-              Liên hệ hỗ trợ
+              {TXT_HERO.contactButton}
             </AppButton>
           </Stack>
         </Box>

@@ -1,18 +1,15 @@
-import Link from 'next/link'
 import {
   COMPANY_NAME,
   CONTACT_ADDRESS,
-  CONTACT_EMAIL,
-  CONTACT_PHONE,
-  FB_PAGE_URL,
-  ZALO_URL
-} from '../lib/constants'
+  FOOTER_CONTACTS,
+  FOOTER_LABELS,
+  FOOTER_SOCIALS
+} from '@/lib/constants'
+import Link from 'next/link'
 
 const YEAR = new Date().getFullYear()
 
 export default function Footer() {
-  const cleanPhone = CONTACT_PHONE.replace(/\D/g, '')
-
   return (
     <footer className="footer" role="contentinfo">
       <div className="footer-container">
@@ -22,30 +19,31 @@ export default function Footer() {
             <p>{CONTACT_ADDRESS}</p>
           </div>
           <div className="footer-section">
-            <h4>Liên hệ</h4>
-            <p>
-              Hotline:{' '}
-              <Link href={`tel:+84${cleanPhone}`} aria-label={`Call ${COMPANY_NAME} at ${CONTACT_PHONE}`}>
-                {CONTACT_PHONE}
+            <h4>{FOOTER_LABELS.contact}</h4>
+            {FOOTER_CONTACTS.map((contact) => (
+              <Link
+                key={contact.platform}
+                href={contact.url}
+                aria-label={contact.label}
+              >
+                {contact.platform}
               </Link>
-            </p>
-            <p>
-              Email:{' '}
-              <Link href={`mailto:${CONTACT_EMAIL}`} aria-label={`Send email to ${COMPANY_NAME}`}>
-                {CONTACT_EMAIL}
-              </Link>
-            </p>
+            ))}
           </div>
           <div className="footer-section">
-            <h4>Kết nối</h4>
+            <h4>{FOOTER_LABELS.social}</h4>
             <div className="social-links" role="list">
-              <Link href={FB_PAGE_URL} target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
-                Facebook
-              </Link>
-              <Link href={ZALO_URL} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on Zalo">
-                Zalo
-              </Link>
-              <Link href="/feed.xml" aria-label="Subscribe to our RSS feed">
+              {FOOTER_SOCIALS.map((social) => (
+                <Link
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                >
+                  {social.platform}
+                </Link>
+              ))}
+              <Link href="/feed.xml" aria-label={FOOTER_LABELS.rss}>
                 RSS
               </Link>
             </div>
@@ -53,7 +51,8 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <p>
-            <time dateTime={YEAR.toString()}>{YEAR}</time> © {COMPANY_NAME}. Bảo lưu mọi quyền.
+            <time dateTime={YEAR.toString()}>{YEAR}</time>
+            {FOOTER_LABELS.copy}
           </p>
         </div>
       </div>

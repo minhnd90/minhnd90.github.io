@@ -1,27 +1,16 @@
 'use client'
 
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
-import SearchIcon from '@mui/icons-material/Search'
-import SupportAgentIcon from '@mui/icons-material/SupportAgent'
-import { Box, Card, CardContent, Container, Grid, Typography, useTheme } from '@mui/material'
-
-const features = [
-  {
-    title: 'Công Việc Chọn Lọc',
-    description: 'Chỉ tuyển chọn các công việc chất lượng từ nhà máy, kho vận và các đối tác uy tín, đã được kiểm chứng.',
-    icon: <AssignmentTurnedInIcon fontSize="large" color="primary" />
-  },
-  {
-    title: 'Tìm Việc Dễ Dàng',
-    description: 'Dễ dàng tra cứu việc làm theo ngành nghề, khu vực và loại hình. Đầy đủ thông tin, rõ ràng minh bạch.',
-    icon: <SearchIcon fontSize="large" color="primary" />
-  },
-  {
-    title: 'Hỗ Trợ Tận Tâm',
-    description: 'Hỗ trợ hoàn thiện hồ sơ, chuẩn bị kỹ năng phỏng vấn và hướng dẫn ứng tuyển từng bước từ A-Z.',
-    icon: <SupportAgentIcon fontSize="large" color="primary" />
-  }
-]
+import { TXT_FEATURE, TXT_FEATURE_LIST } from '@/lib/constants'
+import {
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  SvgIcon,
+  Typography,
+  useTheme
+} from '@mui/material'
 
 export default function Features() {
   const theme = useTheme()
@@ -30,16 +19,21 @@ export default function Features() {
     <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         <Box sx={{ mb: 6, textAlign: 'center' }}>
-          <Typography component="h2" variant="h3" sx={{ fontWeight: 700 }} gutterBottom>
-            Ưu Điểm Của Dịch Vụ
+          <Typography
+            component="h2"
+            variant="h3"
+            sx={{ fontWeight: 700 }}
+            gutterBottom
+          >
+            {TXT_FEATURE.heading}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            Lý do hàng ngàn người lao động đã tin tưởng và chọn nền tảng của chúng tôi.
+            {TXT_FEATURE.description}
           </Typography>
         </Box>
 
         <Grid container spacing={4}>
-          {features.map((feature, index) => (
+          {TXT_FEATURE_LIST.map((feature, index) => (
             <Grid size={{ xs: 12, md: 4 }} key={index}>
               <Card
                 sx={{
@@ -56,11 +50,26 @@ export default function Features() {
                 }}
               >
                 <CardContent sx={{ p: 4, flexGrow: 1, textAlign: 'center' }}>
-                  <Box sx={{ mb: 2 }}>{feature.icon}</Box>
-                  <Typography variant="h5" component="h3" sx={{ fontWeight: 'bold' }} gutterBottom>
+                  <Box sx={{ mb: 2 }}>
+                    <SvgIcon
+                      component={feature.icon}
+                      fontSize="large"
+                      color="primary"
+                    />
+                  </Box>
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    sx={{ fontWeight: 'bold' }}
+                    gutterBottom
+                  >
                     {feature.title}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    sx={{ mt: 2 }}
+                  >
                     {feature.description}
                   </Typography>
                 </CardContent>

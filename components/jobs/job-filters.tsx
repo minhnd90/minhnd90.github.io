@@ -10,24 +10,12 @@ import {
   MenuItem,
   Select,
   TextField,
-  useTheme,
+  useTheme
 } from '@mui/material'
 import { useMemo } from 'react'
-
 import { getCardShadow } from '@/lib/styles'
-import { Job } from '@/lib/types'
-
-interface JobFiltersProps {
-  jobs: Job[]
-  category: string
-  type: string
-  location: string
-  keyword: string
-  onCategoryChange: (value: string) => void
-  onTypeChange: (value: string) => void
-  onLocationChange: (value: string) => void
-  onKeywordChange: (value: string) => void
-}
+import { JobFiltersProps } from '@/lib/types'
+import { TXT_JOB_FILTERS } from '@/lib/constants'
 
 export function JobFilters({
   jobs,
@@ -38,22 +26,42 @@ export function JobFilters({
   onCategoryChange,
   onTypeChange,
   onLocationChange,
-  onKeywordChange,
+  onKeywordChange
 }: JobFiltersProps) {
   const theme = useTheme()
-  const filters = useMemo(() => ({
-    category: ['Tất cả', ...Array.from(new Set(jobs.map((job) => job.category)))],
-    type: ['Tất cả', ...Array.from(new Set(jobs.map((job) => job.type)))],
-    location: ['Tất cả', ...Array.from(new Set(jobs.map((job) => job.location)))]
-  }), [jobs])
+  const filters = useMemo(
+    () => ({
+      category: [
+        TXT_JOB_FILTERS.all,
+        ...Array.from(new Set(jobs.map((job) => job.category)))
+      ],
+      type: [
+        TXT_JOB_FILTERS.all,
+        ...Array.from(new Set(jobs.map((job) => job.type)))
+      ],
+      location: [
+        TXT_JOB_FILTERS.all,
+        ...Array.from(new Set(jobs.map((job) => job.location)))
+      ]
+    }),
+    [jobs]
+  )
 
   return (
-    <Card sx={{ p: 3, mb: 6, borderRadius: 3, boxShadow: getCardShadow(theme), overflow: 'visible' }}>
+    <Card
+      sx={{
+        p: 3,
+        mb: 6,
+        borderRadius: 3,
+        boxShadow: getCardShadow(theme),
+        overflow: 'visible'
+      }}
+    >
       <Grid container spacing={2} sx={{ alignItems: 'center' }}>
         <Grid size={{ xs: 12, md: 4 }}>
           <TextField
             fullWidth
-            placeholder="Vị trí, công việc, kỹ năng..."
+            placeholder={TXT_JOB_FILTERS.placeholder}
             value={keyword}
             onChange={(e) => onKeywordChange(e.target.value)}
             slotProps={{
@@ -69,8 +77,12 @@ export function JobFilters({
         </Grid>
         <Grid size={{ xs: 12, sm: 4, md: 2.6 }}>
           <FormControl fullWidth>
-            <InputLabel>Ngành nghề</InputLabel>
-            <Select value={category} label="Ngành nghề" onChange={(e) => onCategoryChange(e.target.value)}>
+            <InputLabel>{TXT_JOB_FILTERS.category}</InputLabel>
+            <Select
+              value={category}
+              label={TXT_JOB_FILTERS.category}
+              onChange={(e) => onCategoryChange(e.target.value)}
+            >
               {filters.category.map((f) => (
                 <MenuItem key={f} value={f}>
                   {f}
@@ -81,8 +93,12 @@ export function JobFilters({
         </Grid>
         <Grid size={{ xs: 12, sm: 4, md: 2.6 }}>
           <FormControl fullWidth>
-            <InputLabel>Hình thức</InputLabel>
-            <Select value={type} label="Hình thức" onChange={(e) => onTypeChange(e.target.value)}>
+            <InputLabel>{TXT_JOB_FILTERS.type}</InputLabel>
+            <Select
+              value={type}
+              label={TXT_JOB_FILTERS.type}
+              onChange={(e) => onTypeChange(e.target.value)}
+            >
               {filters.type.map((f) => (
                 <MenuItem key={f} value={f}>
                   {f}
@@ -93,8 +109,12 @@ export function JobFilters({
         </Grid>
         <Grid size={{ xs: 12, sm: 4, md: 2.8 }}>
           <FormControl fullWidth>
-            <InputLabel>Địa điểm</InputLabel>
-            <Select value={location} label="Địa điểm" onChange={(e) => onLocationChange(e.target.value)}>
+            <InputLabel>{TXT_JOB_FILTERS.location}</InputLabel>
+            <Select
+              value={location}
+              label={TXT_JOB_FILTERS.location}
+              onChange={(e) => onLocationChange(e.target.value)}
+            >
               {filters.location.map((f) => (
                 <MenuItem key={f} value={f}>
                   {f}

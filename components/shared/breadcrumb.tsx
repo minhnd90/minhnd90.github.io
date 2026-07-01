@@ -1,15 +1,8 @@
+import { TXT_HOME } from '@/lib/constants'
+import { PageBreadcrumbProps } from '@/lib/types'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Box, Breadcrumbs, Typography } from '@mui/material'
 import Link from 'next/link'
-
-export interface BreadcrumbItem {
-  label: string
-  href?: string
-}
-
-interface PageBreadcrumbProps {
-  items: BreadcrumbItem[]
-}
 
 export default function PageBreadcrumb({ items }: PageBreadcrumbProps) {
   return (
@@ -21,12 +14,9 @@ export default function PageBreadcrumb({ items }: PageBreadcrumbProps) {
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Typography
             variant="body2"
-            sx={{
-              fontWeight: 500,
-              '&:hover': { color: 'primary.main' }
-            }}
+            sx={{ fontWeight: 500, '&:hover': { color: 'primary.main' } }}
           >
-            Trang chủ
+            {TXT_HOME}
           </Typography>
         </Link>
         {items.map((item, index) => {
@@ -53,10 +43,7 @@ export default function PageBreadcrumb({ items }: PageBreadcrumbProps) {
             >
               <Typography
                 variant="body2"
-                sx={{
-                  fontWeight: 500,
-                  '&:hover': { color: 'primary.main' }
-                }}
+                sx={{ fontWeight: 500, '&:hover': { color: 'primary.main' } }}
               >
                 {item.label}
               </Typography>

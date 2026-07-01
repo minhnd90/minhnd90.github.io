@@ -1,6 +1,7 @@
 import AppButton from '@/components/shared/button'
 import { CONTACT_EMAIL } from '@/lib/constants'
 import { formatVietnameseDate } from '@/lib/date'
+import { T_JobMetadata } from '@/lib/types'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
@@ -22,23 +23,8 @@ import { notFound } from 'next/navigation'
 import { importPage } from 'nextra/pages'
 import path from 'path'
 
-export const dynamicParams = false;
-export const dynamic = 'force-static';
-
-type JobDetailMetadata = {
-  title: string
-  description: string
-  tags?: string[]
-  responsibilities?: string[]
-  requirements?: string[]
-  benefits?: string[]
-  location: string
-  salary: string
-  date: string
-  type: string
-  applyInstructions: string
-  applyEmail?: string
-}
+export const dynamicParams = false
+export const dynamic = 'force-static'
 
 export function generateStaticParams() {
   const jobsDir = path.join(process.cwd(), 'content/jobs')
@@ -51,7 +37,11 @@ export function generateStaticParams() {
     }))
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { slug } = await params
   try {
     const { metadata } = await importPage(['jobs', slug])
@@ -61,166 +51,273 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-export default async function JobDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function JobDetailPage({
+  params
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { slug } = await params
 
+  let JobContent
+  let data: T_JobMetadata
+  let applyEmail: string
+
   try {
-    const { default: JobContent, metadata } = await importPage(['jobs', slug])
-    const data = metadata as unknown as JobDetailMetadata
-    const applyEmail = data.applyEmail || CONTACT_EMAIL
+    const imported = await importPage(['jobs', slug])
+    JobContent = imported.default
+    data = imported.metadata as unknown as T_JobMetadata
+    applyEmail = data.applyEmail || CONTACT_EMAIL
+  } catch (error) {
+    console.error('Failed to import MDX:', error)
+    notFound()
+  }
 
-    return (
-      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={4}>
-            {/* Main Content Column */}
-            <Grid size={{ xs: 12, md: 8 }}>
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="overline" color="primary" sx={{ fontWeight: 'bold' }}>
-                  Chi tiết tuyển dụng
+  return (
+    <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={4}>
+          {/* Main Content Column */}
+          <Grid size={{ xs: 12, md: 8 }}>
+            <Box sx={{ mb: 4 }}>
+              <Typography
+                variant="overline"
+                color="primary"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Chi tiết tuyển dụng
+              </Typography>
+              <Typography
+                variant="h3"
+                component="h1"
+                sx={{ fontWeight: 800 }}
+                gutterBottom
+              >
+                {data.title}
+              </Typography>
+              <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+                {data.tags?.map((tag: string) => (
+                  <Chip key={tag} label={tag} size="small" variant="outlined" />
+                ))}
+              </Stack>
+            </Box>
+
+            <Card sx={{ borderRadius: 3, mb: 4, variant: 'outlined' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: 'bold' }}
+                  gutterBottom
+                >
+                  Mô tả công việc
                 </Typography>
-                <Typography variant="h3" component="h1" sx={{ fontWeight: 800 }} gutterBottom>
-                  {data.title}
+                <Typography
+                  variant="body1"
+                  sx={{ color: 'text.secondary', mb: 4, lineHeight: 1.8 }}
+                >
+                  {data.description}
                 </Typography>
-                <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-                  {data.tags?.map((tag: string) => (
-                    <Chip key={tag} label={tag} size="small" variant="outlined" />
-                  ))}
-                </Stack>
-              </Box>
 
-              <Card sx={{ borderRadius: 3, mb: 4, variant: 'outlined' }}>
-                <CardContent sx={{ p: 4 }}>
-                  <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
-                    Mô tả công việc
-                  </Typography>
-                  <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4, lineHeight: 1.8 }}>
-                    {data.description}
-                  </Typography>
-
-                  <Grid container spacing={3}>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
-                        Nhiệm vụ chính
-                      </Typography>
-                      <Box component="ul" sx={{ pl: 2, m: 0 }}>
-                        {data.responsibilities?.map((item: string) => (
-                          <Typography component="li" key={item} sx={{ mb: 1, color: 'text.secondary' }}>
-                            {item}
-                          </Typography>
-                        ))}
-                      </Box>
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
-                        Yêu cầu ứng tuyển
-                      </Typography>
-                      <Box component="ul" sx={{ pl: 2, m: 0 }}>
-                        {data.requirements?.map((item: string) => (
-                          <Typography component="li" key={item} sx={{ mb: 1, color: 'text.secondary' }}>
-                            {item}
-                          </Typography>
-                        ))}
-                      </Box>
-                    </Grid>
-                  </Grid>
-
-                  <Box sx={{ mt: 4 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
-                      Quyền lợi
+                <Grid container spacing={3}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{ fontWeight: 'bold' }}
+                      gutterBottom
+                    >
+                      Nhiệm vụ chính
                     </Typography>
                     <Box component="ul" sx={{ pl: 2, m: 0 }}>
-                      {data.benefits?.map((item: string) => (
-                        <Typography component="li" key={item} sx={{ mb: 1, color: 'text.secondary' }}>
+                      {data.responsibilities?.map((item: string) => (
+                        <Typography
+                          component="li"
+                          key={item}
+                          sx={{ mb: 1, color: 'text.secondary' }}
+                        >
                           {item}
                         </Typography>
                       ))}
                     </Box>
-                  </Box>
-
-                  <Box sx={{ mt: 6 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
-                      Chi tiết khác
+                  </Grid>
+                  <Grid size={{ xs: 12, sm: 6 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{ fontWeight: 'bold' }}
+                      gutterBottom
+                    >
+                      Yêu cầu ứng tuyển
                     </Typography>
-                    <Box className="nextra-job-content" sx={{ lineHeight: 1.8, color: 'text.secondary' }}>
-                      <JobContent />
+                    <Box component="ul" sx={{ pl: 2, m: 0 }}>
+                      {data.requirements?.map((item: string) => (
+                        <Typography
+                          component="li"
+                          key={item}
+                          sx={{ mb: 1, color: 'text.secondary' }}
+                        >
+                          {item}
+                        </Typography>
+                      ))}
+                    </Box>
+                  </Grid>
+                </Grid>
+
+                <Box sx={{ mt: 4 }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 'bold' }}
+                    gutterBottom
+                  >
+                    Quyền lợi
+                  </Typography>
+                  <Box component="ul" sx={{ pl: 2, m: 0 }}>
+                    {data.benefits?.map((item: string) => (
+                      <Typography
+                        component="li"
+                        key={item}
+                        sx={{ mb: 1, color: 'text.secondary' }}
+                      >
+                        {item}
+                      </Typography>
+                    ))}
+                  </Box>
+                </Box>
+
+                <Box sx={{ mt: 6 }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 'bold' }}
+                    gutterBottom
+                  >
+                    Chi tiết khác
+                  </Typography>
+                  <Box
+                    className="nextra-job-content"
+                    sx={{ lineHeight: 1.8, color: 'text.secondary' }}
+                  >
+                    <JobContent />
+                  </Box>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          {/* Sidebar Column */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Stack spacing={3} sx={{ position: 'sticky', top: 100 }}>
+              <Paper
+                sx={{
+                  p: 3,
+                  borderRadius: 3,
+                  border: '1px solid',
+                  borderColor: 'divider',
+                  boxShadow: 'none'
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 'bold' }}
+                  gutterBottom
+                >
+                  Thông tin chung
+                </Typography>
+                <Stack spacing={2.5} sx={{ mt: 2 }}>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <LocationOnIcon color="primary" />
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        Địa điểm
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {data.location}
+                      </Typography>
                     </Box>
                   </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <AttachMoneyIcon color="primary" />
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        Lương hấp dẫn
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{ fontWeight: 'bold' }}
+                        color="success.main"
+                      >
+                        {data.salary}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <AccessTimeIcon color="primary" />
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        Ngày đăng
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {formatVietnameseDate(data.date)}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <WorkOutlinedIcon color="primary" />
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        Loại hình
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {data.type}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Stack>
+              </Paper>
+
+              <Card
+                sx={{
+                  bgcolor: 'secondary.main',
+                  color: 'white',
+                  borderRadius: 3,
+                  p: 1
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    variant="h5"
+                    sx={{ fontWeight: 'bold' }}
+                    gutterBottom
+                  >
+                    Ứng tuyển ngay?
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
+                    {data.applyInstructions}
+                  </Typography>
+                  <AppButton
+                    href={`mailto:${applyEmail}?subject=Ứng tuyển cho vị trí ${encodeURIComponent(data.title)}`}
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    size="large"
+                    startIcon={<SendIcon />}
+                    sx={{ borderRadius: 2, fontWeight: 'bold' }}
+                  >
+                    Gửi email ứng tuyển
+                  </AppButton>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      display: 'block',
+                      mt: 2,
+                      textAlign: 'center',
+                      opacity: 0.8
+                    }}
+                  >
+                    Liên hệ: {applyEmail}
+                  </Typography>
                 </CardContent>
               </Card>
-            </Grid>
-
-            {/* Sidebar Column */}
-            <Grid size={{ xs: 12, md: 4 }}>
-              <Stack spacing={3} sx={{ position: 'sticky', top: 100 }}>
-                <Paper sx={{ p: 3, borderRadius: 3, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }} gutterBottom>
-                    Thông tin chung
-                  </Typography>
-                  <Stack spacing={2.5} sx={{ mt: 2 }}>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <LocationOnIcon color="primary" />
-                      <Box>
-                        <Typography variant="body2" color="text.secondary">Địa điểm</Typography>
-                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{data.location}</Typography>
-                      </Box>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <AttachMoneyIcon color="primary" />
-                      <Box>
-                        <Typography variant="body2" color="text.secondary">Lương hấp dẫn</Typography>
-                        <Typography variant="body1" sx={{ fontWeight: 'bold' }} color="success.main">{data.salary}</Typography>
-                      </Box>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <AccessTimeIcon color="primary" />
-                      <Box>
-                        <Typography variant="body2" color="text.secondary">Ngày đăng</Typography>
-                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{formatVietnameseDate(data.date)}</Typography>
-                      </Box>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <WorkOutlinedIcon color="primary" />
-                      <Box>
-                        <Typography variant="body2" color="text.secondary">Loại hình</Typography>
-                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{data.type}</Typography>
-                      </Box>
-                    </Box>
-                  </Stack>
-                </Paper>
-
-                <Card sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: 3, p: 1 }}>
-                  <CardContent>
-                    <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
-                      Ứng tuyển ngay?
-                    </Typography>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 3 }}>
-                      {data.applyInstructions}
-                    </Typography>
-                    <AppButton
-                      href={`mailto:${applyEmail}?subject=Ứng tuyển cho vị trí ${encodeURIComponent(data.title)}`}
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      size="large"
-                      startIcon={<SendIcon />}
-                      sx={{ borderRadius: 2, fontWeight: 'bold' }}
-                    >
-                      Gửi email ứng tuyển
-                    </AppButton>
-                    <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', opacity: 0.8 }}>
-                      Liên hệ: {applyEmail}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Stack>
-            </Grid>
+            </Stack>
           </Grid>
-        </Container>
-      </Box>
-    )
-  } catch (error) {
-    console.error('Failed to render Job detail:', error)
-    notFound()
-  }
+        </Grid>
+      </Container>
+    </Box>
+  )
 }
