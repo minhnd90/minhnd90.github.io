@@ -1,11 +1,12 @@
 'use client'
 
+import { useTheme } from '@/components/theme/theme-provider'
+import { T_SystemTheme } from '@/lib/types'
 import { createTheme, ThemeProvider as MuiProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ReactNode, useMemo } from 'react'
-import { useTheme } from './ThemeProvider'
 
-const getTheme = (mode: 'light' | 'dark') =>
+const getTheme = (mode: T_SystemTheme) =>
   createTheme({
     palette: {
       mode,
@@ -40,9 +41,7 @@ export default function MuiThemeProvider({ children }: { children: ReactNode }) 
   return (
     <MuiProvider theme={theme}>
       <CssBaseline />
-      <div suppressHydrationWarning>
-        {children}
-      </div>
+      {children}
     </MuiProvider>
   )
 }

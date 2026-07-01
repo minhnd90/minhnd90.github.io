@@ -44,7 +44,7 @@ async function generate() {
         })
       }
     } catch (err) {
-      console.warn(`Warning: Could not read directory ${source.dir}`)
+      console.warn(`Warning: Could not read directory ${source.dir} | Error: ${err.message}`)
     }
   }
 

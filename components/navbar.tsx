@@ -1,10 +1,10 @@
 'use client'
 
+import ThemeSwitcher from '@/components/theme-switcher'
+import { APP_NAME, COMPANY_NAME, TXT_HOME_LABEL } from '@/lib/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { APP_NAME, COMPANY_NAME } from '../lib/constants'
-import ThemeSwitcher from './theme-switcher'
 
 const navLinks = [
   { name: 'Trang Chủ', href: '/' },
@@ -21,13 +21,8 @@ export default function Navbar() {
     <nav className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-container">
         <div className="logo">
-          <Link href="/" title={COMPANY_NAME} aria-label={`Go to ${COMPANY_NAME} homepage`}>
-            <Image
-              src="/logo.png"
-              alt={APP_NAME}
-              width={48}
-              height={48}
-            />
+          <Link href="/" title={COMPANY_NAME} aria-label={TXT_HOME_LABEL}>
+            <Image src="/logo.png" alt={APP_NAME} width={48} height={48} />
           </Link>
         </div>
         <div className="nav-links">

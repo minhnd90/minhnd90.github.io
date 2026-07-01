@@ -1,3 +1,8 @@
+import AppButton from '@/components/shared/button'
+import { TXT_JOB_ACTION } from '@/lib/constants'
+import { formatVietnameseDate } from '@/lib/date'
+import { COMMON_STYLES, getCardShadow } from '@/lib/styles'
+import { JobCardProps } from '@/lib/types'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import {
@@ -8,17 +13,8 @@ import {
   Chip,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from '@mui/material'
-import { formatVietnameseDate } from '../../lib/date'
-import { COMMON_STYLES, getCardShadow } from '../../lib/styles'
-import { Job } from '../../lib/types'
-import AppButton from '../shared/button'
-
-interface JobCardProps {
-  job: Job
-  showDescription?: boolean
-}
 
 export function JobCard({ job, showDescription = true }: JobCardProps) {
   const theme = useTheme()
@@ -35,14 +31,29 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
         transition: 'all 0.2s ease',
         '&:hover': {
           borderColor: 'primary.main',
-          boxShadow: theme.palette.mode === 'dark' ? 4 : '0 8px 24px rgba(255, 140, 0, 0.12)',
+          boxShadow:
+            theme.palette.mode === 'dark'
+              ? 4
+              : '0 8px 24px rgba(255, 140, 0, 0.12)'
         }
       }}
     >
       <CardContent sx={{ flexGrow: 1, p: 3.5 }}>
-        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+        <Stack
+          direction="row"
+          sx={{
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            mb: 2
+          }}
+        >
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-            <Chip label={job.category} size="small" color="primary" variant="outlined" />
+            <Chip
+              label={job.category}
+              size="small"
+              color="primary"
+              variant="outlined"
+            />
             <Chip label={job.type} size="small" variant="outlined" />
           </Box>
           <Typography variant="caption" color="text.secondary">
@@ -50,16 +61,35 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
           </Typography>
         </Stack>
 
-        <Typography variant="h5" component="h2" sx={{ fontWeight: 'bold' }} gutterBottom>
+        <Typography
+          variant="h5"
+          component="h2"
+          sx={{ fontWeight: 'bold' }}
+          gutterBottom
+        >
           {job.title}
         </Typography>
 
         <Stack spacing={1} sx={{ mt: 2, mb: showDescription ? 3 : 0 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              color: 'text.secondary'
+            }}
+          >
             <LocationOnIcon fontSize="small" />
             <Typography variant="body2">{job.location}</Typography>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'success.main' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              color: 'success.main'
+            }}
+          >
             <AttachMoneyIcon fontSize="small" />
             <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
               {job.salary}
@@ -68,14 +98,18 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
         </Stack>
 
         {showDescription && (
-          <Typography variant="body2" color="text.secondary" sx={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            lineHeight: 1.6
-          }}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              lineHeight: 1.6
+            }}
+          >
             {job.description}
           </Typography>
         )}
@@ -88,7 +122,9 @@ export function JobCard({ job, showDescription = true }: JobCardProps) {
           size="large"
           sx={{ borderRadius: 2, ...COMMON_STYLES.boldText }}
         >
-          {showDescription ? 'Xem chi tiết và ứng tuyển' : 'Chi tiết công việc'}
+          {showDescription
+            ? TXT_JOB_ACTION.viewDetails
+            : TXT_JOB_ACTION.viewJob}
         </AppButton>
       </CardActions>
     </Card>

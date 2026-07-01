@@ -1,17 +1,13 @@
 'use client'
 
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-} from '@mui/material'
+import { JobCard } from '@/components/jobs/job-card'
+import { JobFilters } from '@/components/jobs/job-filters'
+import { EmptyState } from '@/components/shared/empty-state'
+import PageHeader from '@/components/shared/page-header'
+import { META, TXT_JOB_FILTERS } from '@/lib/constants'
+import { Job } from '@/lib/types'
+import { Box, Container, Grid, Typography } from '@mui/material'
 import { useMemo, useState } from 'react'
-import { Job } from '../../lib/types'
-import { EmptyState } from '../shared/empty-state'
-import PageHeader from '../shared/page-header'
-import { JobCard } from './job-card'
-import { JobFilters } from './job-filters'
 
 export default function JobList({ jobs }: { jobs: Job[] }) {
   const [category, setCategory] = useState('Tất cả')
@@ -24,8 +20,10 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
       const matchCategory = category === 'Tất cả' || job.category === category
       const matchType = type === 'Tất cả' || job.type === type
       const matchLocation = location === 'Tất cả' || job.location === location
-      const text = `${job.title} ${job.description} ${job.tags.join(' ')}`.toLowerCase()
-      const matchKeyword = keyword.trim() === '' || text.includes(keyword.toLowerCase())
+      const text =
+        `${job.title} ${job.description} ${job.tags.join(' ')}`.toLowerCase()
+      const matchKeyword =
+        keyword.trim() === '' || text.includes(keyword.toLowerCase())
       return matchCategory && matchType && matchLocation && matchKeyword
     })
   }, [jobs, category, type, location, keyword])
@@ -34,10 +32,7 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
     <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         {/* Header Section */}
-        <PageHeader
-          title="Cơ Hội Việc Làm"
-          subtitle="Kết nối bạn với các doanh nghiệp uy tín. Việc làm thật, lương thật, nhận việc nhanh trong 48h."
-        />
+        <PageHeader title={META.jobs.title} subtitle={META.jobs.description} />
 
         {/* Filters Section */}
         <JobFilters
@@ -54,7 +49,7 @@ export default function JobList({ jobs }: { jobs: Job[] }) {
 
         {/* Results Info */}
         <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
-          {filteredJobs.length} công việc phù hợp
+          {filteredJobs.length} {TXT_JOB_FILTERS.resultSuffix}
         </Typography>
 
         {/* Jobs List */}

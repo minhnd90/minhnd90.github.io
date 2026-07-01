@@ -1,28 +1,20 @@
 'use client'
 
+import { T_SystemTheme, T_Theme, T_ThemeContextValue } from '@/lib/types'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-
-type Theme = 'light' | 'dark' | 'system'
-
-type ThemeContextValue = {
-  theme: Theme
-  resolvedTheme: 'light' | 'dark'
-  systemTheme: 'light' | 'dark'
-  setTheme: (value: Theme | ((current: Theme) => Theme)) => void
-}
 
 const STORAGE_KEY = 'theme'
 
-const DEFAULT_CONTEXT_VALUE: ThemeContextValue = {
+const DEFAULT_CONTEXT_VALUE: T_ThemeContextValue = {
   theme: 'system',
   resolvedTheme: 'light',
   systemTheme: 'light',
-  setTheme: () => {}
+  setTheme: () => { }
 }
 
-const ThemeContext = createContext<ThemeContextValue>(DEFAULT_CONTEXT_VALUE)
+const ThemeContext = createContext<T_ThemeContextValue>(DEFAULT_CONTEXT_VALUE)
 
-function getSystemTheme() {
+function getSystemTheme(): T_SystemTheme {
   if (typeof window === 'undefined') {
     return 'light'
   }
@@ -30,7 +22,7 @@ function getSystemTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-function getStoredTheme(): Theme {
+function getStoredTheme(): T_Theme {
   if (typeof window === 'undefined') {
     return 'system'
   }
@@ -47,7 +39,7 @@ function getStoredTheme(): Theme {
   return 'system'
 }
 
-function applyTheme(theme: Theme, systemTheme: 'light' | 'dark') {
+function applyTheme(theme: T_Theme, systemTheme: T_SystemTheme) {
   const resolvedTheme = theme === 'system' ? systemTheme : theme
   const root = document.documentElement
 
@@ -57,38 +49,37 @@ function applyTheme(theme: Theme, systemTheme: 'light' | 'dark') {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getStoredTheme)
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => getSystemTheme())
+  // Start with SSR-safe defaults so the first client render matches the
+  // server render. Real values are synced in the effect below, after mount.
+  const [theme, setThemeState] = useState<T_Theme>('system')
+  const [systemTheme, setSystemTheme] = useState<T_SystemTheme>('light')
   const resolvedTheme = theme === 'system' ? systemTheme : theme
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return
-    }
+    // Sync real values from localStorage / matchMedia after hydration.
+    const storedTheme = getStoredTheme()
+    const currentSystemTheme = getSystemTheme()
+
+    setThemeState(storedTheme)
+    setSystemTheme(currentSystemTheme)
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = (event: MediaQueryListEvent) => {
       setSystemTheme(event.matches ? 'dark' : 'light')
     }
 
-    mediaQuery.addEventListener?.('change', handleChange)
-    mediaQuery.addListener?.(handleChange)
+    mediaQuery.addEventListener('change', handleChange)
 
     return () => {
-      mediaQuery.removeEventListener?.('change', handleChange)
-      mediaQuery.removeListener?.(handleChange)
+      mediaQuery.removeEventListener('change', handleChange)
     }
   }, [])
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return
-    }
-
     applyTheme(theme, systemTheme)
   }, [theme, systemTheme])
 
-  const setTheme = useCallback((nextTheme: Theme | ((current: Theme) => Theme)) => {
+  const setTheme = useCallback((nextTheme: T_Theme | ((current: T_Theme) => T_Theme)) => {
     setThemeState((currentTheme) => {
       const newTheme = typeof nextTheme === 'function' ? nextTheme(currentTheme) : nextTheme
 
@@ -105,12 +96,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const value = useMemo(
-    () => ({
-      theme,
-      resolvedTheme,
-      systemTheme,
-      setTheme
-    }),
+    () => ({ theme, resolvedTheme, systemTheme, setTheme }),
     [theme, resolvedTheme, systemTheme, setTheme]
   )
 

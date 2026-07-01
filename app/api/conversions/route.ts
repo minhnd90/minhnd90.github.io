@@ -1,17 +1,18 @@
-import { errorResponse } from '@/lib/api-responses';
-import { API_ERRORS, ConversionsPayload, FacebookEvent, UserData } from '@/lib/constants';
-import { checkRateLimit } from '@/lib/rate-limit';
-import { createHash } from 'node:crypto';
+import { errorResponse } from '@/lib/api-responses'
+import { API_ERRORS } from '@/lib/constants'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { ConversionsPayload, FacebookEvent, UserData } from '@/lib/types'
+import { createHash } from 'node:crypto'
 
 // Hash PII value with SHA256 as required by Meta
 function hashPII(value: string): string {
-  if (!value) return '';
-  return createHash('sha256').update(value.trim().toLowerCase()).digest('hex');
+  if (!value) return ''
+  return createHash('sha256').update(value.trim().toLowerCase()).digest('hex')
 }
 
 // Hash user_data object: em, ph, ge, db, ln, fn, etc.
 function hashUserData(userData: UserData): UserData {
-  if (!userData || typeof userData !== 'object') return userData;
+  if (!userData || typeof userData !== 'object') return userData
   const piiFields: (keyof UserData)[] = [
     'em',
     'ph',
@@ -27,9 +28,9 @@ function hashUserData(userData: UserData): UserData {
   const hashed: UserData = { ...userData }
 
   for (const field of piiFields) {
-    const value = hashed[field];
+    const value = hashed[field]
     if (value && typeof value === 'string') {
-      hashed[field] = hashPII(value);
+      hashed[field] = hashPII(value)
     }
   }
 
@@ -66,7 +67,8 @@ function validateEvent(event: FacebookEvent): string[] {
 export async function POST(req: Request) {
   try {
     // Rate limiting check
-    const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    const clientIP =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
       req.headers.get('x-real-ip') ||
       'unknown'
     if (!checkRateLimit(clientIP)) {
@@ -86,7 +88,7 @@ export async function POST(req: Request) {
       )
     }
 
-    if (!body || (typeof body !== 'object')) {
+    if (!body || typeof body !== 'object') {
       return errorResponse(API_ERRORS.invalidJson, 400)
     }
 
@@ -112,7 +114,10 @@ export async function POST(req: Request) {
 
     if (validationErrors.length > 0) {
       return new Response(
-        JSON.stringify({ error: API_ERRORS.validationFailed, details: validationErrors }),
+        JSON.stringify({
+          error: API_ERRORS.validationFailed,
+          details: validationErrors
+        }),
         { status: 400 }
       )
     }
@@ -129,7 +134,7 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`
       },
       body: JSON.stringify(payload)
     })

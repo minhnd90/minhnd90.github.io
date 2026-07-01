@@ -7,7 +7,7 @@ import { Roboto } from 'next/font/google'
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 import MuiThemeProvider from '@/components/theme/mui-theme-provider'
-import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import { ThemeProvider } from '@/components/theme/theme-provider'
 import '../styles/index.scss'
 
 const roboto = Roboto({ subsets: ['vietnamese'] })
@@ -26,27 +26,23 @@ export const metadata = {
  * Root layout for the application. Wraps all pages with global providers,
  * theme, analytics, and common layout components.
  */
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='vi' className={roboto.className} suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang='vi' className={roboto.className}>
+      <body>
         <ViewTransitions>
-          <ThemeProvider>
-            <AppRouterCacheProvider>
+          <AppRouterCacheProvider>
+            <ThemeProvider>
               <MuiThemeProvider>
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
               </MuiThemeProvider>
-            </AppRouterCacheProvider>
-            <Analytics />
-            <SpeedInsights />
-          </ThemeProvider>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
         </ViewTransitions>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
