@@ -14,11 +14,10 @@ export function sanitizeSlug(filename: string): string {
   // Fallback in case nothing remains after sanitization
   return base || 'content'
 }
-
 export async function getAllJobs(): Promise<Job[]> {
   const pageMap = await getPageMap('/jobs')
   return pageMap
-    .filter((item): item is MdxFile => 'frontMatter' in item)
+    .filter((item): item is MdxFile => 'frontMatter' in item && item.name !== 'index')
     .map((item) => {
       const data = item.frontMatter as FrontMatter
       return {
@@ -37,8 +36,8 @@ export async function getAllJobs(): Promise<Job[]> {
 
 export async function getAllPosts(): Promise<BlogPost[]> {
   const pageMap = await getPageMap('/blog')
-  const posts = pageMap
-    .filter((item): item is MdxFile => 'frontMatter' in item)
+  return pageMap
+    .filter((item): item is MdxFile => 'frontMatter' in item && item.name !== 'index')
     .map((item) => {
       const data = item.frontMatter as FrontMatter
       return {
@@ -49,9 +48,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         tags: data.tags || []
       }
     })
-
-  // Sort by date descending
-  return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  )
+    .sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
 }
