@@ -29,7 +29,7 @@ export const CONTACT_ADDRESS = process.env.CONTACT_ADDRESS || 'Số 72 đường
 
 export const SITE_URL = process.env.SITE_URL || 'https://bm-group.info.vn'
 export const FB_PAGE_URL = process.env.FB_PAGE_URL || 'https://facebook.com/bmgroup.info.vn'
-export const ZALO_URL = process.env.ZALO_URL || 'https://zalo.me'
+export const ZALO_URL = process.env.ZALO_URL || 'https://zalo.me/288286191870098556'
 
 // ─── SEO / Metadata helpers ───────────────────────────────────────────────────
 
