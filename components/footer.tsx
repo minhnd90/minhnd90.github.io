@@ -35,6 +35,7 @@ export default function Footer() {
             <div className="social-links" role="list">
               {FOOTER_SOCIALS.map((social) => (
                 <Link
+                  key={social.platform}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -45,6 +46,14 @@ export default function Footer() {
               ))}
               <Link href="/feed.xml" aria-label={FOOTER_LABELS.rss}>
                 RSS
+              </Link>
+            </div>
+          </div>
+          <div className="footer-section">
+            <h4>{FOOTER_LABELS.legal}</h4>
+            <div className="social-links" role="list">
+              <Link href="/about/privacy-policy">
+                Privacy Policy
               </Link>
             </div>
           </div>

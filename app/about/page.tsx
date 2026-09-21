@@ -52,7 +52,7 @@ export default function AboutPage(): React.ReactElement {
                 Sứ mệnh của chúng tôi
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 3, fontSize: '1.1rem', lineHeight: 1.8 }}>
-                Chúng tôi là **{APP_NAME}** — chuyên gia trong lĩnh vực tuyển dụng lao động phổ thông cho các ngành sản xuất, kho vận và công nghiệp tại Việt Nam.
+                Chúng tôi là {APP_NAME} — chuyên gia trong lĩnh vực tuyển dụng lao động phổ thông cho các ngành sản xuất, kho vận và công nghiệp tại Việt Nam.
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
                 Mục tiêu của chúng tôi không chỉ là tuyển dụng, mà là xây dựng một cầu nối bền vững giúp người lao động có công việc ổn định, thu nhập tốt và các phúc lợi minh bạch, góp phần vào sự phát triển ổn định của doanh nghiệp.
