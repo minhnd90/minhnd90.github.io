@@ -49,6 +49,14 @@ export default function Footer() {
               </Link>
             </div>
           </div>
+          <div className="footer-section">
+            <h4>{FOOTER_LABELS.legal}</h4>
+            <div className="social-links" role="list">
+              <Link href="/about/privacy-policy">
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
         </div>
         <div className="footer-bottom">
           <p>

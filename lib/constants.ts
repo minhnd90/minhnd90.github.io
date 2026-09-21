@@ -16,29 +16,25 @@ import { EmptyStateProps } from './types'
 // ─── Brand ────────────────────────────────────────────────────────────────────
 
 export const APP_NAME = process.env.APP_NAME || 'BM Group'
-export const COMPANY_NAME =
-  process.env.COMPANY_NAME || 'CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP'
-export const COMPANY_DESC =
-  process.env.COMPANY_DESC || 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng'
+export const COMPANY_NAME = process.env.COMPANY_NAME || 'CÔNG TY TNHH DỊCH VỤ VIỆC LÀM BÌNH MINH GROUP'
+export const COMPANY_DESC = process.env.COMPANY_DESC || 'Việc Chất, Lương Chuẩn, Tương Lai Vững Vàng'
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
 
-export const CONTACT_EMAIL =
-  process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn'
+export const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'tuyendung@bm-group.info.vn'
 export const CONTACT_PHONE = process.env.CONTACT_PHONE || '0988 108 250'
-export const CONTACT_ADDRESS =
-  process.env.CONTACT_ADDRESS || 'Địa chỉ đang cập nhật'
+export const CONTACT_ADDRESS = process.env.CONTACT_ADDRESS || 'Số 72 đường Bùi Huy Phồn, phường Nếnh, Tỉnh Bắc Ninh'
 
 // ─── Links & SEO ──────────────────────────────────────────────────────────────
 
 export const SITE_URL = process.env.SITE_URL || 'https://bm-group.info.vn'
-export const FB_PAGE_URL = process.env.FB_PAGE_URL || 'https://facebook.com'
+export const FB_PAGE_URL = process.env.FB_PAGE_URL || 'https://facebook.com/bmgroup.info.vn'
 export const ZALO_URL = process.env.ZALO_URL || 'https://zalo.me'
 
 // ─── SEO / Metadata helpers ───────────────────────────────────────────────────
 
 export const TXT_HOME = 'Trang chủ'
-export const TXT_HOME_LABEL = `Go to ${COMPANY_NAME} homepage`
+export const TXT_HOME_LABEL = `Trở về trang chủ ${COMPANY_NAME}`
 export const SITE_TITLE_SUFFIX = `| ${APP_NAME}`
 
 export const META = {
@@ -71,23 +67,19 @@ export const META = {
 export const PAGE_HEADERS = {
   jobs: {
     title: 'Cơ Hội Việc Làm',
-    subtitle:
-      'Kết nối bạn với các doanh nghiệp uy tín. Việc làm thật, lương thật, nhận việc nhanh trong 48h.'
+    subtitle: 'Kết nối bạn với các doanh nghiệp uy tín. Việc làm thật, lương thật, nhận việc nhanh trong 48h.'
   },
   blog: {
     title: 'Góc Chia Sẻ',
-    subtitle:
-      'Kinh nghiệm tìm việc, mẹo phỏng vấn và các kỹ năng sống dành cho người lao động phổ thông.'
+    subtitle: 'Kinh nghiệm tìm việc, mẹo phỏng vấn và các kỹ năng sống dành cho người lao động phổ thông.'
   },
   about: {
     title: `Giới thiệu ${APP_NAME}`,
-    subtitle:
-      'Chuyên tuyển dụng lao động phổ thông, nhân viên kho bãi và sản xuất hàng đầu cho các tập đoàn công nghiệp lớn.'
+    subtitle: 'Chuyên tuyển dụng lao động phổ thông, nhân viên kho bãi và sản xuất hàng đầu cho các tập đoàn công nghiệp lớn.'
   },
   contact: {
     title: 'Liên hệ & Ứng tuyển',
-    subtitle:
-      'Chúng tôi luôn sẵn sàng hỗ trợ bạn tìm được công việc phù hợp nhất. Phản hồi nhanh trong vòng 24h.'
+    subtitle: 'Chúng tôi luôn sẵn sàng hỗ trợ bạn tìm được công việc phù hợp nhất. Phản hồi nhanh trong vòng 24h.'
   }
 } as const
 
@@ -138,8 +130,7 @@ export const FORM_VALIDATION = {
   messageRequired: 'Vui lòng nhập nội dung liên hệ',
   submitError: 'Không thể gửi yêu cầu lúc này. Vui lòng thử lại sau.',
   networkError: 'Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.',
-  successMessage:
-    'Yêu cầu của bạn đã được gửi thành công, chúng tôi sẽ liên hệ sớm nhất.',
+  successMessage: 'Yêu cầu của bạn đã được gửi thành công, chúng tôi sẽ liên hệ sớm nhất.',
   submitting: 'Đang gửi...',
   submitButton: 'Gửi yêu cầu'
 } as const
@@ -148,29 +139,24 @@ export const FORM_VALIDATION = {
 
 export const CONTACT_UI = {
   recruitmentInfo: 'Thông tin tuyển dụng',
-  contactDescription:
-    'Liên hệ trực tiếp qua Hotline hoặc Email để được sắp xếp lịch phỏng vấn sớm nhất.',
+  contactDescription: 'Liên hệ trực tiếp qua Hotline hoặc Email để được sắp xếp lịch phỏng vấn sớm nhất.',
   emailLabel: 'Email ứng tuyển',
   hotlineLabel: 'Hotline 24/7',
   locationLabel: 'Khu vực làm việc',
   locationValue: 'Hà Nội, Bắc Ninh, Hải Phòng',
   applyNowTitle: 'Nộp hồ sơ ngay?',
-  applyNowDescription:
-    'Gửi thông tin của bạn ngay bây giờ để nhận lịch phỏng vấn sớm nhất.',
+  applyNowDescription: 'Gửi thông tin của bạn ngay bây giờ để nhận lịch phỏng vấn sớm nhất.',
   applyEmailButton: 'Gửi email ứng tuyển ngay',
   applicationGuide: 'Hướng dẫn nộp hồ sơ',
   positionTitle: 'Vị trí mong muốn',
   positionDesc: 'Tiêu đề email ghi rõ: Ứng tuyển [Vị trí công việc]',
   basicInfoTitle: 'Thông tin cơ bản',
-  basicInfoDesc:
-    'Gửi ngắn gọn: Họ tên, Năm sinh, Địa chỉ, Số điện thoại liên hệ.',
+  basicInfoDesc: 'Gửi ngắn gọn: Họ tên, Năm sinh, Địa chỉ, Số điện thoại liên hệ.',
   documentsTitle: 'Giấy tờ tùy thân',
-  documentsDesc:
-    'Nếu có, đính kèm ảnh chụp CCCD/CMND để chúng tôi ưu tiên xét duyệt.',
+  documentsDesc: 'Nếu có, đính kèm ảnh chụp CCCD/CMND để chúng tôi ưu tiên xét duyệt.',
   emailTemplateTitle: 'Mẫu nội dung email ứng tuyển',
   copyHint: 'Sao chép và sửa lại thông tin của bạn',
-  disclaimer:
-    '* Lưu ý: Chúng tôi không thu bất kỳ khoản phí nào của người lao động. Cẩn thận với các hành vi lừa đảo nộp phí phỏng vấn.'
+  disclaimer: '* Lưu ý: Chúng tôi không thu bất kỳ khoản phí nào của người lao động. Cẩn thận với các hành vi lừa đảo nộp phí phỏng vấn.'
 } as const
 
 // ─── API Error Messages ───────────────────────────────────────────────────────
@@ -189,34 +175,29 @@ export const TXT_READMORE = 'Đọc tiếp'
 
 export const TXT_CTA = {
   heading: `Sẵn sàng làm việc cùng ${APP_NAME}?`,
-  description:
-    'Kết nối ngay với đội ngũ để được tư vấn và nhận lộ trình đi làm trong vòng 48h.',
+  description: 'Kết nối ngay với đội ngũ để được tư vấn và nhận lộ trình đi làm trong vòng 48h.',
   button: 'Liên hệ ứng tuyển ngay'
 } as const
 
 export const TXT_FEATURE = {
   heading: ' Ưu Điểm Của Dịch Vụ',
-  description:
-    'Lý do hàng ngàn người lao động đã tin tưởng và chọn nền tảng của chúng tôi.'
+  description: 'Lý do hàng ngàn người lao động đã tin tưởng và chọn nền tảng của chúng tôi.'
 } as const
 
 export const TXT_FEATURE_LIST = [
   {
     title: 'Công Việc Chọn Lọc',
-    description:
-      'Chỉ tuyển chọn các công việc chất lượng từ nhà máy, kho vận và các đối tác uy tín, đã được kiểm chứng.',
+    description: 'Chỉ tuyển chọn các công việc chất lượng từ nhà máy, kho vận và các đối tác uy tín, đã được kiểm chứng.',
     icon: AssignmentTurnedIn
   },
   {
     title: 'Tìm Việc Dễ Dàng',
-    description:
-      'Dễ dàng tra cứu việc làm theo ngành nghề, khu vực và loại hình. Đầy đủ thông tin, rõ ràng minh bạch.',
+    description: 'Dễ dàng tra cứu việc làm theo ngành nghề, khu vực và loại hình. Đầy đủ thông tin, rõ ràng minh bạch.',
     icon: Search
   },
   {
     title: 'Hỗ Trợ Tận Tâm',
-    description:
-      'Hỗ trợ hoàn thiện hồ sơ, chuẩn bị kỹ năng phỏng vấn và hướng dẫn ứng tuyển từng bước từ A-Z.',
+    description: 'Hỗ trợ hoàn thiện hồ sơ, chuẩn bị kỹ năng phỏng vấn và hướng dẫn ứng tuyển từng bước từ A-Z.',
     icon: SupportAgent
   }
 ] as const
@@ -252,13 +233,13 @@ export const TXT_JOB_FILTERS = {
 
 export const TXT_EMPTY_STATE: EmptyStateProps = {
   icon: WorkOutlined,
-  message:
-    'Không tìm thấy nội dung phù hợp. Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm nhé!'
+  message: 'Không tìm thấy nội dung phù hợp. Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm nhé!'
 }
 
 export const FOOTER_LABELS = {
   contact: 'Liên hệ',
   social: 'Kết nối',
+  legal: 'Pháp lý',
   copy: `© ${COMPANY_NAME}. Bảo lưu mọi quyền.`,
   rss: 'Subscribe to our RSS feed'
 } as const
